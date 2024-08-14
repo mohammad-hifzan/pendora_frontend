@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+// import logo from './logo.svg';
+// import './App.css';
+import $ from 'jquery';
+import Mangas from './components/mangaList'
+import Header from './common/header'
+import Footer from './common/footer'
+import ProductSection from './common/productSection'
+import HeroSection from './common/heroSection'
+import SearchModel from './common/searchModel'
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div id="preloder">
+          <div className="loader"></div>
+      </div>
+      <Header />
+      <HeroSection />
+      <ProductSection />
+      <Footer />
+      <SearchModel />
+    </>
   );
 }
+
 
 export default App;
