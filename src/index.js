@@ -5,6 +5,10 @@ import './index.css';
 import $ from 'jquery';
 import 'bootstrap';
 import AddManga from './components/addManga'
+import MangaList from './components/mangaList'
+import WizardLayout from './layouts/wizardLayout'
+import SignUp from './components/signUp'
+import Login from './components/login'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
@@ -14,9 +18,14 @@ function RootApp() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<App />}>
-          <Route index element={<App />}/>
-          <Route path= '/manga/add' element={<AddManga />}/>
+          <Route index element={<MangaList products='all'/>} />
+          <Route path= '/latest' element={<MangaList products='recentProduct'/>} />
+          <Route path= '/signup' element={<SignUp />}/>
+          <Route path= '/login' element={<Login />}/>
         </Route>
+        
+        <Route path= '/manga/add' element={<AddManga />}/>
+        }
       </Routes>
     </BrowserRouter>
     )
