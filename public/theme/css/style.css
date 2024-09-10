@@ -1111,6 +1111,24 @@ ol {
 	position: relative;
 }
 
+.anime__review__item__pic_reply {
+	float: right;
+	margin-left: 20px;
+	position: relative;
+}
+
+.anime__review__item__pic_reply:before {
+	position: absolute;
+	right: -30px;
+	top: 15px;
+	border-top: 15px solid transparent;
+	border-left: 15px solid #1d1e39;
+	content: "";
+	-webkit-transform: rotate(45deg);
+	-ms-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+
 .anime__review__item__pic:before {
 	position: absolute;
 	right: -30px;
@@ -1124,6 +1142,12 @@ ol {
 }
 
 .anime__review__item__pic img {
+	height: 50px;
+	width: 50px;
+	border-radius: 50%;
+}
+
+.anime__review__item__pic_reply img {
 	height: 50px;
 	width: 50px;
 	border-radius: 50%;

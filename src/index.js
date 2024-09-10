@@ -9,6 +9,8 @@ import MangaList from './components/mangaList'
 import WizardLayout from './layouts/wizardLayout'
 import SignUp from './components/signUp'
 import Login from './components/login'
+import MangaShow from './components/mangaShow'
+import Chapter from './components/chapters'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
@@ -19,7 +21,9 @@ function RootApp() {
       <Routes>
         <Route path='/' element={<App />}>
           <Route index element={<MangaList products='all'/>} />
-          <Route path= '/latest' element={<MangaList products='recentProduct'/>} />
+          <Route path= '/latest' element={<MangaList />} />
+          <Route path= '/mangas/:id' element={<MangaShow />} />
+          <Route path= '/mangas/:manga_id/chapters/:id' element={<Chapter />} />
           <Route path= '/signup' element={<SignUp />}/>
           <Route path= '/login' element={<Login />}/>
         </Route>

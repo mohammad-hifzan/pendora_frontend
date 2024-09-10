@@ -13,7 +13,7 @@ function App() {
   return (
     <>
       <div id="preloder">
-          <div className="loader"></div>
+        <div className="loader"></div>
       </div>
       <Header />
       <Outlet />
