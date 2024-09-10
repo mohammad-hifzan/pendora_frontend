@@ -23,7 +23,7 @@ function MangaList(props) {
 
 const getMangas = async () => {
   try {
-    const response = await axios.get(`${API_URL}/v2/mangas`);
+    const response = await axios.get(`${API_URL}/v2/mangas`, {withCredentials: true});
     return response.data;
   } catch (error) {
     console.error("Error fetching mangas:", error);

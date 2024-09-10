@@ -1,12 +1,13 @@
 import BreadCrumb from '../common/breadCrumb'
-import {useState, useEffect} from 'react'
+import {useState, createContext, useContext, useEffect} from 'react'
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 const API_URL = 'http://localhost:3000';
 
 function Login() {
 	const [formParams, setFormParams] = useState({nameOrEmail: '', password: ''});
-	const [jwtToken, setJwtToken] = useState('')
+	const [user, setUser] = useState(null);
+
 	const navigate = useNavigate();
 
 	const handleChange = (e) => {
@@ -31,7 +32,7 @@ function Login() {
 	      }
 	    );
 	    if (response != 'error' && response.status == 201) {
-				setJwtToken(response.data.token)
+				setUser(response.user)
 				navigate('/')
 			} else {
 				navigate('/login')
