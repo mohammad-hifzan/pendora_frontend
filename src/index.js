@@ -11,6 +11,8 @@ import SignUp from './components/signUp'
 import Login from './components/login'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Provider } from 'react-redux';
+import { store } from './user_auths/store';  // Import the Redux store
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 function RootApp() {
@@ -32,7 +34,9 @@ function RootApp() {
 }
 root.render(
   <React.StrictMode>
-    <RootApp />
+    <Provider store={store}>
+      <RootApp />
+    </Provider>
   </React.StrictMode>
 );
 

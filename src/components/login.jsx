@@ -1,10 +1,14 @@
 import BreadCrumb from '../common/breadCrumb'
-import {useState, useEffect} from 'react'
+import { login } from '../user_auths/authenticationSlice';
+import { useDispatch } from 'react-redux';
+import {useState, createContext, useContext, useEffect} from 'react'
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 const API_URL = 'http://localhost:3000';
 
-function Login() {
+function Login(props) {
+	const dispatch = useDispatch();
+
 	const [formParams, setFormParams] = useState({nameOrEmail: '', password: ''});
 	const [jwtToken, setJwtToken] = useState('')
 	const navigate = useNavigate();
@@ -16,6 +20,8 @@ function Login() {
       [name]: value
     });
   };
+
+  debugger
 
   const SubmitLogin = async(csrfToken, formData) => {
 		try {
@@ -31,7 +37,8 @@ function Login() {
 	      }
 	    );
 	    if (response != 'error' && response.status == 201) {
-				setJwtToken(response.data.token)
+				setUser(response.user)
+				dispatch(setUser(response.user));
 				navigate('/')
 			} else {
 				navigate('/login')
