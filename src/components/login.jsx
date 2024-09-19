@@ -10,7 +10,8 @@ function Login(props) {
 	const dispatch = useDispatch();
 
 	const [formParams, setFormParams] = useState({nameOrEmail: '', password: ''});
-	const [jwtToken, setJwtToken] = useState('')
+	const [user, setUser] = useState(null);
+
 	const navigate = useNavigate();
 
 	const handleChange = (e) => {
@@ -37,8 +38,7 @@ function Login(props) {
 	      }
 	    );
 	    if (response != 'error' && response.status == 201) {
-				setUser(response.user)
-				dispatch(setUser(response.user));
+				dispatch(response.user);
 				navigate('/')
 			} else {
 				navigate('/login')

@@ -15,7 +15,7 @@ function Header() {
             <div className="header__nav">
               <nav className="header__menu mobile-menu">
                 <ul>
-                  <li className="active"><a href="./index.html">Homepage</a></li>
+                  <li className="active"><Link to="/">Homepage</Link></li>
                   <li><a href="./categories.html">Categories <span className="arrow_carrot-down"></span></a>
                     <ul className="dropdown">
                       <li><a href="./categories.html">Categories</a></li>
@@ -36,7 +36,7 @@ function Header() {
           <div className="col-lg-2">
             <div className="header__right">
               <a href="#" className="search-switch"><span className="icon_search"></span></a>
-              <a href="./login.html"><span className="icon_profile"></span></a>
+              <Link to="/login"><span className="icon_profile"></span></Link>
             </div>
           </div>
         </div>
