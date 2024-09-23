@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom"
+import store from '../user_auths/store'
 function Header() {
+  const current_user = store.getState().auth.user
 	return (
 		<header className="header">
       <div className="container">

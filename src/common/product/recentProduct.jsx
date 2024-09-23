@@ -18,10 +18,10 @@ function RecentProduct(props) {
                 <li>Active</li>
                 <li>Movie</li>
               </ul>
-              <h5>{manga.title}</h5>
+              <h5><a>{manga.title}</a></h5>
             </div>
           </div>
-        </Link>
+          </Link>
       </div>
     ))
   }
