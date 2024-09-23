@@ -22,7 +22,7 @@ function Login(props) {
     });
   };
 
-  debugger
+  
 
   const SubmitLogin = async(csrfToken, formData) => {
 		try {
@@ -38,7 +38,7 @@ function Login(props) {
 	      }
 	    );
 	    if (response != 'error' && response.status == 201) {
-				dispatch(response.user);
+				dispatch(login(response.data.user));
 				navigate('/')
 			} else {
 				navigate('/login')
