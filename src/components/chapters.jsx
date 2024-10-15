@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom"
+import { useParams, Link, useNavigate } from "react-router-dom"
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -8,6 +8,7 @@ function Chapter() {
 	const { manga_id, id } = useParams()
 	const [chapterData, setChapterData] = useState(null);
   const [chapters, setChapters] = useState([])
+  const navigate = useNavigate();
   let chaptersList = null
 
 	useEffect(() => {
@@ -18,10 +19,10 @@ function Chapter() {
     getChapters(manga_id).then(result => {
       setChapters(result)
     }) 
-  }, []);
+  }, [id]);
 
 	let chapterImages = null 
-	if (chapterData) {
+	if (chapterData && chapterData.chapter_images) {
 		chapterImages = chapterData.chapter_images.map(image => (
 			<div className="blog__details__item__text" >
 	      {/* <h4></h4> */}
@@ -35,6 +36,23 @@ function Chapter() {
     chaptersList = chapters.map(chapter => (
       <option value={chapter.id} key={chapter.id}>{chapter.name}</option>
     ))
+  }
+
+  function gotoPrev() {
+    if (chapterData && chapterData.prev_chapter_id) {
+      navigate(`/mangas/${manga_id}/chapters/${chapterData.prev_chapter_id}`);
+    }
+  }
+
+  function gotoNext() {
+    if (chapterData && chapterData.next_chapter_id) {
+      navigate(`/mangas/${manga_id}/chapters/${chapterData.next_chapter_id}`);
+    }
+  }
+
+  function handleSelect(event) {
+    let chapterId = event.target.value
+    navigate(`/mangas/${manga_id}/chapters/${chapterId}`);
   }
 
 
@@ -64,21 +82,26 @@ function Chapter() {
               <div className="blog__details__btns">
                 <div className="row">
                   <div className="col-lg-4">
-                    <div className="blog__details__btns__item">
-                      <h5><a href="#"><span className="arrow_left"></span> Building a Better LiA...</a>
-                      </h5>
-                    </div>
+                   {chapters && chapters.length > 0 &&
+                      <div className="blog__details__btns__item">
+                        <h5><a href="#" disabled={chapterData && chapterData.prev_chapter_id ? false : true} onClick={gotoPrev}><span className="arrow_left"></span> Prev Chapter </a>
+                        </h5>
+                      </div>
+                    }
+                    
                   </div>
                   <div className="col-lg-4" style={{marginLeft: 'auto', marginRight: 'auto'}}>
-                    <select className="custom-select mr-sm-2" style={{backgroundColor: '#212529', color: '#ffffff'}}>
+                    <select className="custom-select mr-sm-2" value={id} onChange={handleSelect} style={{backgroundColor: '#212529', color: '#ffffff'}}>
                       {chaptersList ? chaptersList : <p>...</p>}
                     </select>
                   </div>
                   <div className="col-lg-4">
-                    <div className="blog__details__btns__item next__btn">
-                      <h5><a href="#">Mugen no Juunin: Immortal – 21 <span
-                            className="arrow_right"></span></a></h5>
-                    </div>
+                    {chapters && chapters.length > 0 &&
+                      <div className="blog__details__btns__item next__btn">
+                        <h5><a href="#" disabled={chapterData && chapterData.next_chapter_id ? false : true} onClick={gotoNext}>Next Chapter <span
+                              className="arrow_right"></span></a></h5>
+                      </div>
+                    }
                   </div>
                 </div>
               </div>
@@ -98,20 +121,20 @@ function Chapter() {
                 <div className="row">
                   <div className="col-lg-4">
                     <div className="blog__details__btns__item">
-                      <h5><a href="#"><span className="arrow_left"></span> Building a Better LiA...</a>
+                      <h5><a href="#" disabled={chapterData && chapterData.prev_chapter_id ? false : true} onClick={gotoPrev}><span className="arrow_left"></span> Prev Chapter </a>
                       </h5>
                     </div>
                   </div>
 
                   <div className="col-lg-4" style={{marginLeft: 'auto', marginRight: 'auto'}}>
-                    <select className="custom-select mr-sm-2" style={{backgroundColor: '#212529', color: '#ffffff'}}>
+                    <select className="custom-select mr-sm-2" value={id} onChange={handleSelect} style={{backgroundColor: '#212529', color: '#ffffff'}}>
                       {chaptersList ? chaptersList : <p>...</p>}
                     </select>
                   </div>
 
                   <div className="col-lg-4">
                     <div className="blog__details__btns__item next__btn">
-                      <h5><a href="#">Mugen no Juunin: Immortal – 21 <span
+                      <h5><a href="#" disabled={chapterData && chapterData.next_chapter_id ? false : true} onClick={gotoNext}> Next Chapter <span
                             className="arrow_right"></span></a></h5>
                     </div>
                   </div>

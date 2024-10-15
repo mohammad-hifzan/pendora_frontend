@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom"
-function RecentProduct(props) {
+function updatedManga(props) {
   let mangaList = null
   let enablefullPage = null
-  if (props.mangas.recent_mangas) {
+  if (props.mangas.updated_chapters) {
     enablefullPage = props.enablefullPage
-    mangaList = props.mangas.recent_mangas.slice(0, props.breakPoint).map(manga => (
+    mangaList = props.mangas.updated_chapters.slice(0, props.breakPoint).map(manga => (
         <div className="col-lg-4 col-md-6 col-sm-6" key={manga.id}>
           <Link to={`/mangas/${manga.id}`}>
           <div className="product__item">
@@ -26,7 +26,7 @@ function RecentProduct(props) {
     ))
   }
 
-	return (
+  return (
     <>
       {
         enablefullPage ?
@@ -36,7 +36,7 @@ function RecentProduct(props) {
                     <div className="row">
                       <div className="col-lg-8 col-md-8 col-sm-6">
                         <div className="section-title">
-                          <h4>Romance</h4>
+                          <h4>Updated Chapters</h4>
                         </div>
                       </div>
                       <div className="col-lg-4 col-md-4 col-sm-6">
@@ -69,7 +69,7 @@ function RecentProduct(props) {
           <div className="row">
             <div className="col-lg-8 col-md-8 col-sm-8">
               <div className="section-title">
-                <h4>Recently Added Shows</h4>
+                <h4>Updated Chapters</h4>
               </div>
             </div>
             <div className="col-lg-4 col-md-4 col-sm-4">
@@ -84,9 +84,8 @@ function RecentProduct(props) {
         </div>
       }
     </>
-		
-		)
+    
+    )
 }
 
-
-export default RecentProduct
+export default updatedManga

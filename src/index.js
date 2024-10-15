@@ -14,7 +14,7 @@ import Chapter from './components/chapters'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
-import { store } from './user_auths/store';  // Import the Redux store
+import store from './user_auths/store';  // Import the Redux store
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 function RootApp() {
@@ -37,11 +37,11 @@ function RootApp() {
     )
 }
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <Provider store={store}>
       <RootApp />
     </Provider>
-  </React.StrictMode>
+  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
