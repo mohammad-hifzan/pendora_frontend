@@ -23,13 +23,11 @@ function RootApp() {
       <Routes>
         <Route path='/' element={<App />}>
           <Route index element={<MangaList products='all'/>} />
-          <Route path= '/latest' element={<MangaList />} />
           <Route path= '/mangas/:id' element={<MangaShow />} />
           <Route path= '/mangas/:manga_id/chapters/:id' element={<Chapter />} />
           <Route path= '/signup' element={<SignUp />}/>
           <Route path= '/login' element={<Login />}/>
         </Route>
-        
         <Route path= '/manga/add' element={<AddManga />}/>
         }
       </Routes>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import ProductSection from '../common/productSection'
 import HeroSection from '../common/heroSection'
@@ -6,6 +7,8 @@ const API_URL = 'http://localhost:3000'; // Rails server URL
 
 function MangaList(props) {
   const [posts, setPosts] = useState([]);
+  const location = useLocation();
+  const mangaType = location.state?.products || 'all';
 
   useEffect(() => {
     getMangas().then(result => {
@@ -16,7 +19,7 @@ function MangaList(props) {
   return (
     <>
       <HeroSection />
-      <ProductSection mangas={posts} products={props.products} />
+      <ProductSection mangas={posts} products={mangaType} />
     </>
   );
 }

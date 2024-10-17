@@ -73,7 +73,7 @@ function PopularProduct(props) {
             </div>
             <div className="col-lg-4 col-md-4 col-sm-4">
               <div className="btn__all">
-                <a href="#" className="primary-btn">View All <span className="arrow_right"></span></a>
+                <Link to={'/'} state={{ products: 'popularProduct' }} className="primary-btn">View All <span className="arrow_right"></span></Link>
               </div>
             </div>
           </div>
