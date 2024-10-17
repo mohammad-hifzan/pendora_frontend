@@ -21,9 +21,7 @@ function MangaShow(){
   }, []);
   if (chapters) {
     chaptersList = chapters.map(chapter => (
-      <div style={{maxHeight: 600, overflow: 'scroll'}}>
-        <Link to={`chapters/${chapter.id}`} key={chapter.id}>{chapter.name}</Link>
-      </div>
+      <Link to={`chapters/${chapter.id}`} key={chapter.id}>{chapter.name}</Link>
     ))
   }
 	return (
@@ -92,7 +90,9 @@ function MangaShow(){
                 <div className="section-title">
                   <h5>List Name</h5>
                 </div>
-                {chaptersList ? chaptersList : <p>No Chapters</p> }
+                <div style={{maxHeight: 600, overflow: 'scroll'}}>
+                  {chaptersList ? chaptersList : <p>No Chapters</p> }
+                </div>
               </div>
             </div>
           </div>
