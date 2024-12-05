@@ -14,7 +14,8 @@ import Chapter from './components/chapters'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
-import store from './user_auths/store';  // Import the Redux store
+import store from './user_auths/store';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 function RootApp() {
@@ -23,6 +24,7 @@ function RootApp() {
       <Routes>
         <Route path='/' element={<App />}>
           <Route index element={<MangaList products='all'/>} />
+          <Route path= '/mangas/' element={<MangaList />} />
           <Route path= '/mangas/:id' element={<MangaShow />} />
           <Route path= '/mangas/:manga_id/chapters/:id' element={<Chapter />} />
           <Route path= '/signup' element={<SignUp />}/>
@@ -34,6 +36,7 @@ function RootApp() {
     </BrowserRouter>
     )
 }
+
 root.render(
   // <React.StrictMode>
     <Provider store={store}>

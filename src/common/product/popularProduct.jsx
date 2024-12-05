@@ -1,10 +1,26 @@
 import { Link } from "react-router-dom"
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import PaginatedList from '../paginatedList'
 function PopularProduct(props) {
   let mangaList = null
   let enablefullPage = null
-  if (props.mangas.popular_today) {
+  const mangaState = useSelector((state) => state.manga);
+  const mangas = mangaState.popularManga
+  const [popularManga, setPopularManga] = useState([])
+
+  useEffect(() => {
+    if (props.type === "popular") {
+      setPopularManga(mangaState.popularManga);
+    } else {
+      if (props.mangas.data && props.mangas.data.popular_today.length > 0) {
+        setPopularManga(props.mangas.data.popular_today);
+      }
+    }
+  }, [props.type, mangaState.popularManga, props.mangas]);
+  if (popularManga) {
     enablefullPage = props.enablefullPage
-    mangaList = props.mangas.popular_today.slice(0, props.breakPoint).map(manga => (
+    mangaList = popularManga.slice(0, props.breakPoint).map(manga => (
         <div className="col-lg-4 col-md-6 col-sm-6" key={manga.id}>
           <Link to={`/mangas/${manga.id}`}>
           <div className="product__item">
@@ -54,14 +70,8 @@ function PopularProduct(props) {
                     {mangaList ? mangaList : <div>No content</div>}
                   </div>
                 </div>
-                <div className="product__pagination">
-                  <a href="#" className="current-page">1</a>
-                  <a href="#">2</a>
-                  <a href="#">3</a>
-                  <a href="#">4</a>
-                  <a href="#">5</a>
-                  <a href="#"><i className="fa fa-angle-double-right"></i></a>
-                </div>
+                {/* {<Pagination totalItems={12} itemsPerPage={3}/>} */}
+                <PaginatedList /> 
               </>
         :
         <div className="recent__product">
@@ -73,7 +83,8 @@ function PopularProduct(props) {
             </div>
             <div className="col-lg-4 col-md-4 col-sm-4">
               <div className="btn__all">
-                <Link to={'/'} state={{ products: 'popularProduct' }} className="primary-btn">View All <span className="arrow_right"></span></Link>
+                {/* <Link to={'/'} state={{ products: 'popularProduct' }} className="primary-btn">View All <span className="arrow_right"></span></Link> */}
+              <Link to={"/mangas?type=popular"} className="primary-btn">Most Popular <span className="arrow_right"></span></Link>
               </div>
             </div>
           </div>
