@@ -4,20 +4,24 @@ import RecentProduct from './product/recentProduct'
 import PopularProduct from './product/popularProduct'
 import LiveProduct from './product/liveProduct'
 import ProductBreadCrumb from './product/productBreadCrumb'
+import { useLocation } from 'react-router-dom';
 function ProductSection(props) {
   let updatedMangaVisible = null
   let popularProductVisible = null
   let recentProductVisible = null
   // let liveProductVisible = null
+  const location = useLocation();
+  const page = new URLSearchParams(location.search).get('type') || 'root';
 
-  let breakPoint = props.products == 'all' ? 6 : 18
-  let enableFullPage = props.products != 'all' 
+  let breakPoint = page === 'root' ? 6 : 3
+  let enableFullPage = page !== 'root' 
   if (props) {
-    updatedMangaVisible = props.products && (props.products.includes('updatedManga') || props.products.includes('all'))
-    popularProductVisible = props.products && (props.products.includes('popularProduct') || props.products.includes('all'))
-    recentProductVisible = props.products && (props.products.includes('recentProduct') || props.products.includes('all'))
+    updatedMangaVisible = page === 'root' ? true : page === 'updated' ? true : false
+    popularProductVisible = page === 'root' ? true : page === 'popular' ? true : false
+    recentProductVisible = page === 'root' ? true : page === 'new' ? true : false
     // liveProductVisible = props.products && (props.products.includes('liveProduct') || props.products.includes('all'))
   }
+  
 	return (
     <>
       {enableFullPage && <ProductBreadCrumb />}
@@ -26,11 +30,12 @@ function ProductSection(props) {
           <div className="row">
             <div className="col-lg-8">
               {/* Trending products */}
-              { updatedMangaVisible ? <UpdatedManga mangas={props.mangas} breakPoint={breakPoint} enablefullPage={enableFullPage}/> : null}
+
+              { updatedMangaVisible ? <UpdatedManga mangas={props.mangas} breakPoint={breakPoint} type={page} enablefullPage={enableFullPage}/> : null}
               {/* Popular products */}
-              { popularProductVisible ? <PopularProduct mangas={props.mangas} breakPoint={breakPoint} enablefullPage={enableFullPage}/> : null}
+              { popularProductVisible ? <PopularProduct mangas={props.mangas} breakPoint={breakPoint} type={page} enablefullPage={enableFullPage}/> : null}
               {/* Recent products */}
-              { recentProductVisible ? <RecentProduct mangas={props.mangas} breakPoint={breakPoint} enablefullPage={enableFullPage}/> : null}
+              { recentProductVisible ? <RecentProduct mangas={props.mangas} breakPoint={breakPoint} type={page} enablefullPage={enableFullPage}/> : null}
               {/* Live products */}
               {/* { liveProductVisible ? <LiveProduct /> : null} */}
             </div>

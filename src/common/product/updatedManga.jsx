@@ -1,10 +1,28 @@
 import { Link } from "react-router-dom"
-function updatedManga(props) {
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import PaginatedList from '../paginatedList'
+function UpdatedManga(props) {
   let mangaList = null
   let enablefullPage = null
-  if (props.mangas.updated_chapters) {
+  const mangaState = useSelector((state) => state.manga);
+  const mangas = mangaState.updatedManga
+  const [updatedManga, setUpdatedManga] = useState([])
+  useEffect(() => {
+    if (props.type === "updated") {
+      setUpdatedManga(mangaState.updatedManga);
+    } else {
+      if (props.mangas.data) {
+        setUpdatedManga(props.mangas.data.updated_chapters);
+      }
+    }
+  }, [props.type, mangaState.updatedManga, props.mangas]);
+
+
+  if (updatedManga) {
+    
     enablefullPage = props.enablefullPage
-    mangaList = props.mangas.updated_chapters.slice(0, props.breakPoint).map(manga => (
+    mangaList = updatedManga.slice(0, props.breakPoint).map(manga => (
         <div className="col-lg-4 col-md-6 col-sm-6" key={manga.id}>
           <Link to={`/mangas/${manga.id}`}>
           <div className="product__item">
@@ -55,14 +73,7 @@ function updatedManga(props) {
                     {mangaList ? mangaList : <div>No content</div>}
                   </div>
                 </div>
-                <div className="product__pagination">
-                  <a href="#" className="current-page">1</a>
-                  <a href="#">2</a>
-                  <a href="#">3</a>
-                  <a href="#">4</a>
-                  <a href="#">5</a>
-                  <a href="#"><i className="fa fa-angle-double-right"></i></a>
-                </div>
+                <PaginatedList /> 
               </>
         :
         <div className="recent__product">
@@ -74,7 +85,8 @@ function updatedManga(props) {
             </div>
             <div className="col-lg-4 col-md-4 col-sm-4">
               <div className="btn__all">
-                <Link to={'/'} state={{ products: 'updatedManga' }} className="primary-btn">View All <span className="arrow_right"></span></Link>
+                {/* <Link to={'/'} state={{ products: 'updatedManga' }} className="primary-btn">View All <span className="arrow_right"></span></Link> */}
+                <Link to={"/mangas?type=updated"} className="primary-btn">View All <span className="arrow_right"></span></Link>
               </div>
             </div>
           </div>
@@ -88,4 +100,4 @@ function updatedManga(props) {
     )
 }
 
-export default updatedManga
+export default UpdatedManga

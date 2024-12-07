@@ -1,10 +1,26 @@
 import { Link } from "react-router-dom"
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import PaginatedList from '../paginatedList'
 function RecentProduct(props) {
+  const [recentManga, setRecentManga] = useState([])
   let mangaList = null
   let enablefullPage = null
-  if (props.mangas.recent_mangas) {
+  const mangaState = useSelector((state) => state.manga);
+  const mangas = mangaState.newManga
+  useEffect(() => {
+    if (props.type === "new") {
+      setRecentManga(mangaState.newManga);
+    } else {
+      if (props.mangas.data) {
+        setRecentManga(props.mangas.data.recent_mangas);
+      }
+    }
+  }, [props.type, mangaState.newManga, props.mangas]);
+
+  if (recentManga) {
     enablefullPage = props.enablefullPage
-    mangaList = props.mangas.recent_mangas.slice(0, props.breakPoint).map(manga => (
+    mangaList = recentManga.slice(0, props.breakPoint).map(manga => (
         <div className="col-lg-4 col-md-6 col-sm-6" key={manga.id}>
           <Link to={`/mangas/${manga.id}`}>
           <div className="product__item">
@@ -55,14 +71,8 @@ function RecentProduct(props) {
                     {mangaList ? mangaList : <div>No content</div>}
                   </div>
                 </div>
-                <div className="product__pagination">
-                  <a href="#" className="current-page">1</a>
-                  <a href="#">2</a>
-                  <a href="#">3</a>
-                  <a href="#">4</a>
-                  <a href="#">5</a>
-                  <a href="#"><i className="fa fa-angle-double-right"></i></a>
-                </div>
+                {/* <Pagination totalItems={14  } itemsPerPage={3}/> */}
+                <PaginatedList /> 
               </>
         :
         <div className="recent__product">
@@ -74,7 +84,8 @@ function RecentProduct(props) {
             </div>
             <div className="col-lg-4 col-md-4 col-sm-4">
               <div className="btn__all">
-                <Link to={'/'} state={{ products: 'recentProduct' }} className="primary-btn">View All <span className="arrow_right"></span></Link>
+                {/* <Link to={'/'} state={{ products: 'recentProduct' }} className="primary-btn">View All <span className="arrow_right"></span></Link> */}
+              <Link to={"/mangas?type=new"} className="primary-btn">View All <span className="arrow_right"></span></Link>
               </div>
             </div>
           </div>
