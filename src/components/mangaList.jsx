@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import axios from 'axios';
 import ProductSection from '../common/productSection'
 import HeroSection from '../common/heroSection'
-const API_URL = 'http://localhost:3000'; // Rails server URL        
+import {get} from '../common/utility/toolbox'       
 
 function MangaList(props) {
   const [posts, setPosts] = useState([]);
@@ -25,7 +24,7 @@ function MangaList(props) {
 
 const getMangas = async () => {
   try {
-    const response = await axios.get(`${API_URL}/v2/mangas`, {withCredentials: true});
+    const response = await get('v2/mangas')
     return response.data;
   } catch (error) {
     console.error("Error fetching mangas:", error);
