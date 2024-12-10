@@ -1,8 +1,7 @@
 import BreadCrumb from '../common/breadCrumb'
 import {useState, useEffect} from 'react'
-import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
-const API_URL = 'http://localhost:3000';
+import {post} from '../common/utility/toolbox'
 
 function SignUp() {
 	const [formParams, setFormParams] = useState({name: '', email: '', password: ''});
@@ -11,9 +10,7 @@ function SignUp() {
 	
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let csrfToken = GetCsrfToken()
-		let response = SubmitRegistration(csrfToken, formParams)
-		debugger
+		let response = SubmitRegistration(formParams)
 		if (response != 'error' && response.status == 201) {
 			setJwtToken(response.data.token)
 			navigate('/')
@@ -74,26 +71,11 @@ function SignUp() {
     </>
 		)
 }
-const GetCsrfToken = async() => {
-	const response = await fetch(`${API_URL}/v2/csrf_token`);
-  const data = await response.json();
-  return data.csrf_token
-}
-const SubmitRegistration = async(csrfToken, formData) => {
+
+const SubmitRegistration = async(formData) => {
 
 	try {
-    const response = await axios.post(
-      `${API_URL}/v2/signup`,
-      formData,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRF-Token': csrfToken, // Include the CSRF token in the request headers
-        },
-        withCredentials: true, // Include credentials (like cookies)
-      }
-    );
-    
+    const response = await post(`v2/signup`, formData);
     return response
   } catch (error) {
       console.error('Submission error:', error);

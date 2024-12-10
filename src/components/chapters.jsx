@@ -1,8 +1,6 @@
 import { useParams, Link, useNavigate } from "react-router-dom"
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-
-const API_URL = 'http://localhost:3000'; // Rails server URL
+import {get} from '../common/utility/toolbox' 
 
 function Chapter() {
 	const { manga_id, id } = useParams()
@@ -209,7 +207,7 @@ function Chapter() {
 
 const getChapter = async (mangaId, id) => {
   try {
-    const response = await axios.get(`${API_URL}/v2/mangas/${mangaId}/chapters/${id}`, {withCredentials: true});
+    const response = await get(`v2/mangas/${mangaId}/chapters/${id}`);
     return response.data;
   } catch (error) {
     console.error("Error fetching mangas:", error);
@@ -219,7 +217,7 @@ const getChapter = async (mangaId, id) => {
 
 const getChapters = async (manga_id) => {
   try {
-    const response = await axios.get(`${API_URL}/v2/mangas/${manga_id}/chapters`, {withCredentials: true});
+    const response = await get(`v2/mangas/${manga_id}/chapters`);
     return response.data;
   } catch (error) {
     console.error("Error fetching mangas:", error);

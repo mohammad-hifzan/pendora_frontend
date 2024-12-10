@@ -2,9 +2,8 @@ import BreadCrumb from '../common/breadCrumb'
 import { login } from '../user_auths/authenticationSlice';
 import { useDispatch } from 'react-redux';
 import {useState, createContext, useContext, useEffect} from 'react'
-import axios from 'axios';
+import {post} from '../common/utility/toolbox'
 import { useNavigate, Link } from 'react-router-dom';
-const API_URL = 'http://localhost:3000';
 
 function Login(props) {
 	const dispatch = useDispatch();
@@ -24,19 +23,9 @@ function Login(props) {
 
   
 
-  const SubmitLogin = async(csrfToken, formData) => {
+  const SubmitLogin = async(formData) => {
 		try {
-	    const response = await axios.post(
-	      `${API_URL}/v2/login`,
-	      formData,
-	      {
-	        headers: {
-	          'Content-Type': 'application/json',
-	          'X-CSRF-Token': csrfToken, // Include the CSRF token in the request headers
-	        },
-	        withCredentials: true, // Include credentials (like cookies)
-	      }
-	    );
+	    const response = await post(`v2/login`, formData);
 	    if (response != 'error' && response.status == 201) {
 				dispatch(login(response.data.user));
 				navigate('/')
@@ -51,8 +40,7 @@ function Login(props) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let csrfToken = GetCsrfToken()
-		SubmitLogin(csrfToken, formParams)
+		SubmitLogin(formParams)
   }
 
 	return (
@@ -107,11 +95,6 @@ function Login(props) {
 		)
 }
 
-const GetCsrfToken = async() => {
-	const response = await fetch(`${API_URL}/v2/csrf_token`);
-  const data = await response.json();
-  return data.csrf_token
-}
 
 
 
