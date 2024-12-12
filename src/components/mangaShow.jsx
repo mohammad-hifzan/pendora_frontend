@@ -5,6 +5,7 @@ import {get} from '../common/utility/toolbox'
 function MangaShow(){
 	const { id } = useParams()
 	const [mangaData, setMangaData] = useState([]);
+  
   const [chapters, setChapters] = useState([])
   let chaptersList = null
 
@@ -16,7 +17,7 @@ function MangaShow(){
     getChapters(id).then(result => {
       setChapters(result)
     })
-  }, []);
+  }, [id]);
   if (chapters) {
     chaptersList = chapters.map(chapter => (
       <Link to={`chapters/${chapter.id}`} key={chapter.id}>{chapter.name}</Link>
