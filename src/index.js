@@ -11,6 +11,7 @@ import SignUp from './components/signUp'
 import Login from './components/login'
 import MangaShow from './components/mangaShow'
 import Chapter from './components/chapters'
+import Bookmark from './components/bookmark'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
@@ -25,6 +26,7 @@ function RootApp() {
         <Route path='/' element={<App />}>
           <Route index element={<MangaList products='all'/>} />
           <Route path= '/mangas/' element={<MangaList />} />
+          <Route path= '/bookmark' element={<Bookmark />} />
           <Route path= '/mangas/:id' element={<MangaShow />} />
           <Route path= '/mangas/:manga_id/chapters/:id' element={<Chapter />} />
           <Route path= '/signup' element={<SignUp />}/>

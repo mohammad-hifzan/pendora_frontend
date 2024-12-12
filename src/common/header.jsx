@@ -15,6 +15,9 @@ function Header() {
       throw error;
     }
   };
+  if (currentUser) {
+    
+  }
 	return (
 		<header className="header">
       <div className="container">
@@ -39,6 +42,7 @@ function Header() {
                       <li><a href="./blog-details.html">Blog Details</a></li>
                       <li><Link to="/signup">Sign Up</Link></li>
                       <li><Link to="/login">Login</Link></li>
+                      <li><Link to="/bookmark">Bookmark</Link></li>
                       <li><Link to="/manga/add">Add Manga</Link></li>
                       <li><Link to="#" onClick={logOut}>LogOut</Link></li>
                     </ul>
@@ -52,7 +56,17 @@ function Header() {
           <div className="col-lg-2">
             <div className="header__right">
               <a href="#" className="search-switch"><span className="icon_search"></span></a>
-              <Link to="/login"><span className="icon_profile"></span></Link>
+              {!currentUser && <Link to="/login"><span className="icon_profile"></span></Link>}
+              {currentUser && 
+                <span className="dropdown">
+                  <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><span className="icon_profile"></span></a>
+                  <ul className="dropdown-menu" >
+                    <li><a className="dropdown-item" style={{color: 'black'}} href="#">Action</a></li>
+                    <li><a className="dropdown-item" style={{color: 'black'}} href="#">Another action</a></li>
+                    <li><a className="dropdown-item" style={{color: 'black'}} href="#">Something else here</a></li>
+                  </ul>
+                </span>
+              }
             </div>
           </div>
         </div>
