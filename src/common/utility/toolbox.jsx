@@ -18,10 +18,11 @@ export const post = async (path, data) => {
 	return response
 }
 
-export const get = async (path) => {
+export const get = async (path, data={}) => {
 	const response = await axios.get(
 		`${API_URL}/${path}`,
 		{
+		  params: data,
 		  withCredentials: true, // Include cookies
 		}
 	);

@@ -1,6 +1,7 @@
 import { useParams, Link, useNavigate } from "react-router-dom"
 import React, { useState, useEffect } from 'react';
 import {get} from '../common/utility/toolbox' 
+import Comment from '../common/comment'
 
 function Chapter() {
 	const { manga_id, id } = useParams()
@@ -138,65 +139,66 @@ function Chapter() {
                   </div>
                 </div>
               </div>
-              <div className="blog__details__comment">
-                <h4>3 Comments</h4>
-                <div className="blog__details__comment__item">
-                  <div className="blog__details__comment__item__pic">
-                    <img src="/theme/img/blog/details/comment-1.png" alt="" />
-                  </div>
-                  <div className="blog__details__comment__item__text">
-                    <span>Sep 08, 2020</span>
-                    <h5>John Smith</h5>
-                    <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-                    adipisci velit, sed quia non numquam eius modi</p>
-                    <a href="#">Like</a>
-                    <a href="#">Reply</a>
-                  </div>
-                </div>
-                <div className="blog__details__comment__item blog__details__comment__item--reply">
-                  <div className="blog__details__comment__item__pic">
-                    <img src="/theme/img/blog/details/comment-2.png" alt="" />
-                  </div>
-                  <div className="blog__details__comment__item__text">
-                    <span>Sep 08, 2020</span>
-                    <h5>Elizabeth Perry</h5>
-                    <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-                    adipisci velit, sed quia non numquam eius modi</p>
-                    <a href="#">Like</a>
-                    <a href="#">Reply</a>
-                  </div>
-                </div>
-                <div className="blog__details__comment__item">
-                  <div className="blog__details__comment__item__pic">
-                    <img src="/theme/img/blog/details/comment-3.png" alt="" />
-                  </div>
-                  <div className="blog__details__comment__item__text">
-                    <span>Sep 08, 2020</span>
-                    <h5>Adrian Coleman</h5>
-                    <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-                    adipisci velit, sed quia non numquam eius modi</p>
-                    <a href="#">Like</a>
-                    <a href="#">Reply</a>
-                  </div>
-                </div>
-              </div>
-              <div className="blog__details__form">
-                <h4>Leave A Commnet</h4>
-                <form action="#">
-                  <div className="row">
-                    <div className="col-lg-6 col-md-6 col-sm-6">
-                      <input type="text" placeholder="Name" />
-                    </div>
-                    <div className="col-lg-6 col-md-6 col-sm-6">
-                      <input type="text" placeholder="Email" />
-                    </div>
-                    <div className="col-lg-12">
-                      <textarea placeholder="Message"></textarea>
-                      <button type="submit" className="site-btn">Send Message</button>
-                    </div>
-                  </div>
-                </form>
-              </div>
+              {/* <div className="blog__details__comment"> */}
+              {/*   <h4>3 Comments</h4> */}
+              {/*   <div className="blog__details__comment__item"> */}
+              {/*     <div className="blog__details__comment__item__pic"> */}
+              {/*       <img src="/theme/img/blog/details/comment-1.png" alt="" /> */}
+              {/*     </div> */}
+              {/*     <div className="blog__details__comment__item__text"> */}
+              {/*       <span>Sep 08, 2020</span> */}
+              {/*       <h5>John Smith</h5> */}
+              {/*       <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, */}
+              {/*       adipisci velit, sed quia non numquam eius modi</p> */}
+              {/*       <a href="#">Like</a> */}
+              {/*       <a href="#">Reply</a> */}
+              {/*     </div> */}
+              {/*   </div> */}
+              {/*   <div className="blog__details__comment__item blog__details__comment__item--reply"> */}
+              {/*     <div className="blog__details__comment__item__pic"> */}
+              {/*       <img src="/theme/img/blog/details/comment-2.png" alt="" /> */}
+              {/*     </div> */}
+              {/*     <div className="blog__details__comment__item__text"> */}
+              {/*       <span>Sep 08, 2020</span> */}
+              {/*       <h5>Elizabeth Perry</h5> */}
+              {/*       <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, */}
+              {/*       adipisci velit, sed quia non numquam eius modi</p> */}
+              {/*       <a href="#">Like</a> */}
+              {/*       <a href="#">Reply</a> */}
+              {/*     </div> */}
+              {/*   </div> */}
+              {/*   <div className="blog__details__comment__item"> */}
+              {/*     <div className="blog__details__comment__item__pic"> */}
+              {/*       <img src="/theme/img/blog/details/comment-3.png" alt="" /> */}
+              {/*     </div> */}
+              {/*     <div className="blog__details__comment__item__text"> */}
+              {/*       <span>Sep 08, 2020</span> */}
+              {/*       <h5>Adrian Coleman</h5> */}
+              {/*       <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, */}
+              {/*       adipisci velit, sed quia non numquam eius modi</p> */}
+              {/*       <a href="#">Like</a> */}
+              {/*       <a href="#">Reply</a> */}
+              {/*     </div> */}
+              {/*   </div> */}
+              {/* </div> */}
+              <Comment />
+              {/* <div className="blog__details__form"> */}
+              {/*   <h4>Leave A Commnet</h4> */}
+              {/*   <form action="#"> */}
+              {/*     <div className="row"> */}
+              {/*       <div className="col-lg-6 col-md-6 col-sm-6"> */}
+              {/*         <input type="text" placeholder="Name" /> */}
+              {/*       </div> */}
+              {/*       <div className="col-lg-6 col-md-6 col-sm-6"> */}
+              {/*         <input type="text" placeholder="Email" /> */}
+              {/*       </div> */}
+              {/*       <div className="col-lg-12"> */}
+              {/*         <textarea placeholder="Message"></textarea> */}
+              {/*         <button type="submit" className="site-btn">Send Message</button> */}
+              {/*       </div> */}
+              {/*     </div> */}
+              {/*   </form> */}
+              {/* </div> */}
             </div>
           </div>
         </div>
