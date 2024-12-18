@@ -46,7 +46,7 @@ function ProductSidebar() {
           </div>
         </div>
         {/* product sidebar comment */}
-        <ProductSidebarComment />
+        {/* <ProductSidebarComment /> */}
       </div>
 		)
 }

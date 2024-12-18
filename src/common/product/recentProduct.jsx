@@ -20,7 +20,26 @@ function RecentProduct(props) {
 
   if (recentManga) {
     enablefullPage = props.enablefullPage
-    mangaList = recentManga.slice(0, props.breakPoint).map(manga => (
+    if (mobileType()) {
+      mangaList = recentManga.slice(0, props.breakPoint).map(manga => (
+          <div className="product__sidebar__comment__item" key={manga.id}>
+            <Link to={`/mangas/${manga.id}`} style={{display: 'block'}}>
+              <div className="product__sidebar__comment__item__pic">
+                <img src={manga.thumbnail} alt="" style={{width: '100px', height: 'auto'}}/>
+              </div>
+              <div className="product__sidebar__comment__item__text">
+                <ul>
+                  <li>Active</li>
+                  <li>Movie</li>
+                </ul>
+                <h5><a>{manga.title}</a></h5>
+                <span><i className="fa fa-eye"></i> 19.141 Viewes</span>
+              </div>
+            </Link>
+          </div>
+      ))
+    } else {
+      mangaList = recentManga.slice(0, props.breakPoint).map(manga => (
         <div className="col-lg-4 col-md-6 col-sm-6" key={manga.id}>
           <Link to={`/mangas/${manga.id}`}>
           <div className="product__item">
@@ -38,8 +57,9 @@ function RecentProduct(props) {
             </div>
           </div>
           </Link>
-      </div>
-    ))
+        </div>
+      ))
+    }
   }
 
 	return (
@@ -67,7 +87,7 @@ function RecentProduct(props) {
                       </div>
                     </div>
                   </div>
-                  <div className="row">
+                  <div className={mobileType() ? "row container" : "row"}>
                     {mangaList ? mangaList : <div>No content</div>}
                   </div>
                 </div>
@@ -89,7 +109,7 @@ function RecentProduct(props) {
               </div>
             </div>
           </div>
-          <div className="row">
+          <div className={mobileType() ? "row container" : "row"}>
             {mangaList ? mangaList : <div>No content</div>}
           </div>
         </div>
@@ -99,5 +119,18 @@ function RecentProduct(props) {
 		)
 }
 
+function getDeviceType() {
+  const userAgent = navigator.userAgent;
 
+  if (/mobile/i.test(userAgent)) {
+    return "Mobile";
+  } else if (/tablet/i.test(userAgent) || /iPad/.test(userAgent)) {
+    return "Tablet";
+  } else {
+    return "Laptop/Desktop";
+  }
+}
+function mobileType() {
+  return getDeviceType() === "Mobile"
+}
 export default RecentProduct
