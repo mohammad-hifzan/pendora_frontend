@@ -88,7 +88,7 @@ function MangaShow(){
             <div className="col-lg-12">
               <div className="anime__details__episodes" >
                 <div className="section-title">
-                  <h5>List Name</h5>
+                  <h5>Chapters</h5>
                 </div>
                 <div style={{maxHeight: '600px', overflowY: 'auto', overflowX: 'hidden'}}>
                   {chaptersList ? chaptersList : <p>No Chapters</p> }

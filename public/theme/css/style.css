@@ -411,6 +411,17 @@ ol {
 	padding: 20px;
 }
 
+.header__menu .dropdown-custom {
+	font-size: 15px;
+	color: #b7b7b7;
+	font-weight: 700;
+	-webkit-transition: all, 0.5s;
+	-o-transition: all, 0.5s;
+	transition: all, 0.5s;
+	padding: 20px;
+}
+
+
 .header__menu ul li a span {
 	position: relative;
 	font-size: 17px;

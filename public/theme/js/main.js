@@ -53,10 +53,12 @@
     /*------------------
 		Navigation
 	--------------------*/
-    $(".mobile-menu").slicknav({
-        prependTo: '#mobile-menu-wrap',
-        allowParentLinks: true
-    });
+    $(document).ready(function () {
+      $(".mobile-menu").slicknav({
+          prependTo: '#mobile-menu-wrap',
+          allowParentLinks: true
+      });
+    })
 
     /*------------------
 		Hero Slider
