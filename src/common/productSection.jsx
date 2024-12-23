@@ -1,7 +1,4 @@
 import ProductSidebar from './product/productSidebar'
-import UpdatedManga from './product/updatedManga'
-import RecentProduct from './product/recentProduct'
-import PopularProduct from './product/popularProduct'
 import LiveProduct from './product/liveProduct'
 import ProductBreadCrumb from './product/productBreadCrumb'
 import SubProduct from './product/subProduct'
