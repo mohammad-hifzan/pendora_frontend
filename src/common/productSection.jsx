@@ -4,6 +4,7 @@ import RecentProduct from './product/recentProduct'
 import PopularProduct from './product/popularProduct'
 import LiveProduct from './product/liveProduct'
 import ProductBreadCrumb from './product/productBreadCrumb'
+import SubProduct from './product/subProduct'
 import { useLocation } from 'react-router-dom';
 function ProductSection(props) {
   let updatedMangaVisible = null
@@ -31,17 +32,17 @@ function ProductSection(props) {
             <div className="col-lg-8">
               {/* Trending products */}
 
-              { updatedMangaVisible ? <UpdatedManga mangas={props.mangas} breakPoint={breakPoint} type={page} enablefullPage={enableFullPage}/> : null}
+              { updatedMangaVisible ? <SubProduct mangas={props.mangas} breakPoint={breakPoint} type={page} productSubType="updatedManga" enablefullPage={enableFullPage}/> : null}
               {/* Popular products */}
-              { popularProductVisible ? <PopularProduct mangas={props.mangas} breakPoint={breakPoint} type={page} enablefullPage={enableFullPage}/> : null}
+              { popularProductVisible ? <SubProduct mangas={props.mangas} breakPoint={breakPoint} type={page} productSubType="popularManga" enablefullPage={enableFullPage}/> : null}
               {/* Recent products */}
-              { recentProductVisible ? <RecentProduct mangas={props.mangas} breakPoint={breakPoint} type={page} enablefullPage={enableFullPage}/> : null}
+              { recentProductVisible ? <SubProduct mangas={props.mangas} breakPoint={breakPoint} type={page} productSubType="newManga" enablefullPage={enableFullPage}/> : null}
               {/* Live products */}
               {/* { liveProductVisible ? <LiveProduct /> : null} */}
             </div>
             {/* product sidebar */}
             <div className="col-lg-4 col-md-6 col-sm-8">
-              <ProductSidebar />
+              <ProductSidebar mangas={props.mangas} />
             </div>
           </div>
         </div>

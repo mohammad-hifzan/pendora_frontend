@@ -2,21 +2,21 @@ import React from "react";
 import usePagination from "./usePagination";
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { setUpdatedManga, setNewManga, setPopularManga } from '../mangaReducers/mangas';
+import { setUpdatedManga, setNewManga, setPopularManga, setBookmark } from '../mangaReducers/mangas';
 
-const PaginatedList = () => {
+const PaginatedList = (props) => {
   const mangaState = useSelector((state) => state.manga);
   const dispatch = useDispatch();
   const location = useLocation();
   const type = new URLSearchParams(location.search).get('type')
   const { data, currentPage, totalPages, loading, error, goToPage } =
-    usePagination();
+    usePagination(props?.url);
     if (data.length > 0) {
       dispatch(setUpdatedManga(data[0]['updated_chapters']));
       dispatch(setNewManga(data[0]['recent_mangas']));
-      dispatch(setPopularManga(data[0]['popular_today']));
+      dispatch(setPopularManga(data[0]['popular_mangas']));
+      dispatch(setBookmark(data[0]['bookmarked_mangas']))
     }
-    
   return (
     <div>
       <div className="product__pagination">
@@ -37,26 +37,9 @@ const PaginatedList = () => {
                   >{currentPage + 1}</a>}
 
         {currentPage != totalPages && currentPage + 1 != totalPages && <a href="#" className={currentPage === totalPages && "current-page"} onClick={() => goToPage(totalPages)}
-                  disabled={currentPage === totalPages}>5</a>}
+                  disabled={currentPage === totalPages}>{totalPages}</a>}
         {/* <a href="#"><i className="fa fa-angle-double-right"></i></a> */}
       </div>
-      {/* <div> */}
-        {/* <button */}
-        {/*   onClick={() => goToPage(currentPage - 1)} */}
-        {/*   disabled={currentPage === 1} */}
-        {/* > */}
-        {/*   Previous */}
-        {/* </button> */}
-        {/* <span> */}
-        {/*   Page {currentPage} of {totalPages} */}
-        {/* </span> */}
-        {/* <button */}
-        {/*   onClick={() => goToPage(currentPage + 1)} */}
-        {/*   disabled={currentPage === totalPages} */}
-        {/* > */}
-        {/*   Next */}
-        {/* </button> */}
-      {/* </div> */}
     </div>
   );
 };

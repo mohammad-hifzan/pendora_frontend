@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useLocation } from 'react-router-dom';
-import axios from "axios";
-const API_URL = 'http://localhost:3000';
-const usePagination = (options = {}) => {
+import { get, post } from './utility/toolbox'
+
+const usePagination = (url, options = {}) => {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -13,16 +13,16 @@ const usePagination = (options = {}) => {
   const location = useLocation();
   useEffect(() => {
     const type = new URLSearchParams(location.search).get('type')
-    fetchData(currentPage, type);
+    fetchData(url, currentPage, type);
   }, [currentPage]);
 
-  const fetchData = async (page, type) => {
+  const fetchData = async (url, page, type) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get(`${API_URL}/v2/mangas`, {
-        params: { page, per_page: perPage, ...params, type: type},
-      });
+      const response = await get(url,
+        { page: page, per_page: perPage, ...params, type: type},
+      );
       
       setData([response.data.data]);
 

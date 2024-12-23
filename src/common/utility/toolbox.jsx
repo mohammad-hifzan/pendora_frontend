@@ -1,5 +1,6 @@
 import {getCsrf} from './csrf'
 import axios from 'axios';
+import store from '../../user_auths/store'
 const API_URL = 'http://localhost:3000';
 
 export const post = async (path, data) => {
@@ -28,3 +29,8 @@ export const get = async (path, data={}) => {
 	);
 	return response
 }
+
+export const getUser = () => {
+  return store.getState().auth.user || {};
+}
+
