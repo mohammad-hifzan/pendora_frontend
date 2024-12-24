@@ -1,24 +1,45 @@
 import { useParams, Link } from "react-router-dom"
+import { useDispatch, useSelector } from 'react-redux';
 import React, { useState, useEffect } from 'react';
-import {get} from '../common/utility/toolbox' 
+import {get, post, getUser} from '../common/utility/toolbox' 
 import Comment from '../common/comment'
 
 function MangaShow(){
+  const currentUser = getUser();
 	const { id } = useParams()
 	const [mangaData, setMangaData] = useState([]);
-  
+  const [bookmark, setBookmark] = useState(null);
+
+
   const [chapters, setChapters] = useState([])
   let chaptersList = null
+
+  const handleBookmarkClick = async() => {
+    try {
+      const result = await post(`/v2/mangas/${id}/bookmarks/toggle_bookmark`, {user_id: currentUser?.id});
+      setBookmark(result.data['bookmarked']);
+    } catch (error) {
+      console.error('Error fetching comments:', error);
+    }
+  }
+
+
+
+
 
 	useEffect(() => {
     getManga(id).then(result => {
       setMangaData(result)
     })
+    isbookmarked(id).then(result => {
+      setBookmark(result)
+    })
 
     getChapters(id).then(result => {
       setChapters(result)
     })
-  }, [id]);
+  }, [id, bookmark]);
+
   if (chapters) {
     chaptersList = chapters.map(chapter => (
       <Link to={`chapters/${chapter.id}`} key={chapter.id}>{chapter.name}</Link>
@@ -68,15 +89,13 @@ function MangaShow(){
                         <ul>
                           <li><span>Scores:</span> 7.31 / 1,515</li>
                           <li><span>Rating:</span> 8.5 / 161 times</li>
-                          <li><span>Duration:</span> 24 min/ep</li>
-                          <li><span>Quality:</span> HD</li>
                           <li><span>Views:</span> 131,541</li>
                         </ul>
                       </div>
                     </div>
                   </div>
                   <div className="anime__details__btn">
-                    <a href="#" className="follow-btn"><i className="fa fa-heart-o"></i> Bookmark</a>
+                    <a href="#" className="follow-btn" onClick={handleBookmarkClick}><i className={bookmark ? "fa fa-heart" : "fa fa-heart-o"}></i> {bookmark ? 'Bookmarked' : 'Bookmark'}</a>
                     <a href="#" className="watch-btn"><span>Continue</span> <i
                     className="fa fa-angle-right"></i></a>
                   </div>
@@ -151,5 +170,19 @@ const getChapters = async (id) => {
     throw error;
   }
 };
+
+const isbookmarked = async (mangaId) => {
+  try {
+    const response = await get(`/v2/mangas/${mangaId}/bookmarks/bookmarked`)
+    if (response.data['bookmarked']) {
+      return true
+    } else {
+      return false
+    }
+  } catch (error) {
+    console.error("Error fetching bookmark data:", error);
+    throw error;
+  }
+}
 
 export default MangaShow
