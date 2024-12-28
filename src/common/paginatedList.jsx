@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import usePagination from "./usePagination";
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
@@ -10,13 +10,15 @@ const PaginatedList = (props) => {
   const location = useLocation();
   const type = new URLSearchParams(location.search).get('type')
   const { data, currentPage, totalPages, loading, error, goToPage } =
-    usePagination(props?.url);
+  usePagination(props?.url, props?.filterQuery);
+  useEffect(() => { 
     if (data.length > 0) {
       dispatch(setUpdatedManga(data[0]['updated_chapters']));
       dispatch(setNewManga(data[0]['recent_mangas']));
       dispatch(setPopularManga(data[0]['popular_mangas']));
       dispatch(setBookmark(data[0]['bookmarked_mangas']))
     }
+  }, [props?.filterQuery])
   return (
     <div>
       <div className="product__pagination">
@@ -32,7 +34,7 @@ const PaginatedList = (props) => {
         {currentPage - 1 > 1 && <a href="#" onClick={() => goToPage(currentPage - 1)}
                   >{currentPage - 1}</a>}
         {<a href="#" className="current-page" onClick={() => goToPage(currentPage)}
-                  disabled='true'>{currentPage}</a>}
+                  disabled={true}>{currentPage}</a>}
         {currentPage + 1 > 1 && currentPage + 1 <= totalPages && <a href="#" onClick={() => goToPage((currentPage + 1))}
                   >{currentPage + 1}</a>}
 

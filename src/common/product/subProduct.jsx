@@ -1,11 +1,21 @@
-import { Link } from "react-router-dom"
+import { Link, useSearchParams } from "react-router-dom"
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import PaginatedList from '../paginatedList'
+import FilterModal from '../filterModal'
 function SubProduct(props) {
   let mangaList = null
   let enablefullPage = null
+  const [filterQuery, setFilterQuery] = useState({ selected: [], excluded: [] });
   const mangaState = useSelector((state) => state.manga);
+
+  const [searchQuery, setSearchQuery] = useSearchParams()
+
+  useEffect(() => {
+    const selected = searchQuery.get("selected")?.split(",") || [];
+    const excluded = searchQuery.get("excluded")?.split(",") || [];
+    setFilterQuery({ selected, excluded });
+  }, [searchQuery])
 
   const mangas = mangaState[props.productSubType]
   
@@ -13,9 +23,11 @@ function SubProduct(props) {
 
   const userAgent = navigator.userAgent;
 
-  const pageTitle = props.productSubType === 'popularManga' ? 'Most Viewed Today' : props.productSubType === 'newManga' ? 'Recently Added Shows' : 'Popular Chapters'
+  const pageTitle = props.productSubType === 'popularManga' ? 'Most Viewed' : props.productSubType === 'newManga' ? 'Recently Added Shows' : 'Popular Chapters'
   const pageType = props.productSubType === 'popularManga' ? 'popular' : props.productSubType === 'newManga' ? 'new' : 'updated'
   const viewTitle = props.productSubType === 'popularManga' ? 'Most Popular' : 'View All'
+
+
 
   function updateProduct(mangaState, props) {
     if (props.type !== "root") {
@@ -33,13 +45,12 @@ function SubProduct(props) {
     }
   }
 
-
   useEffect(() => {
     updateProduct(mangaState, props)
-  }, [props.type, mangaState[props.productSubType], props.mangas]);
+  }, [props.type, mangaState[props.productSubType], props.mangas, searchQuery]);
 
 
-  if (product) {  
+  if (product.length > 0) {  
     enablefullPage = props.enablefullPage
     if (mobileType()) {
       mangaList = product.slice(0, props.breakPoint).map(manga => (
@@ -53,7 +64,7 @@ function SubProduct(props) {
                   <li>Active</li>
                   <li>Movie</li>
                 </ul>
-                <h5><a>{manga.title}</a></h5>
+                <h5>{manga.title}</h5>
                 <span><i className="fa fa-eye"></i> 19.141 Viewes</span>
               </div>
             </Link>
@@ -74,7 +85,7 @@ function SubProduct(props) {
                   <li>Active</li>
                   <li>Movie</li>
                 </ul>
-                <h5><a>{manga.title}</a></h5>
+                <h5>{manga.title}</h5>
               </div>
             </div>
             </Link>
@@ -97,6 +108,7 @@ function SubProduct(props) {
                           <h4>{pageTitle}</h4>
                         </div>
                       </div>
+                          
                       <div className="col-lg-4 col-md-4 col-sm-6">
                         <div className="product__page__filter">
                           <p>Order by:</p>
@@ -108,12 +120,19 @@ function SubProduct(props) {
                         </div>
                       </div>
                     </div>
+                    <br></br>
+                    <FilterModal />
+                    <div className="filter-button">                      
+                      <a data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Filter
+                      </a>
+                    </div>
                   </div>
                   <div className={mobileType() ? "row container" : "row"}>
                     {mangaList ? mangaList : <div>No content</div>}
                   </div>
                 </div>
-                <PaginatedList url="v2/mangas/" /> 
+                <PaginatedList url="v2/mangas/" filterQuery={filterQuery} /> 
               </>
         :
         <div className="recent__product">
