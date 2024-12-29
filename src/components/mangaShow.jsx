@@ -8,6 +8,7 @@ function MangaShow(){
   const currentUser = getUser();
 	const { id } = useParams()
 	const [mangaData, setMangaData] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [bookmark, setBookmark] = useState(null);
 
 
@@ -23,10 +24,6 @@ function MangaShow(){
     }
   }
 
-
-
-
-
 	useEffect(() => {
     getManga(id).then(result => {
       setMangaData(result)
@@ -38,7 +35,14 @@ function MangaShow(){
     getChapters(id).then(result => {
       setChapters(result)
     })
+
   }, [id, bookmark]);
+
+  useEffect(() => {
+    if (mangaData?.categories) {
+      setCategories(mangaData.categories.map((category) => (category.name)))
+    }
+  }, [mangaData])
 
   if (chapters) {
     chaptersList = chapters.map(chapter => (
@@ -82,7 +86,7 @@ function MangaShow(){
                           <li><span>Studios:</span> Lerche</li>
                           <li><span>Date aired:</span> Oct 02, 2019 to ?</li>
                           <li><span>Status:</span> Airing</li>
-                          <li><span>Genre:</span> Action, Adventure, Fantasy, Magic</li>
+                          <li><span>Genre:</span>{categories.length > 0 && categories.join(', ')}</li>
                         </ul>
                       </div>
                       <div className="col-lg-6 col-md-6">

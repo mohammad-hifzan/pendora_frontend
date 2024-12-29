@@ -21,7 +21,7 @@ const usePagination = (url, filterQuery={}, options = {}) => {
     setError(null);
     try {
       const response = await get(url,
-        { page: page, per_page: perPage, ...params, type: type, filterQuery: filterQuery},
+        { page: page, per_page: perPage, ...params, type: type, filter_query: filterQuery},
       );
       
       setData([response.data.data]);
