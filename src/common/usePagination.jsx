@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useLocation } from 'react-router-dom';
 import { get, post } from './utility/toolbox'
 
-const usePagination = (url, options = {}) => {
+const usePagination = (url, filterQuery={}, options = {}) => {
   const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -14,14 +14,14 @@ const usePagination = (url, options = {}) => {
   useEffect(() => {
     const type = new URLSearchParams(location.search).get('type')
     fetchData(url, currentPage, type);
-  }, [currentPage]);
+  }, [currentPage, filterQuery]);
 
   const fetchData = async (url, page, type) => {
     setLoading(true);
     setError(null);
     try {
       const response = await get(url,
-        { page: page, per_page: perPage, ...params, type: type},
+        { page: page, per_page: perPage, ...params, type: type, filterQuery: filterQuery},
       );
       
       setData([response.data.data]);

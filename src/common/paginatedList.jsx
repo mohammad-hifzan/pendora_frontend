@@ -10,7 +10,7 @@ const PaginatedList = (props) => {
   const location = useLocation();
   const type = new URLSearchParams(location.search).get('type')
   const { data, currentPage, totalPages, loading, error, goToPage } =
-    usePagination(props?.url);
+    usePagination(props?.url, props?.filterQuery);
     if (data.length > 0) {
       dispatch(setUpdatedManga(data[0]['updated_chapters']));
       dispatch(setNewManga(data[0]['recent_mangas']));
