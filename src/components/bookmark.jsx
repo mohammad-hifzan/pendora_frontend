@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProductSidebar from '../common/product/productSidebar'
@@ -7,9 +7,11 @@ import PaginatedList from '../common/paginatedList'
 import {get} from '../common/utility/toolbox'       
 // Needs UI improvment 
 function Bookmark(props) {
-  const [mangas, setMangas] = useState([]);
   const mangaState = useSelector((state) => state.manga);
+  const [mangas, setMangas] = useState([]);
   const location = useLocation();
+  const filterQuery = useMemo(() => ([]), []);
+  
   useEffect(() => {
     getMangas().then(result => {
       setMangas(mangaState.bookmark || result.data['bookmarked_mangas'])
@@ -93,7 +95,7 @@ function Bookmark(props) {
                     {mangaList ? mangaList : <div>No content</div>}
                   </div>
                 </div>
-                <PaginatedList url="v2/mangas/bookmarked"/> 
+                <PaginatedList url="v2/mangas/bookmarked" filterQuery={filterQuery} /> 
             </div>
             {/* product sidebar */}
             <div className="col-lg-2">

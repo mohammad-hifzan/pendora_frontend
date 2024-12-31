@@ -1,11 +1,20 @@
-import { Link } from "react-router-dom"
+import { Link, useSearchParams } from "react-router-dom"
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import PaginatedList from '../paginatedList'
+import FilterModal from '../filterModal'
 function SubProduct(props) {
   let mangaList = null
   let enablefullPage = null
+  const [filterQuery, setFilterQuery] = useState({ selected: [], excluded: [] });
   const mangaState = useSelector((state) => state.manga);
+
+  const [searchQuery, setSearchQuery] = useSearchParams();
+  useEffect(() => {
+    const selected = searchQuery.get("selected")?.split(",") || [];
+    const excluded = searchQuery.get("excluded")?.split(",") || [];
+    setFilterQuery({ selected, excluded });
+  }, [searchQuery])
 
   const mangas = mangaState[props.productSubType]
   
@@ -36,7 +45,7 @@ function SubProduct(props) {
 
   useEffect(() => {
     updateProduct(mangaState, props)
-  }, [props.type, mangaState[props.productSubType], props.mangas]);
+  }, [props.type, mangaState[props.productSubType], props.mangas, searchQuery]);
 
 
   if (product) {  
@@ -108,12 +117,21 @@ function SubProduct(props) {
                         </div>
                       </div>
                     </div>
+                    <br></br>
+                    <div>                      
+                      <FilterModal />
+                      <div className="filter-button">                      
+                        <a data-bs-toggle="modal" data-bs-target="#exampleModal">
+                          Filter
+                        </a>
+                      </div>
+                    </div>
                   </div>
                   <div className={mobileType() ? "row container" : "row"}>
                     {mangaList ? mangaList : <div>No content</div>}
                   </div>
                 </div>
-                <PaginatedList url="v2/mangas/" /> 
+                <PaginatedList url="v2/mangas/" filterQuery={filterQuery} /> 
               </>
         :
         <div className="recent__product">
