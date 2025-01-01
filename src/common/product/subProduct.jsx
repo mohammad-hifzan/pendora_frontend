@@ -63,7 +63,7 @@ function SubProduct(props) {
                   <li>Movie</li>
                 </ul>
                 <h5><a>{manga.title}</a></h5>
-                <span><i className="fa fa-eye"></i> 19.141 Viewes</span>
+                <span><i className="fa fa-eye"></i> {manga.views} Viewes</span>
               </div>
             </Link>
           </div>
@@ -75,8 +75,8 @@ function SubProduct(props) {
             <div className="product__item">
               <div className="product__item__pic set-bg" style={{backgroundImage: `url(${manga.thumbnail})`}}>
                 <div className="ep">18 / 18</div>
-                <div className="comment"><i className="fa fa-comments"></i> 11</div>
-                <div className="view"><i className="fa fa-eye"></i> 9141</div>
+                <div className="comment"><i className="fa fa-comments"></i> {manga.comment_count}</div>
+                <div className="view"><i className="fa fa-eye"></i> {manga.views}</div>
               </div>
               <div className="product__item__text">
                 <ul>
@@ -131,7 +131,7 @@ function SubProduct(props) {
                     {mangaList ? mangaList : <div>No content</div>}
                   </div>
                 </div>
-                <PaginatedList url="v2/mangas/" filterQuery={filterQuery} /> 
+                {product.length > 0 && <PaginatedList url="v2/mangas/" filterQuery={filterQuery} />} 
               </>
         :
         <div className="recent__product">
