@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import React, { useState, useEffect } from 'react';
 import {get, post, getUser} from '../common/utility/toolbox' 
 import Comment from '../common/comment'
+import Suggested from '../common/product/suggested'
 
 function MangaShow(){
   const currentUser = getUser();
@@ -122,31 +123,7 @@ function MangaShow(){
           <div className="row">
             {<Comment />}
             <div className="col-lg-4 col-md-4">
-              <div className="anime__details__sidebar">
-                <div className="section-title">
-                  <h5>you might like...</h5>
-                </div>
-                <div className="product__sidebar__view__item set-bg" style={{backgroundImage: `url(${"/theme/img/sidebar/tv-1.jpg"})`}}>
-                  <div className="ep">18 / ?</div>
-                  <div className="view"><i className="fa fa-eye"></i> 9141</div>
-                  <h5><a href="#">Boruto: Naruto next generations</a></h5>
-                </div>
-                <div className="product__sidebar__view__item set-bg" style={{backgroundImage: `url(${"/theme/img/sidebar/tv-2.jpg"})`}}>
-                  <div className="ep">18 / ?</div>
-                  <div className="view"><i className="fa fa-eye"></i> 9141</div>
-                  <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
-                </div>
-                <div className="product__sidebar__view__item set-bg" style={{backgroundImage: `url(${"/theme/img/sidebar/tv-3.jpg"})`}}>
-                  <div className="ep">18 / ?</div>
-                  <div className="view"><i className="fa fa-eye"></i> 9141</div>
-                  <h5><a href="#">Sword art online alicization war of underworld</a></h5>
-                </div>
-                <div className="product__sidebar__view__item set-bg" style={{backgroundImage: `url(${"/theme/img/sidebar/tv-4.jpg"})`}}>
-                  <div className="ep">18 / ?</div>
-                  <div className="view"><i className="fa fa-eye"></i> 9141</div>
-                  <h5><a href="#">Fate/stay night: Heaven's Feel I. presage flower</a></h5>
-                </div>
-              </div>
+              {<Suggested categories={categories} manga_id={id} />}
             </div>
           </div>
         </div>
