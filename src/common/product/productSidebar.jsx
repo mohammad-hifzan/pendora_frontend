@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from "react-router-dom"
 import ProductSidebarComment from './productSidebarComment'
 import {get} from '../utility/toolbox' 
 function ProductSidebar(props) {
@@ -13,12 +14,14 @@ function ProductSidebar(props) {
   
   if (popularManga.length > 0) {
       mangaList = popularManga.slice(0, 6).map(manga => (
-        <div className="product__sidebar__view__item set-bg mix day years"
-          style={{backgroundImage: `url(${manga.thumbnail})`}}>
-          <div className="ep">18 / ?</div>
-          <div className="view"><i className="fa fa-eye"></i> 9141</div>
-          <h5><a href="#">{manga.title}</a></h5>
-        </div>
+        <Link to={`/mangas/${manga.id}`} style={{display: 'block'}}> 
+          <div className="product__sidebar__view__item set-bg mix day years"
+            style={{backgroundImage: `url(${manga.thumbnail})`}}>
+            <div className="ep">18 / ?</div>
+            <div className="view"><i className="fa fa-eye"></i> 9141</div>
+            <h5><a href="#">{manga.title}</a></h5>
+          </div>
+        </Link>
       ))
   }
 
