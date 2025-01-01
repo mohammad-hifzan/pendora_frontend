@@ -47,7 +47,7 @@ function MangaShow(){
 
   if (chapters) {
     chaptersList = chapters.map(chapter => (
-      <Link to={`chapters/${chapter.id}`} key={chapter.id}>{chapter.name}</Link>
+      <Link to={`chapters/${chapter.id}`} key={chapter.id} className={mangaData.read_chapters.some(c => c.id === chapter.id) ? "read_episode" : ""}>{chapter.name}</Link>
     ))
   }
 	return (
@@ -58,8 +58,8 @@ function MangaShow(){
             <div className="row">
               <div className="col-lg-3">
                 <div className="anime__details__pic set-bg" style={{backgroundImage: `url(${mangaData ? mangaData.thumbnail : null})`}}>
-                  <div className="comment"><i className="fa fa-comments"></i> 11</div>
-                  <div className="view"><i className="fa fa-eye"></i> 9141</div>
+                  <div className="comment"><i className="fa fa-comments"></i> {mangaData.comment_count}</div>
+                  <div className="view"><i className="fa fa-eye"></i> {mangaData.views}</div>
                 </div>
               </div>
               <div className="col-lg-9">
@@ -83,18 +83,19 @@ function MangaShow(){
                     <div className="row">
                       <div className="col-lg-6 col-md-6">
                         <ul>
-                          <li><span>Type:</span> TV Series</li>
-                          <li><span>Studios:</span> Lerche</li>
-                          <li><span>Date aired:</span> Oct 02, 2019 to ?</li>
-                          <li><span>Status:</span> Airing</li>
+                          <li><span>Type:</span> {categories.includes('Manhua') ? 'Manhua' : categories.includes('Manhwa') ? 'Manhwa' : categories.includes('Manga') ? 'Manga' : 'Comic'}</li>
+                          <li><span>Date aired:</span> {mangaData.created_at}</li>
+                          <li><span>Status:</span> {mangaData.status || 'Ongoing'}</li>
+                          <li><span>Views:</span> {mangaData.views}</li>
                           <li><span>Genre:</span>{categories.length > 0 && categories.join(', ')}</li>
                         </ul>
                       </div>
                       <div className="col-lg-6 col-md-6">
                         <ul>
+                          <li><span>Studios:</span> Lerche</li>
                           <li><span>Scores:</span> 7.31 / 1,515</li>
                           <li><span>Rating:</span> 8.5 / 161 times</li>
-                          <li><span>Views:</span> 131,541</li>
+                          
                         </ul>
                       </div>
                     </div>

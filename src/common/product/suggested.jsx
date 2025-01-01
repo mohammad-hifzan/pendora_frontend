@@ -19,7 +19,7 @@ function Suggested(props) {
 	        <div className="product__sidebar__view__item set-bg"
 	          style={{backgroundImage: `url(${manga.thumbnail})`}}>
 	          <div className="ep">18 / ?</div>
-	          <div className="view"><i className="fa fa-eye"></i> 9141</div>
+	          <div className="view"><i className="fa fa-eye"></i> {manga.views}</div>
 	          <h5><a href="#">{manga.title}</a></h5>
 	        </div>
       	</Link>

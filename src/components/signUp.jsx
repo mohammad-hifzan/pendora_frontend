@@ -1,18 +1,16 @@
 import BreadCrumb from '../common/breadCrumb'
-import {useState, useEffect} from 'react'
+import {useState} from 'react'
 import { useNavigate, Link } from 'react-router-dom';
 import {post} from '../common/utility/toolbox'
 
 function SignUp() {
 	const [formParams, setFormParams] = useState({name: '', email: '', password: ''});
-	const [jwtToken, setJwtToken] = useState('')
 	const navigate = useNavigate();
 	
   const handleSubmit = async (e) => {
     e.preventDefault();
 		let response = SubmitRegistration(formParams)
 		if (response != 'error' && response.status == 201) {
-			setJwtToken(response.data.token)
 			navigate('/')
 		} else {
 			navigate('/signup')
