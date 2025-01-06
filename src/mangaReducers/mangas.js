@@ -5,6 +5,8 @@ const initialState = {
   newManga: [],
   popularManga: [],
   bookmark: [],
+  ongoing: [],
+  completed: [],
 };
 
 const mangaSlice = createSlice({
@@ -22,10 +24,16 @@ const mangaSlice = createSlice({
     },
     setBookmark(state, action) {
       state.bookmark = action.payload
+    },
+    setOngoing(state, action) {
+      state.ongoing = action.payload
+    },
+    setCompleted(state, action) {
+      state.completed = action.payload
     }
   },
 });
 
 // Export actions
-export const { setUpdatedManga, setNewManga, setPopularManga, setBookmark } = mangaSlice.actions;
+export const { setUpdatedManga, setNewManga, setPopularManga, setBookmark, setOngoing, setCompleted } = mangaSlice.actions;
 export default mangaSlice.reducer;

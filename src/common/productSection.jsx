@@ -7,19 +7,23 @@ function ProductSection(props) {
   let updatedMangaVisible = null
   let popularProductVisible = null
   let recentProductVisible = null
+  let ongoingProductVisible = null
+  let completedProductVisible = null
   // let liveProductVisible = null
   const location = useLocation();
   const page = new URLSearchParams(location.search).get('type') || 'root';
 
   let breakPoint = page === 'root' ? 6 : 3
   let enableFullPage = page !== 'root' 
+  
   if (props) {
     updatedMangaVisible = page === 'root' ? true : page === 'updated' ? true : false
     popularProductVisible = page === 'root' ? true : page === 'popular' ? true : false
     recentProductVisible = page === 'root' ? true : page === 'new' ? true : false
+    ongoingProductVisible = page === 'root' ? true : page === 'ongoing' ? true : false
+    completedProductVisible = page === 'root' ? true : page === 'completed' ? true : false
     // liveProductVisible = props.products && (props.products.includes('liveProduct') || props.products.includes('all'))
   }
-  
 	return (
     <>
       {enableFullPage && <ProductBreadCrumb />}
@@ -34,6 +38,10 @@ function ProductSection(props) {
               { popularProductVisible ? <SubProduct mangas={props.mangas} breakPoint={breakPoint} type={page} productSubType="popularManga" enablefullPage={enableFullPage}/> : null}
               {/* Recent products */}
               { recentProductVisible ? <SubProduct mangas={props.mangas} breakPoint={breakPoint} type={page} productSubType="newManga" enablefullPage={enableFullPage}/> : null}
+              {/* Ongoing products */}
+              { ongoingProductVisible && page != 'root' ? <SubProduct mangas={props.mangas} breakPoint={breakPoint} type={page} productSubType="ongoingManga" enablefullPage={enableFullPage}/> : null}
+              {/* Completed products */}
+              { completedProductVisible && page != 'root' ? <SubProduct mangas={props.mangas} breakPoint={breakPoint} type={page} productSubType="completedManga" enablefullPage={enableFullPage}/> : null}
               {/* Live products */}
               {/* { liveProductVisible ? <LiveProduct /> : null} */}
             </div>

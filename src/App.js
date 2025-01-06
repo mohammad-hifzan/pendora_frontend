@@ -15,8 +15,10 @@ function App() {
       <div id="preloder">
         <div className="loader"></div>
       </div>
-      <Header />
-      <Outlet />
+      <div style={{minHeight: '100vh'}}>        
+        <Header />
+        <Outlet />
+      </div>
       <Footer />
       <SearchModel />
     </>

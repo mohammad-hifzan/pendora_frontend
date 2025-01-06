@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { logout } from '../user_auths/authenticationSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import store from '../user_auths/store'
@@ -7,6 +7,7 @@ import {post} from './utility/toolbox'
 function Header() {
   const currentUser = useSelector((state) => state.auth.user);
   const [userLoggedIn, setUserLoggedIn] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     if (currentUser) {
@@ -32,25 +33,25 @@ function Header() {
       <div className="container">
         <div className="row">
           <div className="col-lg-2">
-            <div className="header__logo">
-              <Link to="/">
+            <Link to="/">
+              <div className="header__logo">
                 <img src="theme/img/logo.png" alt="" />
-              </Link>
-            </div>
+              </div>
+            </Link>
           </div>
           <div className="col-lg-8">
             <div className="header__nav">
               <nav className="header__menu mobile-menu">
                 <ul>
-                  <li className="active"><Link to="/">Homepage</Link></li>
-                  <li><span className="dropdown-custom">More</span>
+                  <li className={location.pathname === ('/' || '/mangas') ? "active" : ''}><Link to="/">Homepage</Link></li>
+                  <li className={location.pathname === '/bookmark' ? "active" : ''}><span className="dropdown-custom">More</span>
                     <ul className="dropdown">
                       <li><Link to="/bookmark">Bookmark</Link></li>
                       {userLoggedIn && <li><Link to="#" onClick={logOut}>LogOut</Link></li>}
                     </ul>
                   </li>
-                  <li><a href="./blog.html">Our Blog</a></li>
-                  <li><a href="#">Contacts</a></li>
+                  <li className={location.pathname === '/blog' ? "active" : ''}><Link to="/blog">Our Blog</Link></li>
+                  {/* <li><a href="#">Contacts</a></li> */}
                 </ul>
               </nav>
             </div>
