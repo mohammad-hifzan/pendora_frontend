@@ -19,6 +19,7 @@ function Bookmark(props) {
   }, [mangaState.bookmark]);
 
   let mangaList = []
+
   if (mangas.length > 0) {
     if (mobileType()) {
       mangaList = mangas.slice(0, props.breakPoint).map(manga => (
@@ -78,23 +79,13 @@ function Bookmark(props) {
                           <h4>Bookmark</h4>
                         </div>
                       </div>
-                      <div className="col-lg3 col-md-4 col-sm-6">
-                        <div className="product__page__filter">
-                          <p>Order by:</p>
-                          <select>
-                            <option value="">A-Z</option>
-                            <option value="">1-10</option>
-                            <option value="">10-50</option>
-                          </select>
-                        </div>
-                      </div>
                     </div>
                   </div>
                   <div className={mobileType() ? 'row container' : 'row'}>
                     {mangaList ? mangaList : <div>No content</div>}
                   </div>
                 </div>
-                {mangas.length > 0 && <PaginatedList url="v2/mangas/bookmarked" filterQuery={filterQuery} />} 
+                {<PaginatedList url="v2/mangas/bookmarked" filterQuery={filterQuery} />} 
             </div>
             {/* product sidebar */}
             <div className="col-lg-2">

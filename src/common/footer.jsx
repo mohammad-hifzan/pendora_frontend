@@ -1,23 +1,56 @@
+import React, { useState, useEffect } from 'react';
+import { Link } from "react-router-dom"
 function Footer() {
+  const [isVisible, setIsVisible] = useState(true); // Visible by default
+  const [previousScroll, setPreviousScroll] = useState(window.scrollY);
+
+  const toggleVisibility = () => {
+    const currentScroll = window.scrollY;
+
+    if (currentScroll > previousScroll) {
+      // Scrolling down
+      setIsVisible(false);
+    } else {
+      // Scrolling up
+      setIsVisible(true);
+    }
+
+    setPreviousScroll(currentScroll);
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth', // Smooth scrolling effect
+    });
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', toggleVisibility);
+    return () => {
+      window.removeEventListener('scroll', toggleVisibility);
+    };
+  }, [previousScroll]);
+  
 	return (
 		<footer className="footer">
-      <div className="page-up">
-        <a href="#" id="scrollToTopButton"><span className="arrow_carrot-up"></span></a>
+      <div className={`page-up scroll-to-top ${isVisible ? 'visible' : ''}`}>
+        <a href="#" id="scrollToTopButton" ><span className="arrow_carrot-up"></span></a>
       </div>
       <div className="container">
         <div className="row">
           <div className="col-lg-3">
             <div className="footer__logo">
-              <a href="./index.html"><img src="theme/img/logo.png" alt="" /></a>
+              <Link to="/"><a><img src="theme/img/logo.png" alt="" /></a></Link>
             </div>
           </div>
             <div className="col-lg-6">
               <div className="footer__nav">
                 <ul>
-                  <li className="active"><a href="./index.html">Homepage</a></li>
-                  <li><a href="./categories.html">Categories</a></li>
-                  <li><a href="./blog.html">Our Blog</a></li>
-                  <li><a href="#">Contacts</a></li>
+                  <li className="active"><Link to="/">Homepage</Link></li>
+                  {/* <li><a href="./categories.html">Categories</a></li> */}
+                  <li><Link to="/blog">Our Blog</Link></li>
+                  {/* <li><a href="#">Contacts</a></li> */}
                 </ul>
               </div>
             </div>

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import PaginatedList from '../paginatedList'
 import FilterModal from '../filterModal'
+import TypeSelect from './typeSelect'
 function SubProduct(props) {
   let mangaList = null
   let enablefullPage = null
@@ -22,9 +23,36 @@ function SubProduct(props) {
 
   const userAgent = navigator.userAgent;
 
-  const pageTitle = props.productSubType === 'popularManga' ? 'Most Viewed Today' : props.productSubType === 'newManga' ? 'Recently Added Shows' : 'Popular Chapters'
-  const pageType = props.productSubType === 'popularManga' ? 'popular' : props.productSubType === 'newManga' ? 'new' : 'updated'
-  const viewTitle = props.productSubType === 'popularManga' ? 'Most Popular' : 'View All'
+  const subTypeMappings = {
+    popularManga: {
+      pageTitle: "Most Viewed",
+      pageType: "popular",
+      viewTitle: "Most Popular",
+    },
+    newManga: {
+      pageTitle: "Recently Added Shows",
+      pageType: "new",
+      viewTitle: "View All",
+    },
+    ongoingManga: {
+      pageTitle: "Ongoing Shows",
+      pageType: "ongoing",
+      viewTitle: "View All",
+    },
+    completedManga: {
+      pageTitle: "Completed Shows",
+      pageType: "completed",
+      viewTitle: "View All",
+    },
+    default: {
+      pageTitle: "Popular Chapters",
+      pageType: "updated",
+      viewTitle: "View All",
+    },
+  };
+
+  const { pageTitle, pageType, viewTitle } =
+  subTypeMappings[props.productSubType] || subTypeMappings.default;
 
   function updateProduct(mangaState, props) {
     if (props.type !== "root") {
@@ -37,6 +65,10 @@ function SubProduct(props) {
           setProduct(props.mangas.data.recent_mangas);
         } else if (props.productSubType === 'popularManga') {
           setProduct(props.mangas.data.popular_mangas);
+        } else if (props.productSubType === 'ongoingManga') {
+          setProduct(props.mangas.data.ongoing_mangas);
+        } else if (props.productSubType === 'completedManga') {
+          setProduct(props.mangas.data.completed_mangas);
         }
       }
     }
@@ -74,7 +106,7 @@ function SubProduct(props) {
             <Link to={`/mangas/${manga.id}`}>
             <div className="product__item">
               <div className="product__item__pic set-bg" style={{backgroundImage: `url(${manga.thumbnail})`}}>
-                <div className="ep">18 / 18</div>
+                <div className="ep"><i class="fa fa-fire"></i> hot</div>
                 <div className="comment"><i className="fa fa-comments"></i> {manga.comment_count}</div>
                 <div className="view"><i className="fa fa-eye"></i> {manga.views}</div>
               </div>
@@ -92,11 +124,11 @@ function SubProduct(props) {
     }
 
   }
-
+  
   return (
     <>
       {
-        enablefullPage ?
+        props.enablefullPage ?
               <>
                 <div className="product__page__content">
                   <div className="product__page__title">
@@ -107,14 +139,7 @@ function SubProduct(props) {
                         </div>
                       </div>
                       <div className="col-lg-4 col-md-4 col-sm-6">
-                        <div className="product__page__filter">
-                          <p>Order by:</p>
-                          <select>
-                            <option value="">A-Z</option>
-                            <option value="">1-10</option>
-                            <option value="">10-50</option>
-                          </select>
-                        </div>
+                        <TypeSelect />
                       </div>
                     </div>
                     <br></br>
@@ -131,9 +156,10 @@ function SubProduct(props) {
                     {mangaList ? mangaList : <div>No content</div>}
                   </div>
                 </div>
-                {product.length > 0 && <PaginatedList url="v2/mangas/" filterQuery={filterQuery} />} 
+                {<PaginatedList url="v2/mangas/" filterQuery={filterQuery} />} 
               </>
         :
+
         <div className="recent__product">
           <div className="row">
             <div className="col-lg-8 col-md-8 col-sm-8">

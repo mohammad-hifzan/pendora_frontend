@@ -1994,11 +1994,19 @@ ol {
 }
 
 .page-up {
-	position: absolute;
-	left: 50%;
-	top: -25px;
+	display: none;
+	position: fixed;
+	left: 90%;
+	bottom: 50px;
 	margin-left: -25px;
+	z-index: 1000;
+	cursor: pointer;
 }
+
+.scroll-to-top.visible {
+  display: block !important;
+}
+
 
 .page-up a {
 	display: inline-block;
@@ -2017,6 +2025,8 @@ ol {
 	top: 2px;
 	left: -1px;
 }
+
+
 
 .footer__nav {
 	text-align: center;

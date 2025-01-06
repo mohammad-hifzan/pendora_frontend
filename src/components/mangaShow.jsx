@@ -11,6 +11,7 @@ function MangaShow(){
 	const [mangaData, setMangaData] = useState([]);
   const [categories, setCategories] = useState([]);
   const [bookmark, setBookmark] = useState(null);
+  const [mangaBookmarks, setMangaBookmarks] = useState(0)
 
 
   const [chapters, setChapters] = useState([])
@@ -24,6 +25,12 @@ function MangaShow(){
       console.error('Error fetching comments:', error);
     }
   }
+
+  useEffect(() => {
+    getMangaBookmarks(id).then(result => {
+      setMangaBookmarks(result.boomark_count);
+    })
+  }, [bookmark])
 
 	useEffect(() => {
     getManga(id).then(result => {
@@ -47,9 +54,15 @@ function MangaShow(){
 
   if (chapters) {
     chaptersList = chapters.map(chapter => (
-      <Link to={`chapters/${chapter.id}`} key={chapter.id} className={mangaData.read_chapters.some(c => c.id === chapter.id) ? "read_episode" : ""}>{chapter.name}</Link>
+      <Link to={`chapters/${chapter.id}`} key={chapter.id} className={mangaData?.read_chapters?.some(c => c.id === chapter.id) ? "read_chapters" : ""}>{chapter.name}</Link>
     ))
   }
+
+  let lastUpdate;
+  if (chapters.length > 0) {
+    lastUpdate = chapters[chapters.length - 1]?.updated_at
+  }
+
 	return (
 		<>
 		  <section className="anime-details spad">
@@ -68,16 +81,16 @@ function MangaShow(){
                     <h3>{mangaData && mangaData.title}</h3>
                     <span>{mangaData && mangaData.author}</span>
                   </div>
-                  <div className="anime__details__rating">
-                    <div className="rating">
-                      <a href="#"><i className="fa fa-star"></i></a>
-                      <a href="#"><i className="fa fa-star"></i></a>
-                      <a href="#"><i className="fa fa-star"></i></a>
-                      <a href="#"><i className="fa fa-star"></i></a>
-                      <a href="#"><i className="fa fa-star-half-o"></i></a>
-                    </div>
-                    <span>1.029 Votes</span>
-                  </div>
+                  {/* <div className="anime__details__rating"> */}
+                  {/*   <div className="rating"> */}
+                  {/*     <a href="#"><i className="fa fa-star"></i></a> */}
+                  {/*     <a href="#"><i className="fa fa-star"></i></a> */}
+                  {/*     <a href="#"><i className="fa fa-star"></i></a> */}
+                  {/*     <a href="#"><i className="fa fa-star"></i></a> */}
+                  {/*     <a href="#"><i className="fa fa-star-half-o"></i></a> */}
+                  {/*   </div> */}
+                  {/*   <span>1.029 Votes</span> */}
+                  {/* </div> */}
                   <p>{mangaData && mangaData.description}</p>
                   <div className="anime__details__widget">
                     <div className="row">
@@ -92,18 +105,29 @@ function MangaShow(){
                       </div>
                       <div className="col-lg-6 col-md-6">
                         <ul>
-                          <li><span>Studios:</span> Lerche</li>
-                          <li><span>Scores:</span> 7.31 / 1,515</li>
-                          <li><span>Rating:</span> 8.5 / 161 times</li>
+                          <li><span>Bookmarked:</span> {mangaBookmarks}</li>
+                          <li><span>Last Updated:</span> {lastUpdate}</li>
+                          <li><span>Chapters:</span> {chaptersList.length}</li>
                           
                         </ul>
                       </div>
                     </div>
                   </div>
                   <div className="anime__details__btn">
-                    <a href="#" className="follow-btn" onClick={handleBookmarkClick}><i className={bookmark ? "fa fa-heart" : "fa fa-heart-o"}></i> {bookmark ? 'Bookmarked' : 'Bookmark'}</a>
-                    <a href="#" className="watch-btn"><span>Continue</span> <i
-                    className="fa fa-angle-right"></i></a>
+                    { Object.values(currentUser).length ? 
+                      <a href="#" className="follow-btn" onClick={handleBookmarkClick}><i className={bookmark ? "fa fa-heart" : "fa fa-heart-o"}></i> {bookmark ? 'Bookmarked' : 'Bookmark'}</a>
+                      :
+                      <Link to="/login" className="follow-btn" ><i className="fa fa-user"></i> Login</Link>
+                    }
+
+                    {
+                      Object.values(currentUser).length ? 
+                        <a href="#" className="watch-btn"><span>Continue</span> <i
+                          className="fa fa-angle-right"></i></a>
+                      :
+                        <Link to={`chapters/1`} className="watch-btn"><span>Chapter 1</span> <i
+                        className="fa fa-angle-right"></i></Link>
+                    }
                   </div>
                 </div>
               </div>
@@ -152,6 +176,16 @@ const getChapters = async (id) => {
     throw error;
   }
 };
+
+const getMangaBookmarks = async (mangaId) => {
+  try {
+    const response = await get(`/v2/mangas/${mangaId}/bookmarks/manga_bookmarks`)
+    return response.data
+  } catch (error) {
+    console.error("Error fetching bookmark data:", error);
+    throw error;
+  }
+}
 
 const isbookmarked = async (mangaId) => {
   try {

@@ -63,7 +63,7 @@ function Comment() {
   )), [comments, currentUser]);
 
   return (
-    <div className="col-lg-8 col-md-8">
+    <div className="col-lg-8 col-md-8" style={{maxHeight: '800px', overflowY: 'auto', overflowX: 'hidden'}}>
       <div className="anime__details__review">
         <div className="section-title">
           <h5>Reviews</h5>
