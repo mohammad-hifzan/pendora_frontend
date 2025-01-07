@@ -90,10 +90,10 @@ function SubProduct(props) {
                 <img src={manga.thumbnail} alt="" style={{width: '100px', height: 'auto'}}/>
               </div>
               <div className="product__sidebar__comment__item__text">
-                <ul>
-                  <li>Active</li>
-                  <li>Movie</li>
-                </ul>
+                {/* <ul> */}
+                {/*   <li>Active</li> */}
+                {/*   <li>Movie</li> */}
+                {/* </ul> */}
                 <h5><a>{manga.title}</a></h5>
                 <span><i className="fa fa-eye"></i> {manga.views} Viewes</span>
               </div>
@@ -111,10 +111,10 @@ function SubProduct(props) {
                 <div className="view"><i className="fa fa-eye"></i> {manga.views}</div>
               </div>
               <div className="product__item__text">
-                <ul>
-                  <li>Active</li>
-                  <li>Movie</li>
-                </ul>
+                {/* <ul> */}
+                {/*   <li>Active</li> */}
+                {/*   <li>Movie</li> */}
+                {/* </ul> */}
                 <h5><a>{manga.title}</a></h5>
               </div>
             </div>

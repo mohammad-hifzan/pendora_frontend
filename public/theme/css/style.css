@@ -1305,7 +1305,7 @@ ol {
 	margin-bottom: 35px;
 }
 
-.anime__details__episodes a {
+/*.anime__details__episodes a {
 	display: inline-block;
 	font-size: 15px;
 	color: #ffffff;
@@ -1317,7 +1317,7 @@ ol {
 	-webkit-transition: all, 0.3s;
 	-o-transition: all, 0.3s;
 	transition: all, 0.3s;
-}
+}*/
 
 .filter-button a {
 	display: inline-block;
@@ -1332,6 +1332,34 @@ ol {
 	-o-transition: all, 0.3s;
 	transition: all, 0.3s;
 }
+
+.chapter-button {
+	display: inline-block;
+	font-size: 15px;
+	padding: 10px 20px;
+	border-radius: 4px;
+	margin-right: 15px;
+	margin-bottom: 20px;
+	-webkit-transition: all, 0.3s;
+	-o-transition: all, 0.3s;
+	transition: all, 0.3s;
+}
+
+.unread {
+	color: #ffffff;
+	background: rgba(255, 255, 255, 0.2);
+}
+
+.read {
+	color: #000000;
+	background: #ffffff;
+}
+
+.read:hover {
+	color: #000000;
+	background: #ffffff;
+}
+
 
 .filter-button a:hover {
 	color: #000000;
