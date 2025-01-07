@@ -43,7 +43,7 @@ function Header() {
             <div className="header__nav">
               <nav className="header__menu mobile-menu">
                 <ul>
-                  <li className={location.pathname === ('/' || '/mangas') ? "active" : ''}><Link to="/">Homepage</Link></li>
+                  <li className={(location.pathname === '/' || location.pathname === '/mangas') ? "active" : ''}><Link to="/">Homepage</Link></li>
                   <li className={location.pathname === '/bookmark' ? "active" : ''}><span className="dropdown-custom">More</span>
                     <ul className="dropdown">
                       <li><Link to="/bookmark">Bookmark</Link></li>

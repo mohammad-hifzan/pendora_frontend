@@ -33,7 +33,7 @@ function Bookmark(props) {
                   <li>Active</li>
                   <li>Movie</li>
                 </ul>
-                <h5><a>{manga.title}</a></h5>
+                <h5 style={{color: '#fff'}}><a>{manga.title}</a></h5>
                 <span><i className="fa fa-eye"></i> {manga.views} Viewes</span>
               </div>
             </Link>
@@ -41,7 +41,7 @@ function Bookmark(props) {
       ))
     } else {
       mangaList = mangas.slice(0, 6).map(manga => (
-          <div className="col-lg-4 col-md-6 col-sm-6" key={manga.id} >
+          <div className="col-lg-3 col-md-6 col-sm-6" key={manga.id} >
             <Link to={`/mangas/${manga.id}`}>
             <div className="product__item">
               <div className="product__item__pic set-bg" style={{backgroundImage: `url(${manga.thumbnail})`}}>
@@ -51,9 +51,9 @@ function Bookmark(props) {
               </div>
               <div className="product__item__text">
                 <ul>
-                  <li style={{width: 250, height: 30, padding: 5, fontSize: 15}}>Chapter 1</li>
+                  {/* <li style={{width: '100%', height: 30, padding: 5, fontSize: 15, borderRadius: '5px'}}>Chapter 1</li> */}
                 </ul>
-                <h5><a>{manga.title}</a></h5>
+                <h5 style={{color: '#fff'}}><a>{manga.title}</a></h5>
               </div>
             </div>
             </Link>
@@ -68,9 +68,9 @@ function Bookmark(props) {
       <section className={"product-page spad"}>
         <div className="container">
           <div className="row">
-            <div className="col-lg-3">
-            </div>
-            <div className="col-lg-8">
+            {/* <div className="col-lg-3"> */}
+            {/* </div> */}
+            <div className="col-lg-12">
               <div className="product__page__content">
                   <div className="product__page__title">
                     <div className="row">
@@ -88,8 +88,8 @@ function Bookmark(props) {
                 {<PaginatedList url="v2/mangas/bookmarked" filterQuery={filterQuery} />} 
             </div>
             {/* product sidebar */}
-            <div className="col-lg-2">
-            </div>
+            {/* <div className="col-lg-2"> */}
+            {/* </div> */}
           </div>
         </div>
       </section>

@@ -54,7 +54,7 @@ function MangaShow(){
 
   if (chapters) {
     chaptersList = chapters.map(chapter => (
-      <Link to={`chapters/${chapter.id}`} key={chapter.id} className={mangaData?.read_chapters?.some(c => c.id === chapter.id) ? "read_chapters" : ""}>{chapter.name}</Link>
+      <Link to={`chapters/${chapter.id}`} key={chapter.id} className={mangaData?.read_chapters?.some(c => c.id === chapter.id) ? "read_chapters chapter-button read" : "chapter-button unread"}>{chapter.name}</Link>
     ))
   }
 
@@ -122,8 +122,8 @@ function MangaShow(){
 
                     {
                       Object.values(currentUser).length ? 
-                        <a href="#" className="watch-btn"><span>Continue</span> <i
-                          className="fa fa-angle-right"></i></a>
+                        <Link to={`chapters/${mangaData.length > 0 ? mangaData.read_chapters[mangaData.read_chapters?.length - 1]?.id : chapters[0]?.id}`} className="watch-btn"><span>Continue</span> <i
+                          className="fa fa-angle-right"></i></Link>
                       :
                         <Link to={`chapters/1`} className="watch-btn"><span>Chapter 1</span> <i
                         className="fa fa-angle-right"></i></Link>
