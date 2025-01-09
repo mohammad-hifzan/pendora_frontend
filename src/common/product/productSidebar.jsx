@@ -17,7 +17,7 @@ function ProductSidebar(props) {
         <Link to={`/mangas/${manga.id}`} style={{display: 'block'}}> 
           <div className="product__sidebar__view__item set-bg mix day years"
             style={{backgroundImage: `url(${manga.thumbnail})`}}>
-            <div className="ep">18 / ?</div>
+            {manga.views >= 100 && <div className="ep">Hot</div>}
             <div className="view"><i className="fa fa-eye"></i> {manga.views}</div>
             <h5><a href="#">{manga.title}</a></h5>
           </div>

@@ -58,7 +58,7 @@ function Login(props) {
 	                  <span className="icon_mail"></span>
 	                </div>
 	                <div className="input__item">
-                    <input type="text" placeholder="Password" name="password" value={formParams.password} onChange={handleChange} />
+                    <input type="password" placeholder="Password" name="password" value={formParams.password} onChange={handleChange} />
                     <span className="icon_lock"></span>
 	                </div>
 	                <button type="submit" className="site-btn">Login Now</button>
@@ -73,22 +73,22 @@ function Login(props) {
 	            </div>
 	          </div>
 	        </div>
-	        <div className="login__social">
-	          <div className="row d-flex justify-content-center">
-	            <div className="col-lg-6">
-	              <div className="login__social__links">
-	                <span>or</span>
-	                <ul>
-	                  <li><a href="#" className="facebook"><i className="fa fa-facebook"></i> Sign in With
-	                  Facebook</a></li>
-	                  <li><a href="#" className="google"><i className="fa fa-google"></i> Sign in With Google</a></li>
-	                  <li><a href="#" className="twitter"><i className="fa fa-twitter"></i> Sign in With Twitter</a>
-	                  </li>
-	                </ul>
-	              </div>
-	            </div>
-	          </div>
-	        </div>
+	        {/* <div className="login__social"> */}
+	        {/*   <div className="row d-flex justify-content-center"> */}
+	        {/*     <div className="col-lg-6"> */}
+	        {/*       <div className="login__social__links"> */}
+	        {/*         <span>or</span> */}
+	        {/*         <ul> */}
+	        {/*           <li><a href="#" className="facebook"><i className="fa fa-facebook"></i> Sign in With */}
+	        {/*           Facebook</a></li> */}
+	        {/*           <li><a href="#" className="google"><i className="fa fa-google"></i> Sign in With Google</a></li> */}
+	        {/*           <li><a href="#" className="twitter"><i className="fa fa-twitter"></i> Sign in With Twitter</a> */}
+	        {/*           </li> */}
+	        {/*         </ul> */}
+	        {/*       </div> */}
+	        {/*     </div> */}
+	        {/*   </div> */}
+	        {/* </div> */}
 	      </div>
 	    </section>
     </>

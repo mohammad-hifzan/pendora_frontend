@@ -119,15 +119,17 @@ function MangaShow(){
                       :
                       <Link to="/login" className="follow-btn" ><i className="fa fa-user"></i> Login</Link>
                     }
-
-                    {
-                      Object.values(currentUser).length ? 
-                        <Link to={`chapters/${mangaData.length > 0 ? mangaData.read_chapters[mangaData.read_chapters?.length - 1]?.id : chapters[0]?.id}`} className="watch-btn"><span>Continue</span> <i
-                          className="fa fa-angle-right"></i></Link>
-                      :
-                        <Link to={`chapters/1`} className="watch-btn"><span>Chapter 1</span> <i
-                        className="fa fa-angle-right"></i></Link>
-                    }
+                    {chapters.length > 0 && 
+                      <div style={{display: 'inline'}}>                      
+                        {
+                          Object.values(currentUser).length ? 
+                            <Link to={`chapters/${mangaData.length > 0 ? mangaData.read_chapters[mangaData.read_chapters?.length - 1]?.id : chapters[0]?.id}`} className="watch-btn" onClick={ (event) => (chapters.length > 0 ? null : event.preventDefault()) }><span>Continue</span> <i
+                                                      className="fa fa-angle-right"></i></Link>
+                          :
+                            <Link to={`chapters/${chapters[0]?.id}`} className="watch-btn" onClick={ (event) => (chapters.length > 0 ? null : event.preventDefault()) } ><span>Chapter 1</span> <i
+                                                    className="fa fa-angle-right"></i></Link>
+                        }
+                      </div>}
                   </div>
                 </div>
               </div>

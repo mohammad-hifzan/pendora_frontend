@@ -94,7 +94,7 @@ function SubProduct(props) {
                 {/*   <li>Active</li> */}
                 {/*   <li>Movie</li> */}
                 {/* </ul> */}
-                <h5><a>{manga.title}</a></h5>
+                <h5 style={{color: '#fff'}}><a>{manga.title}</a></h5>
                 <span><i className="fa fa-eye"></i> {manga.views} Viewes</span>
               </div>
             </Link>
@@ -106,7 +106,7 @@ function SubProduct(props) {
             <Link to={`/mangas/${manga.id}`}>
             <div className="product__item">
               <div className="product__item__pic set-bg" style={{backgroundImage: `url(${manga.thumbnail})`}}>
-                <div className="ep"><i class="fa fa-fire"></i> hot</div>
+                {manga.views >= 100 && <div className="ep"><i class="fa fa-fire"></i> hot</div>}
                 <div className="comment"><i className="fa fa-comments"></i> {manga.comment_count}</div>
                 <div className="view"><i className="fa fa-eye"></i> {manga.views}</div>
               </div>
@@ -115,7 +115,7 @@ function SubProduct(props) {
                 {/*   <li>Active</li> */}
                 {/*   <li>Movie</li> */}
                 {/* </ul> */}
-                <h5><a>{manga.title}</a></h5>
+                <h5 style={{color: '#fff'}}><a>{manga.title}</a></h5>
               </div>
             </div>
             </Link>

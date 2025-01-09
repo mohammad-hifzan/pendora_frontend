@@ -9,7 +9,7 @@ const usePagination = (url, filterQuery={}, options = {}) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const { perPage = 3, params = {} } = options;
+  const { perPage = 12, params = {} } = options;
   const location = useLocation();
   useEffect(() => {
     const type = new URLSearchParams(location.search).get('type')
