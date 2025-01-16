@@ -44,12 +44,12 @@ function Header() {
               <nav className="header__menu mobile-menu">
                 <ul>
                   <li className={(location.pathname === '/' || location.pathname === '/mangas') ? "active" : ''}><Link to="/">Homepage</Link></li>
-                  <li className={location.pathname === '/bookmark' ? "active" : ''}><span className="dropdown-custom">More</span>
-                    <ul className="dropdown">
-                      <li><Link to="/bookmark">Bookmark</Link></li>
-                      {userLoggedIn && <li><Link to="#" onClick={logOut}>LogOut</Link></li>}
-                    </ul>
-                  </li>
+                  {currentUser && <li className={location.pathname === '/bookmark' ? "active" : ''}><span className="dropdown-custom">More</span>
+                                      <ul className="dropdown">
+                                        <li><Link to="/bookmark">Bookmark</Link></li>
+                                        {userLoggedIn && <li><Link to="#" onClick={logOut}>LogOut</Link></li>}
+                                      </ul>
+                                    </li>}
                   <li className={location.pathname === '/blog' ? "active" : ''}><Link to="/blog">Our Blog</Link></li>
                   {/* <li><a href="#">Contacts</a></li> */}
                 </ul>

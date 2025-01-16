@@ -13,7 +13,7 @@ function ProductSection(props) {
   const location = useLocation();
   const page = new URLSearchParams(location.search).get('type') || 'root';
 
-  let breakPoint = page === 'root' ? 6 : 3
+  let breakPoint = page === 'root' ? 6 : 12
   let enableFullPage = page !== 'root' 
   
   if (props) {
