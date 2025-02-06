@@ -1,5 +1,5 @@
 import axios from "axios";
-const API_URL = process.env.BACKEND_URL;;
+const API_URL = process.env.BACKEND_URL;
 export const getCsrf = async () => {
   try {
     const response = await fetch(`${API_URL}/v2/csrf_token`);
