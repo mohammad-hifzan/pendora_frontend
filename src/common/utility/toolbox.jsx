@@ -1,7 +1,7 @@
 import {getCsrf} from './csrf'
 import axios from 'axios';
 import store from '../../user_auths/store'
-const API_URL = 'http://localhost:3000';
+const API_URL = process.env.BACKEND_URL;
 
 export const post = async (path, data) => {
 	const csrfToken = await getCsrf(); // Get CSRF token
