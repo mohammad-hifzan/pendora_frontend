@@ -1,4 +1,5 @@
 function LiveProduct() {
+  // will be updated in the future
 	return (
 			<div className="live__product">
         <div className="row">
