@@ -20,6 +20,7 @@ export const post = async (path, data) => {
 }
 
 export const get = async (path, data={}) => {
+	console.log('backend: ' + API_URL)
 	const response = await axios.get(
 		`${API_URL}/${path}`,
 		{
