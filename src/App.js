@@ -12,9 +12,9 @@ import SearchModel from './common/searchModel'
 function App() {
   return (
     <>
-      <div id="preloder">
-        <div className="loader"></div>
-      </div>
+      {/* <div id="preloder"> */}
+      {/*   <div className="loader"></div> */}
+      {/* </div> */}
       <div style={{minHeight: '100vh'}}>        
         <Header />
         <Outlet />
