@@ -6,13 +6,13 @@ import {get} from '../common/utility/toolbox'
 
 function MangaList(props) {
   const [posts, setPosts] = useState([]);
-  const location = useLocation();
-  const mangaType = new URLSearchParams(location.search).get('type') || 'all';
-  useEffect(() => {
-    getMangas().then(result => {
-      setPosts(result)
-    })
-  }, []);
+  // const location = useLocation();
+  // const mangaType = new URLSearchParams(location.search).get('type') || 'all';
+  // useEffect(() => {
+  //   getMangas().then(result => {
+  //     setPosts(result)
+  //   })
+  // }, []);
 
   return (
     <>
