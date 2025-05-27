@@ -1,6 +1,6 @@
 function BreadCrumb(props) {
 	return(
-		<section className="normal-breadcrumb set-bg" style={{backgroundImage: `url(${"theme/img/normal-breadcrumb.jpg"})`}}>
+		<section className="normal-breadcrumb set-bg" style={{backgroundImage: `url(${"themes/themeUser/img/normal-breadcrumb.jpg"})`}}>
 	    <div className="container">
 	      <div className="row">
 	        <div className="col-lg-12 text-center">

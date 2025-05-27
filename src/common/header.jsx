@@ -50,7 +50,7 @@ function Header() {
                                         {userLoggedIn && <li><Link to="#" onClick={logOut}>LogOut</Link></li>}
                                       </ul>
                                     </li>}
-                  <li className={location.pathname === '/blog' ? "active" : ''}><Link to="/blog">Our Blog</Link></li>
+                  <li className={location.pathname === '/blog' ? "active" : ''}><Link to="/blog" target="_blank">Our Blog</Link></li>
                   {/* <li><a href="#">Contacts</a></li> */}
                 </ul>
               </nav>

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom"
 function Footer() {
   const [isVisible, setIsVisible] = useState(true); // Visible by default
   const [previousScroll, setPreviousScroll] = useState(window.scrollY);
+  const currentUser = useSelector((state) => state.auth.user);
 
   const toggleVisibility = () => {
     const currentScroll = window.scrollY;
@@ -51,6 +53,12 @@ function Footer() {
                   {/* <li><a href="./categories.html">Categories</a></li> */}
                   <li><Link to="/blog">Our Blog</Link></li>
                   {/* <li><a href="#">Contacts</a></li> */}
+                  {currentUser &&
+                      currentUser.role == 'admin' ? 
+                      <li><Link to="/admin/companies" target="_blank">Companies</Link></li>
+                      :
+                      <li><Link to="/admin/new" target="_blank">Login As Author</Link></li>
+                  }
                 </ul>
               </div>
             </div>
