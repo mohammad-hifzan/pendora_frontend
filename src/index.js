@@ -17,6 +17,17 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './user_auths/store';
+import PrivateRoute from './components/privateRoute';
+import CreateCompany from './admin/createCompany'
+import CompanySelection from './admin/companySelection'
+import Dashboard from './admin/company/dashboard'
+import AdminMangas from './admin/company/mangas'
+import AdminUsers from './admin/company/user'
+import Role from './admin/company/role'
+import BaseLayout from './admin/layouts/baseLayout'
+import CreateCompanyLayout from './admin/layouts/createCompanyLayout'
+import NoSidebarLayout from './admin/layouts/noSidebarLayout'
+import Error404 from './errors/error404'
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -27,15 +38,31 @@ function RootApp() {
         <Route path='/' element={<App />}>
           <Route index element={<MangaList products='all'/>} />
           <Route path= '/mangas/' element={<MangaList />} />
-          <Route path= '/bookmark' element={<Bookmark />} />
+          <Route path="/bookmark" element={<PrivateRoute><Bookmark /></PrivateRoute>}/>
+          {/* <Route path= '/bookmark' element={<Bookmark />} /> */}
           <Route path= '/blog' element={<Blog />} />
           <Route path= '/mangas/:id' element={<MangaShow />} />
           <Route path= '/mangas/:manga_id/chapters/:id' element={<Chapter />} />
           <Route path= '/signup' element={<SignUp />}/>
           <Route path= '/login' element={<Login />}/>
         </Route>
+        <Route path='/admin'>
+          <Route element={<BaseLayout />}>
+            <Route path="dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>}/>
+            <Route path="mangas" element={<PrivateRoute><AdminMangas /></PrivateRoute>} />
+            <Route path="users" element={<PrivateRoute><AdminUsers /></PrivateRoute>} />
+            <Route path="role" element={<PrivateRoute><Role /></PrivateRoute>} />
+          </Route>
+          <Route element={<CreateCompanyLayout />} >
+            <Route path="new" element={<PrivateRoute><CreateCompany /></PrivateRoute>}/>
+          </Route>
+          <Route element={<NoSidebarLayout />} >
+            <Route path="companies" element={<PrivateRoute><CompanySelection /></PrivateRoute>}/>
+          </Route>
+        </Route>
+        <Route path= "/admin/error" element={<Error404 />} />
+        <Route path= "/error" element={<Error404 />} />
         <Route path= '/manga/add' element={<AddManga />}/>
-        }
       </Routes>
     </BrowserRouter>
     )
