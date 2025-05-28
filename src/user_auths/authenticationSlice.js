@@ -7,6 +7,7 @@ export const fetchCurrentUser = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const res = await axios.get(`${API_URL}/v2/me`, { withCredentials: true });
+      console.log("current user: " + res.data?.user?.email)
       return res.data.user;
     } catch (err) {
       return rejectWithValue('unauthenticated');
