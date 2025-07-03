@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCurrentCompany } from '../company/companySlice';
+import { setCurrentCompany, clearCompany } from '../company/companySlice';
 import {get} from '../common/utility/toolbox'
 import ContentHeader from './contentHeader'
 import { useNavigate, Link } from 'react-router-dom';
@@ -26,7 +26,6 @@ function CompanySelection() {
     try {
       const response = await get(`v2/companies/${company.id}`)
       dispatch(setCurrentCompany(response.data))
-    	debugger
       navigate(`/admin/dashboard`)
     } catch (error) {
       console.error("Error logging out:", error);
@@ -39,6 +38,7 @@ function CompanySelection() {
   }
   
 	useEffect(() => {
+		dispatch(clearCompany())
 		fetchCompanies(currentUser, setCompanies)
   }, []);
 

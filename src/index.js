@@ -4,7 +4,6 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
 import './index.css';
 import $ from 'jquery';
 import 'bootstrap';
-import AddManga from './components/addManga'
 import MangaList from './components/mangaList'
 import WizardLayout from './layouts/wizardLayout'
 import SignUp from './components/signUp'
@@ -21,8 +20,13 @@ import PrivateRoute from './components/privateRoute';
 import CreateCompany from './admin/createCompany'
 import CompanySelection from './admin/companySelection'
 import Dashboard from './admin/company/dashboard'
-import AdminMangas from './admin/company/mangas'
-import AdminUsers from './admin/company/user'
+import AdminMangas from './admin/company/mangas/mangas'
+import AdminChapters from './admin/company/chapters/chapters'
+import AddManga from './admin/company/mangas/addManga'
+import AddChapter from './admin/company/chapters/addChapter'
+import EditChapter from './admin/company/chapters/editChapter'
+import EditManga from './admin/company/mangas/editManga'
+import AdminUsers from './admin/company/users/users'
 import Role from './admin/company/role'
 import BaseLayout from './admin/layouts/baseLayout'
 import CreateCompanyLayout from './admin/layouts/createCompanyLayout'
@@ -49,7 +53,16 @@ function RootApp() {
         <Route path='/admin'>
           <Route element={<BaseLayout />}>
             <Route path="dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>}/>
-            <Route path="mangas" element={<PrivateRoute><AdminMangas /></PrivateRoute>} />
+            <Route path="mangas" >
+              <Route index element={<PrivateRoute><AdminMangas /></PrivateRoute>} />
+              <Route path="add" element={<PrivateRoute><AddManga /></PrivateRoute>} />
+              <Route path="edit/:id" element={<PrivateRoute><EditManga /></PrivateRoute>} />
+              <Route path=":id/chapters">
+                <Route index element={<PrivateRoute><AdminChapters /></PrivateRoute>} />
+                <Route path="add" element={<PrivateRoute><AddChapter /></PrivateRoute>} />
+                <Route path=":chapter_id/edit" element={<PrivateRoute><EditChapter /></PrivateRoute>} />
+              </Route>
+            </Route>
             <Route path="users" element={<PrivateRoute><AdminUsers /></PrivateRoute>} />
             <Route path="role" element={<PrivateRoute><Role /></PrivateRoute>} />
           </Route>
@@ -62,7 +75,6 @@ function RootApp() {
         </Route>
         <Route path= "/admin/error" element={<Error404 />} />
         <Route path= "/error" element={<Error404 />} />
-        <Route path= '/manga/add' element={<AddManga />}/>
       </Routes>
     </BrowserRouter>
     )
