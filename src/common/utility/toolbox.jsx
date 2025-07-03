@@ -10,7 +10,7 @@ export const post = async (path, data) => {
 		data,
 		{
 		  headers: {
-		    'Content-Type': 'application/json',
+		    'Content-Type': 'multipart/form-data',
 		    'X-CSRF-Token': csrfToken,
 		  },
 		  withCredentials: true, // Include cookies
@@ -25,6 +25,22 @@ export const get = async (path, data={}) => {
 		`${API_URL}/${path}`,
 		{
 		  params: data,
+		  withCredentials: true, // Include cookies
+		}
+	);
+	return response
+}
+
+export const put = async (path, data) => {
+	const csrfToken = await getCsrf(); // Get CSRF token
+	const response = await axios.put(
+		`${API_URL}/${path}`,
+		data,
+		{
+		  headers: {
+		    'Content-Type': 'multipart/form-data',
+		    'X-CSRF-Token': csrfToken,
+		  },
 		  withCredentials: true, // Include cookies
 		}
 	);

@@ -53,11 +53,12 @@ function Footer() {
                   {/* <li><a href="./categories.html">Categories</a></li> */}
                   <li><Link to="/blog">Our Blog</Link></li>
                   {/* <li><a href="#">Contacts</a></li> */}
-                  {currentUser &&
+                  {currentUser ?
                       currentUser.role == 'admin' ? 
                       <li><Link to="/admin/companies" target="_blank">Companies</Link></li>
                       :
                       <li><Link to="/admin/new" target="_blank">Login As Author</Link></li>
+                      : null
                   }
                 </ul>
               </div>

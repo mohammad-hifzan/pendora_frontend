@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux';
 import { fetchCurrentUser } from './user_auths/authenticationSlice';
 
 
+
 function App() {
   const dispatch = useDispatch();
   const location = useLocation();
