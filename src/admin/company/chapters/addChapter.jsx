@@ -9,13 +9,14 @@ function AddChapter() {
 
 	const handleChange = (e) => {
     const { name, files, value } = e.target;
+    let chapter_images = []
     if (files) {
-    	let files = Array.from(files);
+    	chapter_images = Array.from(files);
     }
     if (name === "chapter_images") {
     	setFormParams((prev) => ({
 	      ...prev,
-	      chapter_images: files, // ✅ store multiple File objects
+	      chapter_images: chapter_images, // ✅ store multiple File objects
 	    }));
     } else {
     	setFormParams({
@@ -39,6 +40,7 @@ function AddChapter() {
 				  formData.append("chapter[chapter_images][]", file);  // ✅ Notice the []
 				});
 			}
+
 	    const response = await post(`/v2/mangas/${id}/chapters`, formData);
 	    if (response != 'error' && response.status == 201) {
 				navigate(`/admin/mangas/${id}/chapters`)

@@ -3,8 +3,13 @@ import { useNavigate, Link } from 'react-router-dom';
 import {post} from '../../../common/utility/toolbox'
 import MangaForm from './mangaForm'
 function AddManga() {
-	const [formParams, setFormParams] = useState({title: '', author: '', description: '', manga_type: '', status: '', thumbnail: ''});
+	const [formParams, setFormParams] = useState({title: '', author: '', description: '', manga_type: '', status: '', thumbnail: null, categories: []});
 	const navigate = useNavigate();
+
+	const handleSelectChange = (selected) => {
+    setFormParams((prev) => ({ ...prev, categories: selected }));
+  };
+
 
 	const handleChange = (e) => {
     const { name, files, value } = e.target;
@@ -63,7 +68,7 @@ function AddManga() {
 								{/* <!-- Personal Information Form  --> */}
 								
 								<form onSubmit={handleSubmit}>
-									<MangaForm formParams={formParams} handleChange={handleChange}/>
+									<MangaForm formParams={formParams} handleChange={handleChange} handleSelectChange={handleSelectChange}/>
 								</form>
 								
 								{/* <!-- ... end Personal Information Form  --> */}

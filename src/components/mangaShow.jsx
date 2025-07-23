@@ -19,7 +19,9 @@ function MangaShow(){
 
   const handleBookmarkClick = async() => {
     try {
-      const result = await post(`/v2/mangas/${id}/bookmarks/toggle_bookmark`, {user_id: currentUser?.id});
+      const result = await post(`/v2/mangas/${id}/bookmarks/toggle_bookmark`, {
+        bookmark: { user_id: currentUser?.id }
+      });
       setBookmark(result.data['bookmarked']);
     } catch (error) {
       console.error('Error fetching comments:', error);

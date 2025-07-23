@@ -53,17 +53,17 @@ function MangaForm(props) {
 							</div>
 						</div>
 				
-						<div className="col col-lg-12 col-md-12 col-sm-12 col-12">
-							<div className="form-group label-floating is-select">
-								<label className="control-label">Type</label>
-								<select className="form-select" name="type" value={props.formParams.manga_type} onChange={props.handleChange}>
-									<option value="manga">Manga</option>
-									<option value="manhua">Manhua</option>
-									<option value="manhwa">Manhwa</option>
-									<option value="comic">Comic</option>
-								</select>
-							</div>
-						</div>
+						{/* <div className="col col-lg-12 col-md-12 col-sm-12 col-12"> */}
+						{/* 	<div className="form-group label-floating is-select"> */}
+						{/* 		<label className="control-label">Type</label> */}
+						{/* 		<select className="form-select" name="type" value={props.formParams.manga_type} onChange={props.handleChange}> */}
+						{/* 			<option value="manga">Manga</option> */}
+						{/* 			<option value="manhua">Manhua</option> */}
+						{/* 			<option value="manhwa">Manhwa</option> */}
+						{/* 			<option value="comic">Comic</option> */}
+						{/* 		</select> */}
+						{/* 	</div> */}
+						{/* </div> */}
 
 						<div className="col col-lg-12 col-md-12 col-sm-12 col-12">
 							<div className="form-group label-floating">
@@ -75,10 +75,7 @@ function MangaForm(props) {
 						<div className="col col-lg-12 col-md-12 col-sm-12 col-12">
 							<div className="form-group label-floating is-select">
 								<Select
-		              value={props.formParams.categories.map((category) => ({
-									        value: category.id,
-									        label: category.name,
-									      })) }
+		              value={props.formParams.categories }
 		              closeMenuOnSelect={false}
 		              components={animatedComponents}
 		              name="categories"

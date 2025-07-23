@@ -21,7 +21,10 @@ function EditManga() {
 		    	description: response.data.description,
 		    	author: response.data.author,
 		    	type: response.data.manga_type,
-		    	categories: response.data.categories
+		    	categories: response.data.categories.map((category) => ({
+									        value: category.id,
+									        label: category.name,
+									      }))
 		    }
 	    })
 	  } catch (error) {
