@@ -1,14 +1,12 @@
-import {useState, createContext, useContext, useEffect} from 'react'
+import {useState, useEffect} from 'react'
 import {post} from '../common/utility/toolbox'
 import { useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
 import countryList from 'react-select-country-list';
-import {setCurrentCompany} from '../company/companySlice'
+import {clearCompany} from '../company/companySlice'
 function CreateCompany() {
-	debugger
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const [formParams, setFormParams] = useState({name: '', phone: '', description: '', street: '', postal_code: '', city: '', country: ''});
@@ -32,12 +30,11 @@ function CreateCompany() {
   };
 
   useEffect(() => {
-  	dispatch(setCurrentCompany(null))
+  	dispatch(clearCompany())
   }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    debugger
     try {
       await validationSchema.validate(formParams, { abortEarly: false });
       console.log('✅ Form is valid:', formParams);

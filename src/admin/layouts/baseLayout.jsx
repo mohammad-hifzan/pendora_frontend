@@ -22,7 +22,7 @@ function BaseLayout() {
       <>
         <Preloader />
         <LeftSidebar />
-        <RightSidebar />
+        {/* <RightSidebar /> */}
         <AdminHeader />
         <ContentBgWrapper />
         <Outlet />

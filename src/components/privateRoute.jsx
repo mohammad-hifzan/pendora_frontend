@@ -15,12 +15,14 @@ const PrivateRoute = ({ children }) => {
   if (loading || companyLoading) return <div>Loading...</div>;
   const authenticated = isAuthenticated && user
   const redirect = window.location.pathname.includes("admin") ? "/admin/error" : "/login"
-  if (window.location.pathname.includes('admin')) {    
-    if (user?.role !== 'admin' && window.location.pathname !== "/admin/new") {
+  if (window.location.pathname.includes('admin')) {   
+    if (!user && !loading) {
+      return <Navigate to="/admin/login" />;
+    } else if (user?.role !== 'admin' && window.location.pathname !== "/admin/new") {
       return <Navigate to="/admin/new" />;
-    }
-
-    if (user?.role === 'admin' && !currentCompany && !window.location.pathname.includes('/admin/companies')) {
+    } else if (user?.role === 'admin' && window.location.pathname == '/admin/new') {
+      return children
+    } else if (user?.role === 'admin' && !currentCompany && !window.location.pathname.includes('/admin/companies')) {
       return <Navigate to="/admin/companies" />;
     }
   }

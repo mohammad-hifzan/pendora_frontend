@@ -130,16 +130,19 @@ function CompanySelection() {
 					<div className="row">
 						<div className="col col-xl-3 col-lg-6 col-md-6 col-sm-6 col-12">
 							<div className="friend-item friend-groups create-group h-75 mb-3">
-								<a href="#" className="  full-block" data-bs-toggle="modal" data-bs-target="#create-friend-group-1"></a>
-								<div className="content">
-									<a href="#" className="  btn btn-control bg-blue" data-bs-toggle="modal" data-bs-target="#create-friend-group-1">
-										<svg className="olymp-plus-icon"><use href="#olymp-plus-icon"></use></svg>
-									</a>
-									<div className="author-content">
-										<a href="#" className="h5 author-name">Add Company</a>
-										<div className="country">6 Friends in the Group</div>
+								<Link to="/admin/new">
+									<a href="#" className="full-block" ></a> 
+									{/* // add them to full-block to start modal data-bs-toggle="modal" data-bs-target="#create-friend-group-1" */}
+									<div className="content">
+										<a href="#" className="  btn btn-control bg-blue" data-bs-toggle="modal" data-bs-target="#create-friend-group-1">
+											<svg className="olymp-plus-icon"><use href="#olymp-plus-icon"></use></svg>
+										</a>
+										<div className="author-content">
+											<a href="#" className="h5 author-name">Add Company</a>
+											<div className="country">6 Friends in the Group</div>
+										</div>
 									</div>
-								</div>
+								</Link>
 							</div>
 							{/* <!-- ... end Friend Item -->		 */}
 						</div>
@@ -152,9 +155,9 @@ function CompanySelection() {
 
 				{/* <!-- ... end Main Content Groups --> */}
 
-				{/* <!-- Window-popup Create Friends Group --> */}
+				{/* <!-- Window-popup Creating Companies --> */}
 
-				<div className="modal fade" id="create-friend-group-1" tabindex="-1" role="dialog" aria-labelledby="create-friend-group-1" aria-hidden="true">
+				{/* <div className="modal fade" id="create-friend-group-1" tabindex="-1" role="dialog" aria-labelledby="create-friend-group-1" aria-hidden="true">
 					<div className="modal-dialog window-popup create-friend-group create-friend-group-1" role="document">
 						<div className="modal-content">
 							<a href="#" className="close icon-close" data-bs-dismiss="modal" aria-label="Close">
@@ -200,13 +203,13 @@ function CompanySelection() {
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> */}
 
-				{/* <!-- ... end Window-popup Create Friends Group --> */}
+				{/* <!-- ... end Window-popup Creating Companies --> */}
 				
-				{/* <!-- Window-popup Create Friends Group Add Friends --> */}
+				{/* <!-- Window-popup Create Companies Add Companies --> */}
 
-				<div className="modal fade" id="create-friend-group-add-friends" tabindex="-1" role="dialog" aria-labelledby="create-friend-group-add-friends" aria-hidden="true">
+				{/* <div className="modal fade" id="create-friend-group-add-friends" tabindex="-1" role="dialog" aria-labelledby="create-friend-group-add-friends" aria-hidden="true">
 					<div className="modal-dialog window-popup create-friend-group create-friend-group-add-friends" role="document">
 						<div className="modal-content">
 							<a href="#" className="close icon-close" data-bs-dismiss="modal" aria-label="Close">
@@ -238,7 +241,7 @@ function CompanySelection() {
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> */}
 			</>
 
 		)

@@ -8,6 +8,8 @@ import MangaList from './components/mangaList'
 import WizardLayout from './layouts/wizardLayout'
 import SignUp from './components/signUp'
 import Login from './components/login'
+import AdminRegister from './admin/auth/adminRegister'
+import AdminLogin from './admin/auth/adminLogin'
 import MangaShow from './components/mangaShow'
 import Chapter from './components/chapters'
 import Bookmark from './components/bookmark'
@@ -31,6 +33,7 @@ import Role from './admin/company/role'
 import BaseLayout from './admin/layouts/baseLayout'
 import CreateCompanyLayout from './admin/layouts/createCompanyLayout'
 import NoSidebarLayout from './admin/layouts/noSidebarLayout'
+import AuthLayout from './admin/layouts/authLayout'
 import Error404 from './errors/error404'
 
 
@@ -51,6 +54,10 @@ function RootApp() {
           <Route path= '/login' element={<Login />}/>
         </Route>
         <Route path='/admin'>
+          <Route element={<AuthLayout />}>
+            <Route path= 'signup' element={<AdminRegister />} />
+            <Route path= 'login'  element={<AdminLogin />} />
+          </Route>
           <Route element={<BaseLayout />}>
             <Route path="dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>}/>
             <Route path="mangas" >

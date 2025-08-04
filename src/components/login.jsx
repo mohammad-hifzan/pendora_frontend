@@ -2,7 +2,7 @@ import BreadCrumb from '../common/breadCrumb'
 import { login } from '../user_auths/authenticationSlice';
 import { useDispatch } from 'react-redux';
 import {useState, createContext, useContext, useEffect} from 'react'
-import {post} from '../common/utility/toolbox'
+import {post, SubmitLogin} from '../common/utility/toolbox'
 import { useNavigate, Link } from 'react-router-dom';
 
 function Login(props) {
@@ -14,33 +14,17 @@ function Login(props) {
 	const navigate = useNavigate();
 
 	const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormParams({
-      ...formParams,
-      [name]: value
-    });
-  };
+		const { name, value } = e.target;
+		setFormParams({
+		...formParams,
+		[name]: value
+		});
+	};
 
   
-
-  const SubmitLogin = async(formData) => {
-		try {
-	    const response = await post(`v2/login`, formData);
-	    if (response != 'error' && response.status == 201) {
-				dispatch(login(response.data.user));
-				navigate('/')
-			} else {
-				navigate('/login')
-			}
-	  } catch (error) {
-	      console.error('Submission error:', error);
-	      return 'error'
-	    }
-	}
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-		SubmitLogin(formParams)
+		SubmitLogin(formParams, dispatch, navigate);
   }
 
 	return (

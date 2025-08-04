@@ -35,7 +35,7 @@ function Header() {
           <div className="col-lg-2">
             <Link to="/">
               <div className="header__logo">
-                <img src="theme/img/logo.png" alt="" />
+                <img src="themes/themeUser/img/logo.png" alt="" />
               </div>
             </Link>
           </div>

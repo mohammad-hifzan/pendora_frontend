@@ -1,14 +1,30 @@
+import {post} from '../common/utility/toolbox'
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../user_auths/authenticationSlice';
 function AdminHeader() {
+		const currentUser = useSelector((state) => state.auth.user);
+		const dispatch = useDispatch();
+		const logOut = async () => {
+			try {
+				const response = await post('v2/logout', {})
+				if (response.status === 200) {
+					dispatch(logout()); // Clear state after successful logout
+				}
+			} catch (error) {
+				console.error("Error logging out:", error);
+				throw error;
+			}
+		};
 	return (
 		<>
 			<header className="header" id="site-header">
 
 				<div className="page-title">
-					<h6>SHORTCODES</h6>
+					<h6>BOOKWORM</h6>
 				</div>
 
 				<div className="header-content-wrapper">
-					<form className="search-bar w-search notification-list friend-requests">
+					{/* <form className="search-bar w-search notification-list friend-requests">
 						<div className="form-group with-button">
 							<input className="form-control js-user-search" placeholder="Search here people or pages..." type="text" />
 							<button>
@@ -17,13 +33,14 @@ function AdminHeader() {
 								</svg>
 							</button>
 						</div>
-					</form>
+					</form> */}
 
-					<a href="#" className="link-find-friend">Find Friends</a>
+					{/* <a href="#" className="link-find-friend">Find Friends</a> */}
 
 					<div className="control-block">
 
-						<div className="control-icon more has-items">
+						{/* LATER COULD USE IT FOR COMPANY REQUEST */}
+						{/* <div className="control-icon more has-items">
 							<svg className="olymp-happy-face-icon">
 								<use href="#olymp-happy-face-icon"></use>
 							</svg>
@@ -156,9 +173,10 @@ function AdminHeader() {
 
 								<a href="#" className="view-all bg-blue">Check all your Events</a>
 							</div>
-						</div>
+						</div> */}
 
-						<div className="control-icon more has-items">
+						{/* LATER COULD USE IT FOR MESSAGING */}
+						{/* <div className="control-icon more has-items">
 							<svg className="olymp-chat---messages-icon">
 								<use href="#olymp-chat---messages-icon"></use>
 							</svg>
@@ -257,9 +275,10 @@ function AdminHeader() {
 
 								<a href="#" className="view-all bg-purple">View All Messages</a>
 							</div>
-						</div>
+						</div> */}
 
-						<div className="control-icon more has-items">
+						{/* WILL USE IT IN NEXT ITERATION FOR NOTIFICATION */}
+						{/* <div className="control-icon more has-items">
 							<svg className="olymp-thunder-icon">
 								<use href="#olymp-thunder-icon"></use>
 							</svg>
@@ -410,12 +429,12 @@ function AdminHeader() {
 
 								<a href="#" className="view-all bg-primary">View All Notifications</a>
 							</div>
-						</div>
+						</div> */}
 
 						<div className="author-page author vcard inline-items more">
 							<div className="author-thumb">
-								<img alt="author" src="img/author-page.webp" width="36" height="36" className="avatar" />
-								<span className="icon-status online"></span>
+								<img alt="author" src="/themeAuthor/img/user-login-icon.jpg" width="36" height="36" className="avatar" />
+								{/* <span className="icon-status online"></span> */}
 								<div className="more-dropdown more-with-triangle">
 									<div className="mCustomScrollbar" data-mcs-theme="dark">
 										<div className="ui-block-title ui-block-title-small">
@@ -443,7 +462,7 @@ function AdminHeader() {
 												</a>
 											</li>
 											<li>
-												<a href="#">
+												<a href="#" onClick={logOut}>
 													<svg className="olymp-logout-icon">
 														<use href="#olymp-logout-icon"></use>
 													</svg>
@@ -453,11 +472,11 @@ function AdminHeader() {
 											</li>
 										</ul>
 
-										<div className="ui-block-title ui-block-title-small">
+										{/* <div className="ui-block-title ui-block-title-small">
 											<h6 className="title">Chat Settings</h6>
-										</div>
+										</div> */}
 
-										<ul className="chat-settings">
+										{/* <ul className="chat-settings">
 											<li>
 												<a href="#">
 													<span className="icon-status online"></span>
@@ -483,13 +502,13 @@ function AdminHeader() {
 													<span>Invisible</span>
 												</a>
 											</li>
-										</ul>
+										</ul> */}
 
-										<div className="ui-block-title ui-block-title-small">
+										{/* <div className="ui-block-title ui-block-title-small">
 											<h6 className="title">Custom Status</h6>
-										</div>
+										</div> */}
 
-										<form className="form-group with-button custom-status">
+										{/* <form className="form-group with-button custom-status">
 											<input className="form-control" placeholder="" type="text" value="Space Cowboy" />
 
 											<button className="bg-purple">
@@ -497,13 +516,13 @@ function AdminHeader() {
 													<use href="#olymp-check-icon"></use>
 												</svg>
 											</button>
-										</form>
+										</form> */}
 
-										<div className="ui-block-title ui-block-title-small">
+										{/* <div className="ui-block-title ui-block-title-small">
 											<h6 className="title">About Olympus</h6>
-										</div>
+										</div> */}
 
-										<ul>
+										{/* <ul>
 											<li>
 												<a href="#">
 													<span>Terms and Conditions</span>
@@ -524,19 +543,19 @@ function AdminHeader() {
 													<span>Contact</span>
 												</a>
 											</li>
-										</ul>
+										</ul> */}
 									</div>
 
 								</div>
 							</div>
 							<a href="02-ProfilePage.html" className="author-name fn">
 								<div className="author-title">
-									James Spiegel
+									{currentUser?.name}
 									<svg className="olymp-dropdown-arrow-icon">
 										<use href="#olymp-dropdown-arrow-icon"></use>
 									</svg>
 								</div>
-								<span className="author-subtitle">SPACE COWBOY</span>
+								<span className="author-subtitle">ADMIN</span>
 							</a>
 						</div>
 
