@@ -1,13 +1,15 @@
 import { useNavigate, Link } from "react-router-dom"
 import {useState} from 'react'
-import {post} from '../../common/utility/toolbox'
+import {SubmitSignUp} from '../../common/utility/toolbox'
+import { useDispatch } from 'react-redux';
 function AdminRegister() {
     const [formParams, setFormParams] = useState({name: '', email: '', password: ''});
     const navigate = useNavigate();
+		const dispatch = useDispatch();
     
     const handleSubmit = async (e) => {
       e.preventDefault();
-      SubmitRegistration(formParams)
+      SubmitSignUp(formParams, dispatch, navigate);
     }
   
     const handleChange = (e) => {
@@ -17,20 +19,6 @@ function AdminRegister() {
         [name]: value
       });
     };
-
-		const SubmitRegistration = async(formData) => {
-			try {
-				const response = await post(`v2/signup`, formData);
-				if (response != 'error' && response.status == 201) {
-					navigate('/admin/companies')
-				} else {
-					navigate('/admin/signup')
-				}
-			} catch (error) {
-					console.error('Submission error:', error);
-					return 'error'
-				}
-		}
 
 	return (
 					<div className="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">

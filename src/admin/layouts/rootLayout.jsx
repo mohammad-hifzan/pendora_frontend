@@ -1,25 +1,28 @@
-import { Outlet, useLocation } from "react-router-dom"
+import { Outlet } from "react-router-dom"
 import { useDispatch } from 'react-redux';
-import React, { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { fetchCurrentUser } from '../../user_auths/authenticationSlice';
 import Preloader  from '../preloader'
-import ContentBgWrapper from '../contentBgWrapper'
+import { ToastContainer } from 'react-toastify';
 import BackToTop from '../backToTop'
-function CreateCompanyLayout() {
-	const dispatch = useDispatch();
-  const location = useLocation();
+import ContentBgWrapper from '../contentBgWrapper'
+function BaseLayout() {
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchCurrentUser());
   }, [dispatch]);
-	return (
+
+
+  return (
       <>
         <Preloader />
         <ContentBgWrapper />
+        <ToastContainer />
         <Outlet />
         <BackToTop />
       </>
-		)
+    )
 }
 
-export default CreateCompanyLayout;
+export default BaseLayout;

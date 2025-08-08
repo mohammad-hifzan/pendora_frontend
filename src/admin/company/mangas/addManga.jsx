@@ -1,6 +1,6 @@
 import {useState} from 'react'
 import { useNavigate, Link } from 'react-router-dom';
-import {post} from '../../../common/utility/toolbox'
+import {post, customToast} from '../../../common/utility/toolbox'
 import MangaForm from './mangaForm'
 function AddManga() {
 	const [formParams, setFormParams] = useState({title: '', author: '', description: '', manga_type: '', status: '', thumbnail: null, categories: []});
@@ -44,11 +44,14 @@ function AddManga() {
 	    const response = await post(`/v2/mangas`, formData);
 	    if (response != 'error' && response.status == 201) {
 				navigate('/admin/mangas')
+				customToast("Manga Added Successfully!", "success", "light");
 			} else {
 				navigate('/admin/mangas/add')
+				customToast("Failed to Add Manga!", "error", "light");
 			}
 	  } catch (error) {
       console.error('Submission error:', error);
+			customToast("Failed to Add Manga!", "error", "light");
       return 'error'
     }
   }

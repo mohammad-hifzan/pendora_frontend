@@ -9,7 +9,8 @@ import Footer from './common/footer'
 import SearchModel from './common/searchModel'
 import { useDispatch } from 'react-redux';
 import { fetchCurrentUser } from './user_auths/authenticationSlice';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function App() {
@@ -19,7 +20,6 @@ function App() {
   useEffect(() => {
     dispatch(fetchCurrentUser());
   }, [dispatch]);
-
 
   return (
     <>
@@ -31,6 +31,7 @@ function App() {
           </div>
           <div style={{minHeight: '100vh'}}>        
             <Header />
+            <ToastContainer />
             <Outlet />
           </div>
           <Footer />

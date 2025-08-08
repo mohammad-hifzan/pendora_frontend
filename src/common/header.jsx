@@ -3,7 +3,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom"
 import { logout } from '../user_auths/authenticationSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import store from '../user_auths/store'
-import {post} from './utility/toolbox'
+import {post, customToast} from './utility/toolbox'
+
 function Header() {
   const currentUser = useSelector((state) => state.auth.user);
   const [userLoggedIn, setUserLoggedIn] = useState(false);
@@ -22,9 +23,11 @@ function Header() {
       const response = post('v2/logout', {})
       dispatch(logout()); // Clear state after successful logout
       setUserLoggedIn(false)
+      customToast("Logout Successful!", "success", "dark");
     } catch (error) {
       console.error("Error logging out:", error);
       throw error;
+      customToast("Logout Failed!", "error", "dark");
     }
   };
   

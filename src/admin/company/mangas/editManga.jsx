@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
 import { useNavigate, Link, useParams } from 'react-router-dom';
-import {get, put} from '../../../common/utility/toolbox'
+import {get, put, customToast} from '../../../common/utility/toolbox'
 import MangaForm from './mangaForm'
 function EditManga() {
 	const [formParams, setFormParams] = useState({title: '', author: '', description: '', manga_type: '', status: '', thumbnail: null, categories: []});
@@ -75,11 +75,14 @@ function EditManga() {
 	    const response = await put(`/v2/mangas/${manga_id}`, formData);
 	    if (response != 'error' && response.status == 201) {
 				navigate('/admin/mangas')
+				customToast("Manga Updated Successfully!", "success", "light");
 			} else {
 				navigate('/admin/mangas/edit')
+				customToast("Failed to Update Manga!", "error", "light");
 			}
 	  } catch (error) {
       console.error('Submission error:', error);
+			customToast("Failed to Update Manga!", "error", "light");
       return 'error'
     }
   }

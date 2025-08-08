@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
 import {post} from '../common/utility/toolbox'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
@@ -11,6 +11,7 @@ function CreateCompany() {
 	const navigate = useNavigate();
 	const [formParams, setFormParams] = useState({name: '', phone: '', description: '', street: '', postal_code: '', city: '', country: ''});
 	const [error, setError] = useState({name: '', phone: '', description: '', street: '', postal_code: '', city: '', country: ''});
+	const { user, isAuthenticated, loading } = useSelector((state) => state.auth);
 	const validationSchema = Yup.object({
 	  name: 				Yup.string().min(2, 'Name must be at least 2 characters').max(32, 'Name cannot exceed 32 characters').required('Required'),
 	  phone: 				Yup.string().min(1, 'Name must be at least 1 characters').max(255, 'Name cannot exceed 255 characters').required('Required'),
@@ -84,8 +85,8 @@ function CreateCompany() {
 									<img loading="lazy" src="/themes/themeAuthor/img/logo-colored-small.webp" width="34" height="34" alt="Olympus" className="logo-colored" />
 								</div>
 								<div className="title-block">
-									<h6 className="logo-title">olympus</h6>
-									<div className="sub-title">SOCIAL NETWORK</div>
+									<h6 className="logo-title">bookworm</h6>
+									<div className="sub-title">CREATE COMPANY</div>
 								</div>
 							</a>
 
@@ -169,6 +170,12 @@ function CreateCompany() {
 															</label>
 														</div>
 													</div>
+
+													{user.company_count > 0 && 
+														<div style={{ marginBottom: '10px' }}>
+															<Link to="/admin/companies">Back to Companies</Link>
+														</div>
+														}
 
 													<button type="submit" className="btn btn-purple btn-lg full-width">Complete Registration!</button>
 												</div>

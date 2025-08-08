@@ -1,21 +1,17 @@
 import BreadCrumb from '../common/breadCrumb'
 import {useState} from 'react'
 import { useNavigate, Link } from 'react-router-dom';
-import {post} from '../common/utility/toolbox'
+import {SubmitSignUp} from '../common/utility/toolbox'
+import { useDispatch } from 'react-redux';
 
 function SignUp() {
 	const [formParams, setFormParams] = useState({name: '', email: '', password: ''});
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 	
   const handleSubmit = async (e) => {
     e.preventDefault();
-		let response = SubmitRegistration(formParams)
-		if (response != 'error' && response.status == 201) {
-			navigate('/')
-		} else {
-			navigate('/signup')
-		}
-
+		SubmitSignUp(formParams, dispatch, navigate);
   }
 
   const handleChange = (e) => {
@@ -70,15 +66,5 @@ function SignUp() {
 		)
 }
 
-const SubmitRegistration = async(formData) => {
-
-	try {
-    const response = await post(`v2/signup`, formData);
-    return response
-  } catch (error) {
-      console.error('Submission error:', error);
-      return 'error'
-    }
-}
 
 export default SignUp

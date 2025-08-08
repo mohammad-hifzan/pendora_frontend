@@ -4,7 +4,8 @@ import { useSelector } from 'react-redux';
 import ProductSidebar from '../common/product/productSidebar'
 import HeroSection from '../common/heroSection'
 import PaginatedList from '../common/paginatedList'
-import {get} from '../common/utility/toolbox'       
+import {get} from '../common/utility/toolbox'
+
 // Needs UI improvment 
 function Bookmark(props) {
   const mangaState = useSelector((state) => state.manga);

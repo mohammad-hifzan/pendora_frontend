@@ -31,9 +31,9 @@ import EditManga from './admin/company/mangas/editManga'
 import AdminUsers from './admin/company/users/users'
 import Role from './admin/company/role'
 import BaseLayout from './admin/layouts/baseLayout'
-import CreateCompanyLayout from './admin/layouts/createCompanyLayout'
 import NoSidebarLayout from './admin/layouts/noSidebarLayout'
 import AuthLayout from './admin/layouts/authLayout'
+import RootLayout from './admin/layouts/rootLayout'
 import Error404 from './errors/error404'
 
 
@@ -53,7 +53,7 @@ function RootApp() {
           <Route path= '/signup' element={<SignUp />}/>
           <Route path= '/login' element={<Login />}/>
         </Route>
-        <Route path='/admin'>
+        <Route path='/admin' element={<RootLayout />}>
           <Route element={<AuthLayout />}>
             <Route path= 'signup' element={<AdminRegister />} />
             <Route path= 'login'  element={<AdminLogin />} />
@@ -73,9 +73,9 @@ function RootApp() {
             <Route path="users" element={<PrivateRoute><AdminUsers /></PrivateRoute>} />
             <Route path="role" element={<PrivateRoute><Role /></PrivateRoute>} />
           </Route>
-          <Route element={<CreateCompanyLayout />} >
-            <Route path="new" element={<PrivateRoute><CreateCompany /></PrivateRoute>}/>
-          </Route>
+
+          <Route path="new" element={<PrivateRoute><CreateCompany /></PrivateRoute>}/>
+
           <Route element={<NoSidebarLayout />} >
             <Route path="companies" element={<PrivateRoute><CompanySelection /></PrivateRoute>}/>
           </Route>

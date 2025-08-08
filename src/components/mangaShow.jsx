@@ -1,9 +1,10 @@
 import { useParams, Link } from "react-router-dom"
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useState, useEffect } from 'react';
-import {get, post, getUser} from '../common/utility/toolbox' 
+import {get, post, getUser, customToast} from '../common/utility/toolbox' 
 import Comment from '../common/comment'
 import Suggested from '../common/product/suggested'
+
 
 function MangaShow(){
   const currentUser = getUser();
@@ -23,6 +24,11 @@ function MangaShow(){
         bookmark: { user_id: currentUser?.id }
       });
       setBookmark(result.data['bookmarked']);
+      if (result.data['bookmarked']) {
+        customToast("Bookmark Added!", "success", "dark")
+      } else {
+        customToast("Bookmark Rdded!", "warning", "dark")
+      }
     } catch (error) {
       console.error('Error fetching comments:', error);
     }

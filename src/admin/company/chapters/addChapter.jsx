@@ -1,6 +1,6 @@
 import {useState} from 'react'
 import { useNavigate, Link, useParams } from 'react-router-dom';
-import {post} from '../../../common/utility/toolbox'
+import {post, customToast} from '../../../common/utility/toolbox'
 import ChapterForm from './chapterForm'
 function AddChapter() {
 	const [formParams, setFormParams] = useState({name: '', chapter_images: []});
@@ -44,11 +44,14 @@ function AddChapter() {
 	    const response = await post(`/v2/mangas/${id}/chapters`, formData);
 	    if (response != 'error' && response.status == 201) {
 				navigate(`/admin/mangas/${id}/chapters`)
+				customToast("Chapter Added Successfully!", "success", "light");
 			} else {
 				navigate(`/admin/mangas/${id}/chapters/add`)
+				customToast("Failed to Add Chapter!", "error", "light");
 			}
 	  } catch (error) {
       console.error('Submission error:', error);
+			customToast("Failed to Add Chapter!", "error", "light");
       return 'error'
     }
   }

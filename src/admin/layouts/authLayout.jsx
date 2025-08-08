@@ -1,24 +1,11 @@
-import { Outlet, useLocation, Link } from "react-router-dom"
-import { useDispatch } from 'react-redux';
-import React, { useState, useEffect } from 'react';
-import { fetchCurrentUser } from '../../user_auths/authenticationSlice';
-import Preloader  from '../preloader'
-import ContentBgWrapper from '../contentBgWrapper'
+import { Outlet } from "react-router-dom"
 import AdminHeader from '../header'
 import ChatPopup from '../chatPopup'
-import BackToTop from '../backToTop'
 function AuthLayout() {
-	const dispatch = useDispatch();
-  const location = useLocation();
 
-  useEffect(() => {
-    dispatch(fetchCurrentUser());
-  }, [dispatch]);
 	return (
       <>
-        <Preloader />
         <AdminHeader />
-        <ContentBgWrapper />
         <div className="header-spacer"></div>
         <div className="container">
           <div className="row display-flex">
@@ -41,7 +28,6 @@ function AuthLayout() {
             </div>
           </div>
         </div>
-        <BackToTop />
         <ChatPopup />
       </>
 		)

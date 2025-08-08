@@ -1,4 +1,4 @@
-import {post} from '../common/utility/toolbox'
+import {post, customToast} from '../common/utility/toolbox'
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../user_auths/authenticationSlice';
 function AdminHeader() {
@@ -9,9 +9,11 @@ function AdminHeader() {
 				const response = await post('v2/logout', {})
 				if (response.status === 200) {
 					dispatch(logout()); // Clear state after successful logout
+					customToast("Logout Successful!", "success", "light");
 				}
 			} catch (error) {
 				console.error("Error logging out:", error);
+				customToast("Logout Failed!", "error", "light");
 				throw error;
 			}
 		};

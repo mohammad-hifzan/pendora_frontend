@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, Link, useParams } from 'react-router-dom';
-import { post, get, put } from '../../../common/utility/toolbox'
+import { get, put, customToast} from '../../../common/utility/toolbox'
 import ChapterForm from './chapterForm'
 function EditChapter() {
 	const [formParams, setFormParams] = useState({name: '', chapter_images: []});
@@ -62,11 +62,14 @@ function EditChapter() {
 	    const response = await put(`/v2/mangas/${id}/chapters/${chapter_id}`, formData);
 	    if (response != 'error' && response.status == 201) {
 				navigate(`/admin/mangas/${id}/chapters`)
+				customToast("Chapter Updated Successfully!", "success", "light");
 			} else {
 				navigate(`/admin/mangas/${id}/chapters/add`)
+				customToast("Failed to Update Chapter!", "error", "light");
 			}
 	  } catch (error) {
       console.error('Submission error:', error);
+			customToast("Failed to Update Chapter!", "error", "light");
       return 'error'
     }
   }
