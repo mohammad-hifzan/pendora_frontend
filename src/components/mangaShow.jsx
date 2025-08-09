@@ -1,5 +1,4 @@
 import { useParams, Link } from "react-router-dom"
-import { useDispatch, useSelector } from 'react-redux';
 import React, { useState, useEffect } from 'react';
 import {get, post, getUser, customToast} from '../common/utility/toolbox' 
 import Comment from '../common/comment'

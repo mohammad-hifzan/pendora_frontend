@@ -1,8 +1,6 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import ProductSidebar from '../common/product/productSidebar'
-import HeroSection from '../common/heroSection'
 import PaginatedList from '../common/paginatedList'
 import {get} from '../common/utility/toolbox'
 
@@ -65,7 +63,6 @@ function Bookmark(props) {
 
   return (
     <>
-      <HeroSection />
       <section className={"product-page spad"}>
         <div className="container">
           <div className="row">

@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useState } from 'react';
 import ProductSection from '../common/productSection'
-import HeroSection from '../common/heroSection'
 import {get} from '../common/utility/toolbox'       
 
 function MangaList(props) {
@@ -16,7 +14,6 @@ function MangaList(props) {
 
   return (
     <>
-      <HeroSection />
       <ProductSection mangas={posts} />
     </>
   );

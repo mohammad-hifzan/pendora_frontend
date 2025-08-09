@@ -1,7 +1,6 @@
 import BreadCrumb from '../common/breadCrumb'
-import { login } from '../user_auths/authenticationSlice';
 import { useDispatch } from 'react-redux';
-import {useState, createContext, useContext, useEffect} from 'react'
+import {useState} from 'react'
 import {SubmitLogin} from '../common/utility/toolbox'
 import { useNavigate, Link } from 'react-router-dom';
 
@@ -9,7 +8,6 @@ function Login(props) {
 	const dispatch = useDispatch();
 
 	const [formParams, setFormParams] = useState({nameOrEmail: '', password: ''});
-	const [user, setUser] = useState(null);
 
 	const navigate = useNavigate();
 
