@@ -34,9 +34,6 @@ function AdminUsers() {
 						{user.email}
 					</td>
 					<td className="">
-						{user.role}
-					</td>
-					<td className="">
 						{user.updated_at}
 					</td>
 					<td>
@@ -95,10 +92,6 @@ function AdminUsers() {
 										
 												<th>
 													Email
-												</th>
-										
-												<th>
-													Role
 												</th>
 										
 												<th>

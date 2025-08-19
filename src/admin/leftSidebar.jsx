@@ -41,7 +41,7 @@ function LeftSidebar() {
 								</Link>
 							</li>
 							<li>
-								<Link to="/admin/role">
+								<Link to="/admin/roles">
 									<FontAwesomeIcon icon={faUserCheck} size="3x" className="olymp-newsfeed-icon left-menu-icon" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="ROLE" />
 								</Link>
 							</li>
@@ -95,7 +95,7 @@ function LeftSidebar() {
 								</Link>
 							</li>
 							<li>
-								<Link to="/admin/role">
+								<Link to="/admin/roles">
 									<FontAwesomeIcon icon={faUserCheck} size="3x" className="olymp-newsfeed-icon left-menu-icon" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="ROLE" />
 									<span className="left-menu-title">Role</span>
 								</Link>
