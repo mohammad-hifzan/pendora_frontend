@@ -38,6 +38,7 @@ function AdminUsers() {
 					</td>
 					<td>
 						{/* <Link to={`edit/${user.id}`} style={{ position: "relative", zIndex: 9999, pointerEvents: "auto" }}><FontAwesomeIcon icon={faPen} /></Link> */}
+						 <Link to={`${user.id}/edit`} style={{ position: "relative", zIndex: 9999, pointerEvents: "auto" }}><FontAwesomeIcon icon={faPen} /></Link>
 					</td>
 				</tr>
   		))
