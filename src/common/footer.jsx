@@ -55,9 +55,9 @@ function Footer() {
                   {/* <li><a href="#">Contacts</a></li> */}
                   {currentUser ?
                       currentUser.role == 'admin' ? 
-                      <li><Link to="/admin/companies" target="_blank">Companies</Link></li>
+                      <li><Link to="/workspace/companies" target="_blank">Companies</Link></li>
                       :
-                      <li><Link to="/admin/new" target="_blank">Login As Author</Link></li>
+                      <li><Link to="/workspace/new" target="_blank">Login As Author</Link></li>
                       : null
                   }
                 </ul>

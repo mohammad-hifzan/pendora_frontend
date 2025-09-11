@@ -1,12 +1,10 @@
-import DataTable from 'datatables.net-dt';
-import { Link } from "react-router-dom"
 import { useState, useEffect, useRef } from 'react';
-import {get} from '../../../common/utility/toolbox' 
+import {get, destroy, customToast} from '../../common/utility/toolbox' 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPen, faEye } from '@fortawesome/free-solid-svg-icons';
+import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 import CreateRoleModal from './createRoleModal';
 import { Modal as BootstrapModal } from "bootstrap";
-function AdminRoles() {
+function SuperAdminRoles() {
   const [roles, setRoles] = useState([])
   const [selectedRole, setSelectedRole] = useState(null);
   const modalRef = useRef();
@@ -16,6 +14,18 @@ function AdminRoles() {
     const modal = new BootstrapModal(modalRef.current);
     modal.show();
   };
+
+  const deleteRole = async (role) => {  
+    const response = await destroy(`/v2/roles/${role.id}`)
+    if (response != 'error' && response.status == 200) {
+      const updatedRoles = roles.filter(r => r.id !== role.id);
+      setRoles(updatedRoles);
+      customToast("Role Deleted Successfully!", "success", "light");
+    } else {
+      customToast("Failed to Delete Role!", "error", "light");
+    }
+
+  }
 
   const getRoles = async () => {
     try {
@@ -47,7 +57,11 @@ function AdminRoles() {
           <td>
             <div className="row">
               <div className="col-md-2">
-                 <a onClick={() => openModal(role)} style={{ position: "relative", zIndex: 9999, pointerEvents: "auto" }}><FontAwesomeIcon icon={faPen} /></a>
+                 <a onClick={() => openModal(role)} style={{ position: "relative", zIndex: 99999, pointerEvents: "auto", cursor: "pointer" }}><FontAwesomeIcon icon={faPen} /></a>
+              </div>
+              <div className="col-md-2"> </div>
+              <div className="col-md-2">
+                 <a onClick={() => deleteRole(role)} style={{ position: "relative", zIndex: 99999, pointerEvents: "auto", cursor: "pointer" }}><FontAwesomeIcon icon={faTrash} /></a>
               </div>
             </div>
           </td>
@@ -152,4 +166,4 @@ function AdminRoles() {
     )
 }
 
-export default AdminRoles
+export default SuperAdminRoles

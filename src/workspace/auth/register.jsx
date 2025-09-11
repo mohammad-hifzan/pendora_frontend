@@ -2,7 +2,7 @@ import { useNavigate, Link } from "react-router-dom"
 import {useState} from 'react'
 import {SubmitSignUp} from '../../common/utility/toolbox'
 import { useDispatch } from 'react-redux';
-function AdminRegister() {
+function WorkSpaceRegister() {
     const [formParams, setFormParams] = useState({name: '', email: '', password: ''});
     const navigate = useNavigate();
 		const dispatch = useDispatch();
@@ -68,4 +68,4 @@ function AdminRegister() {
 		)
 }
 
-export default AdminRegister
+export default WorkSpaceRegister

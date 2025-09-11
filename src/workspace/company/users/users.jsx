@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import {get} from '../../../common/utility/toolbox' 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
-function AdminUsers() {
+function WorkSpaceUsers() {
 	const [users, setUsers] = useState([])
 
 	const getUsers = async () => {
@@ -143,4 +143,4 @@ function AdminUsers() {
 		)
 }
 
-export default AdminUsers
+export default WorkSpaceUsers

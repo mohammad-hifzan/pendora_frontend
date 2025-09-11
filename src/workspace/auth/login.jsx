@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import {useState, createContext, useContext, useEffect} from 'react'
 import {post, SubmitLogin} from '../../common/utility/toolbox'
 import { useNavigate, Link } from 'react-router-dom';
-function AdminLogin() {
+function WorkSpaceLogin() {
   const dispatch = useDispatch();
 
 	const [formParams, setFormParams] = useState({nameOrEmail: '', password: ''});
@@ -61,4 +61,4 @@ function AdminLogin() {
 		)
 }
 
-export default AdminLogin
+export default WorkSpaceLogin

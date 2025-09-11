@@ -1,22 +1,22 @@
-import {useState} from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate, Link, useParams } from 'react-router-dom';
-import {post, customToast} from '../../../common/utility/toolbox'
+import { get, put, customToast} from '../../../common/utility/toolbox'
 import ChapterForm from './chapterForm'
-function AddChapter() {
+function EditChapter() {
 	const [formParams, setFormParams] = useState({name: '', chapter_images: []});
 	const navigate = useNavigate();
-	const { id } = useParams()
+	const { id, chapter_id } = useParams()
 
 	const handleChange = (e) => {
     const { name, files, value } = e.target;
-    let chapter_images = []
-    if (files) {
-    	chapter_images = Array.from(files);
+    let fileList = []
+    if (files?.length > 0) {
+    	fileList = Array.from(files);
     }
     if (name === "chapter_images") {
     	setFormParams((prev) => ({
 	      ...prev,
-	      chapter_images: chapter_images, // ✅ store multiple File objects
+	      chapter_images: fileList, // ✅ store multiple File objects
 	    }));
     } else {
     	setFormParams({
@@ -25,6 +25,24 @@ function AddChapter() {
 	    });
     }
   };
+
+  useEffect(() => {
+		fetchChapter(id, chapter_id)
+	}, [])
+
+  const fetchChapter = async (manga_id, chapter_id) => {
+		try {
+	    const response = await get(`/v2/mangas/${manga_id}/chapters/${chapter_id}`);
+	    setFormParams((prev) => {
+	    	return {
+	    		...prev,
+		    	name: response.data.name,
+		    }
+	    })
+	  } catch (error) {
+	  	navigate(`/admin/mangas/${manga_id}/chapters`)
+	  }
+	}
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,18 +58,17 @@ function AddChapter() {
 				  formData.append("chapter[chapter_images][]", file);  // ✅ Notice the []
 				});
 			}
-
-	    const response = await post(`/v2/mangas/${id}/chapters`, formData);
+	    const response = await put(`/v2/mangas/${id}/chapters/${chapter_id}`, formData);
 	    if (response != 'error' && response.status == 201) {
 				navigate(`/admin/mangas/${id}/chapters`)
-				customToast("Chapter Added Successfully!", "success", "light");
+				customToast("Chapter Updated Successfully!", "success", "light");
 			} else {
 				navigate(`/admin/mangas/${id}/chapters/add`)
-				customToast("Failed to Add Chapter!", "error", "light");
+				customToast("Failed to Update Chapter!", "error", "light");
 			}
 	  } catch (error) {
       console.error('Submission error:', error);
-			customToast("Failed to Add Chapter!", "error", "light");
+			customToast("Failed to Update Chapter!", "error", "light");
       return 'error'
     }
   }
@@ -63,7 +80,7 @@ function AddChapter() {
 					<div className="col col-xl-12 order-xl-2 col-lg-9 order-lg-2 col-md-12 order-md-1 col-sm-12 col-12">
 						<div className="ui-block">
 							<div className="ui-block-title">
-								<h6 className="title">Add Chapter</h6>
+								<h6 className="title">Edit Chapter</h6>
 							</div>
 							<div className="ui-block-content">
 
@@ -84,4 +101,4 @@ function AddChapter() {
 		)
 }
 
-export default AddChapter
+export default EditChapter

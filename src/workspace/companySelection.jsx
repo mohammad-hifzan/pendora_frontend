@@ -26,7 +26,7 @@ function CompanySelection() {
     try {
       const response = await get(`v2/companies/${company.id}`)
       dispatch(setCurrentCompany(response.data))
-      navigate(`/admin/dashboard`)
+      navigate(`/workspace/dashboard`)
     } catch (error) {
       console.error("Error logging out:", error);
       throw error;
@@ -130,7 +130,7 @@ function CompanySelection() {
 					<div className="row">
 						<div className="col col-xl-3 col-lg-6 col-md-6 col-sm-6 col-12">
 							<div className="friend-item friend-groups create-group h-75 mb-3">
-								<Link to="/admin/new">
+								<Link to="/workspace/new">
 									<a href="#" className="full-block" ></a> 
 									{/* // add them to full-block to start modal data-bs-toggle="modal" data-bs-target="#create-friend-group-1" */}
 									<div className="content">

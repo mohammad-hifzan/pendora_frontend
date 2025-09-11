@@ -62,9 +62,9 @@ function CreateCompany() {
 			debugger
 	    const response = await post(`v2/companies`, formData);
 	    if (response != 'error' && response.status == 201) {
-				navigate('/admin/companies')
+				navigate('/workspace/companies')
 			} else {
-				navigate('/admin/login')
+				navigate('/workspace/login')
 			}
 	  } catch (error) {
 	      console.error('Submission error:', error);
@@ -173,7 +173,7 @@ function CreateCompany() {
 
 													{user.company_count > 0 && 
 														<div style={{ marginBottom: '10px' }}>
-															<Link to="/admin/companies">Back to Companies</Link>
+															<Link to="/workspace/companies">Back to Companies</Link>
 														</div>
 														}
 

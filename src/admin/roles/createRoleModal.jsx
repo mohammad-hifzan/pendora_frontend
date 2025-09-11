@@ -1,4 +1,4 @@
-import { post, put, customToast } from '../../../common/utility/toolbox';
+import { post, put, customToast } from '../../common/utility/toolbox';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { Modal as BootstrapModal } from "bootstrap";

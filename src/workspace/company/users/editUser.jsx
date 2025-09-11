@@ -30,7 +30,7 @@ export default function EditUser() {
         }
       })
     } catch (error) {
-      navigate('/admin/mangas')
+      navigate('/workspace/users')
     }
   }
 
@@ -65,6 +65,7 @@ export default function EditUser() {
       formData.append("user[name]", data.name);
       formData.append("user[email]", data.email);
       formData.append("user[mobile]", data.mobile);
+      debugger
       formData.append("user[roles][]", data.roles.map(role => role.value)); // ✅ add the array of role IDs
       formData.append("user[current_password]", data.current_password);
       formData.append("user[password]", data.password);
@@ -75,7 +76,7 @@ export default function EditUser() {
       const response = await put(`/v2/users/${user_id}`, formData);
       
       if (response != 'error' && response.status == 200) {
-        navigate('/admin/users')
+        navigate('/workspace/users')
         customToast("User Updated Successfully!", "success", "light");
       } else {
         customToast("Failed to Update User!", "error", "light");
@@ -101,13 +102,16 @@ export default function EditUser() {
       }
     };
 
-  let roleOptions = []
-  if (roles.length > 0) {
-      roleOptions = roles.map((role) => ({
-        value: role.id,
-        label: role.name,
-      }));
-    }
+  const roleOptions = roles.map(role => ({
+    value: role.id,
+    label: role.name,
+  }));
+
+  const selectedRoles = formParams.roles.length
+    ? roleOptions.filter(option =>
+        formParams.roles.some(selected => selected.label === option.label)
+      )
+    : [];
 
   const animatedComponents = makeAnimated();
 
@@ -153,7 +157,7 @@ export default function EditUser() {
                         <label className="control-label">Role</label>
                         <div className="form-group label-floating is-select">
                           <Select
-                            value={formParams.roles }
+                            value={selectedRoles }
                             closeMenuOnSelect={false}
                             components={animatedComponents}
                             name="roles"
@@ -189,7 +193,7 @@ export default function EditUser() {
                     </div>
 
                     <div className="col col-lg-6 col-md-6 col-sm-12 col-12">
-                      <Link to="/admin/users" className="btn btn-secondary btn-lg full-width">Cancel</Link>
+                      <Link to="/workspace/users" className="btn btn-secondary btn-lg full-width">Cancel</Link>
                     </div>
                     <div className="col col-lg-6 col-md-6 col-sm-12 col-12">
                       <button className="btn btn-primary btn-lg full-width">Save all Changes</button>

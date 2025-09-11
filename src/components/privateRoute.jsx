@@ -11,19 +11,19 @@ const PrivateRoute = ({ children }) => {
   useEffect(() => {
     dispatch(fetchCurrentCompany());
   }, [dispatch]);
-
+  
   if (loading || companyLoading) return <div>Loading...</div>;
   const authenticated = isAuthenticated && user
-  const redirect = window.location.pathname.includes("admin") ? "/admin/error" : "/login"
-  if (window.location.pathname.includes('admin')) {   
+  const redirect = window.location.pathname.includes("workspace") ? "/workspace/error" : "/login"
+  if (window.location.pathname.includes('workspace')) {   
     if (!user && !loading) {
-      return <Navigate to="/admin/login" />;
-    } else if (user?.role !== 'admin' && window.location.pathname !== "/admin/new") {
-      return <Navigate to="/admin/new" />;
-    } else if (user?.role === 'admin' && window.location.pathname == '/admin/new') {
+      return <Navigate to="/workspace/login" />;
+    } else if (user?.role !== 'admin' && window.location.pathname !== "/workspace/new") {
+      return <Navigate to="/workspace/new" />;
+    } else if (user?.role === 'admin' && window.location.pathname == '/workspace/new') {
       return children
-    } else if (user?.role === 'admin' && !currentCompany && !window.location.pathname.includes('/admin/companies')) {
-      return <Navigate to="/admin/companies" />;
+    } else if (user?.role === 'admin' && !currentCompany && !window.location.pathname.includes('/workspace/companies')) {
+      return <Navigate to="/workspace/companies" />;
     }
   }
 
