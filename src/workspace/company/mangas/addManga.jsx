@@ -1,4 +1,3 @@
-import MangaEditor from "../../../common/mangas/mangaEditor";
 import MangaAdd from "../../../common/mangas/add";
 
 export default function AddManga() {

@@ -16,24 +16,21 @@ const PrivateRoute = ({ children }) => {
 
   
   if (loading || companyLoading) return <div>Loading...</div>; 
-  const authenticated = isAuthenticated && user
-  const redirect = window.location.pathname.includes("workspace") ? "/workspace/error" : "/login"
-  if (window.location.pathname.includes('workspace') || window.location.pathname.includes('admin')) {   
-    debugger
-    if (!user && !loading) {
-      return <Navigate to="/workspace/login" />;
-    } else if (user?.role == "super_admin" && !window.location.pathname.includes("admin")) {
-      return <Navigate to="/admin/dashboard" />
-    } else if (user?.role !== 'admin' && user?.role !== 'super_admin' && window.location.pathname !== "/workspace/new") {
-      return <Navigate to="/workspace/new" />;
-    } else if (user?.role === 'admin' && user?.role !== 'super_admin' && window.location.pathname == '/workspace/new') {
-      return children
-    } else if (user?.role === 'admin' && user?.role !== 'super_admin' && !currentCompany && !window.location.pathname.includes('/workspace/companies')) {
-      return <Navigate to="/workspace/companies" />;
-    }
-  };
-  
-  return children;
-}
+    if (window.location.pathname.includes('workspace') || window.location.pathname.includes('admin')) {   
+      if (!user && !loading) {
+        return <Navigate to="/workspace/login" />;
+      } else if (user?.role == "super_admin" && !window.location.pathname.includes("admin")) {
+        return <Navigate to="/admin/dashboard" />
+      } else if (user?.role !== 'admin' && user?.role !== 'super_admin' && window.location.pathname !== "/workspace/new") {
+        return <Navigate to="/workspace/new" />;
+      } else if (user?.role === 'admin' && user?.role !== 'super_admin' && window.location.pathname == '/workspace/new') {
+        return children
+      } else if (user?.role === 'admin' && user?.role !== 'super_admin' && !currentCompany && !window.location.pathname.includes('/workspace/companies')) {
+        return <Navigate to="/workspace/companies" />;
+      }
+    };
+    
+    return children;
+  }
 
 export default PrivateRoute;

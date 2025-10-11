@@ -5,7 +5,7 @@ export default function AdminUsers() {
     <>
       <div className="header-spacer"></div>
       <UsersTable 
-        fetchUrl="v2/users/company_users" 
+        fetchUrl="v2/users" 
         basePath="admin" 
       />
     </>

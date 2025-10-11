@@ -9,7 +9,6 @@ import { current } from "@reduxjs/toolkit";
 function UsersTable({ fetchUrl, basePath }) {
   const [users, setUsers] = useState([])
   const currentUser = useSelector((state) => state.auth.user);
-
   const getUsers = async () => {
     try {
       const response = await get(fetchUrl)
@@ -43,7 +42,7 @@ function UsersTable({ fetchUrl, basePath }) {
                       </button>
                     </div>
                   </form>
-                 {currentUser.role == "admin" && <Link to="/admin/users/add" className="btn btn-blue btn-md">Add New User</Link>}
+                 {currentUser?.role == "admin" && <Link to="/admin/users/add" className="btn btn-blue btn-md">Add New User</Link>}
                 </div>
               </div>
             </div>
