@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { get } from "../../common/utility/toolbox";
 import ChapterTable from "../../common/chapters/chapterTable";
 
-function SuperAdminChapters() {
+function AdminChapters() {
   const [chapters, setChapters] = useState([]);
   const { id } = useParams();
 
@@ -47,9 +47,6 @@ function SuperAdminChapters() {
                       </button>
                     </div>
                   </form>
-                  <Link to="add" className="btn btn-blue btn-md">
-                    Add New Chapter
-                  </Link>
                 </div>
               </div>
             </div>
@@ -68,4 +65,4 @@ function SuperAdminChapters() {
   );
 }
 
-export default SuperAdminChapters;
+export default AdminChapters;

@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 import CreateRoleModal from './createRoleModal';
 import { Modal as BootstrapModal } from "bootstrap";
-function SuperAdminRoles() {
+function AdminRoles() {
   const [roles, setRoles] = useState([])
   const [selectedRole, setSelectedRole] = useState(null);
   const modalRef = useRef();
@@ -166,4 +166,4 @@ function SuperAdminRoles() {
     )
 }
 
-export default SuperAdminRoles
+export default AdminRoles

@@ -433,133 +433,137 @@ function AdminHeader() {
 							</div>
 						</div> */}
 
-						<div className="author-page author vcard inline-items more">
-							<div className="author-thumb">
-								<img alt="author" src="/themeAuthor/img/user-login-icon.jpg" width="36" height="36" className="avatar" />
-								{/* <span className="icon-status online"></span> */}
-								<div className="more-dropdown more-with-triangle">
-									<div className="mCustomScrollbar" data-mcs-theme="dark">
-										<div className="ui-block-title ui-block-title-small">
-											<h6 className="title">Your Account</h6>
+						{currentUser && 
+							<div className="author-page author vcard inline-items more">
+								<div className="author-thumb">
+									<img alt="author" src="/themeAuthor/img/user-login-icon.jpg" width="36" height="36" className="avatar" />
+									{/* <span className="icon-status online"></span> */}
+									<div className="more-dropdown more-with-triangle">
+										<div className="mCustomScrollbar" data-mcs-theme="dark">
+											<div className="ui-block-title ui-block-title-small">
+												<h6 className="title">Your Account</h6>
+											</div>
+
+											<ul className="account-settings">
+												<li>
+													<a href="29-YourAccount-AccountSettings.html">
+
+														<svg className="olymp-menu-icon">
+															<use href="#olymp-menu-icon"></use>
+														</svg>
+
+														<span>Profile Settings</span>
+													</a>
+												</li>
+												<li>
+													<a href="36-FavPage-SettingsAndCreatePopup.html">
+														<svg className="olymp-star-icon left-menu-icon" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="FAV PAGE">
+															<use href="#olymp-star-icon"></use>
+														</svg>
+
+														<span>Create Fav Page</span>
+													</a>
+												</li>
+												<li>
+													<a href="#" onClick={logOut}>
+														<svg className="olymp-logout-icon">
+															<use href="#olymp-logout-icon"></use>
+														</svg>
+
+														<span>Log Out</span>
+													</a>
+												</li>
+											</ul>
+
+											{/* <div className="ui-block-title ui-block-title-small">
+												<h6 className="title">Chat Settings</h6>
+											</div> */}
+
+											{/* <ul className="chat-settings">
+												<li>
+													<a href="#">
+														<span className="icon-status online"></span>
+														<span>Online</span>
+													</a>
+												</li>
+												<li>
+													<a href="#">
+														<span className="icon-status away"></span>
+														<span>Away</span>
+													</a>
+												</li>
+												<li>
+													<a href="#">
+														<span className="icon-status disconected"></span>
+														<span>Disconnected</span>
+													</a>
+												</li>
+
+												<li>
+													<a href="#">
+														<span className="icon-status status-invisible"></span>
+														<span>Invisible</span>
+													</a>
+												</li>
+											</ul> */}
+
+											{/* <div className="ui-block-title ui-block-title-small">
+												<h6 className="title">Custom Status</h6>
+											</div> */}
+
+											{/* <form className="form-group with-button custom-status">
+												<input className="form-control" placeholder="" type="text" value="Space Cowboy" />
+
+												<button className="bg-purple">
+													<svg className="olymp-check-icon">
+														<use href="#olymp-check-icon"></use>
+													</svg>
+												</button>
+											</form> */}
+
+											{/* <div className="ui-block-title ui-block-title-small">
+												<h6 className="title">About Olympus</h6>
+											</div> */}
+
+											{/* <ul>
+												<li>
+													<a href="#">
+														<span>Terms and Conditions</span>
+													</a>
+												</li>
+												<li>
+													<a href="#">
+														<span>FAQs</span>
+													</a>
+												</li>
+												<li>
+													<a href="#">
+														<span>Careers</span>
+													</a>
+												</li>
+												<li>
+													<a href="#">
+														<span>Contact</span>
+													</a>
+												</li>
+											</ul> */}
 										</div>
 
-										<ul className="account-settings">
-											<li>
-												<a href="29-YourAccount-AccountSettings.html">
-
-													<svg className="olymp-menu-icon">
-														<use href="#olymp-menu-icon"></use>
-													</svg>
-
-													<span>Profile Settings</span>
-												</a>
-											</li>
-											<li>
-												<a href="36-FavPage-SettingsAndCreatePopup.html">
-													<svg className="olymp-star-icon left-menu-icon" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="FAV PAGE">
-														<use href="#olymp-star-icon"></use>
-													</svg>
-
-													<span>Create Fav Page</span>
-												</a>
-											</li>
-											<li>
-												<a href="#" onClick={logOut}>
-													<svg className="olymp-logout-icon">
-														<use href="#olymp-logout-icon"></use>
-													</svg>
-
-													<span>Log Out</span>
-												</a>
-											</li>
-										</ul>
-
-										{/* <div className="ui-block-title ui-block-title-small">
-											<h6 className="title">Chat Settings</h6>
-										</div> */}
-
-										{/* <ul className="chat-settings">
-											<li>
-												<a href="#">
-													<span className="icon-status online"></span>
-													<span>Online</span>
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<span className="icon-status away"></span>
-													<span>Away</span>
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<span className="icon-status disconected"></span>
-													<span>Disconnected</span>
-												</a>
-											</li>
-
-											<li>
-												<a href="#">
-													<span className="icon-status status-invisible"></span>
-													<span>Invisible</span>
-												</a>
-											</li>
-										</ul> */}
-
-										{/* <div className="ui-block-title ui-block-title-small">
-											<h6 className="title">Custom Status</h6>
-										</div> */}
-
-										{/* <form className="form-group with-button custom-status">
-											<input className="form-control" placeholder="" type="text" value="Space Cowboy" />
-
-											<button className="bg-purple">
-												<svg className="olymp-check-icon">
-													<use href="#olymp-check-icon"></use>
-												</svg>
-											</button>
-										</form> */}
-
-										{/* <div className="ui-block-title ui-block-title-small">
-											<h6 className="title">About Olympus</h6>
-										</div> */}
-
-										{/* <ul>
-											<li>
-												<a href="#">
-													<span>Terms and Conditions</span>
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<span>FAQs</span>
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<span>Careers</span>
-												</a>
-											</li>
-											<li>
-												<a href="#">
-													<span>Contact</span>
-												</a>
-											</li>
-										</ul> */}
 									</div>
-
 								</div>
+								<a href="02-ProfilePage.html" className="author-name fn">
+									<div className="author-title">
+										{currentUser?.name}
+										<svg className="olymp-dropdown-arrow-icon">
+											<use href="#olymp-dropdown-arrow-icon"></use>
+										</svg>
+									</div>
+									<span className="author-subtitle">ADMIN</span>
+								</a>
 							</div>
-							<a href="02-ProfilePage.html" className="author-name fn">
-								<div className="author-title">
-									{currentUser?.name}
-									<svg className="olymp-dropdown-arrow-icon">
-										<use href="#olymp-dropdown-arrow-icon"></use>
-									</svg>
-								</div>
-								<span className="author-subtitle">ADMIN</span>
-							</a>
-						</div>
+					}
+
+						
 
 					</div>
 				</div>

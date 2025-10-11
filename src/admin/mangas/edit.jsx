@@ -1,12 +1,12 @@
-import MangaEdit from "../../../common/mangas/edit";
+import MangaEdit from "../../common/mangas/edit";
 
-export default function EditManga() {
+export default function AdminEditManga() {
   return (
     <>
       <div className="header-spacer"></div>
       <MangaEdit
         fetchUrlBase="/v2/mangas"         // API is the same
-        redirectPath="/workspace/mangas"      // admin route
+        redirectPath="/admin/mangas"      // admin route
       />
     </>
   );

@@ -47,11 +47,11 @@ function CreateCategoryModal(props) {
 
   const handleResponse = (response, successMsg, errorMsg) => {
     if (response !== 'error' && (response.status === 201 || response.status === 200)) {
-      navigate('/workspace/categories');
+      navigate('/admin/categories');
       customToast(successMsg, "success", "light");
       handleClose();
     } else {
-      navigate('/workspace/categories');
+      navigate('/admin/categories');
       customToast(errorMsg, "error", "light");
     }
   };
@@ -92,7 +92,7 @@ function CreateCategoryModal(props) {
       aria-labelledby="create-category-modal"
       aria-hidden="true"
     >
-      <div className="modal-dialog window-popup create-category-modal" role="document">
+      <div className="modal-dialog window-popup create-friend-group create-friend-group-1" role="document">
         <div className="modal-content">
           <a href="#" className="close icon-close" data-bs-dismiss="modal" aria-label="Close">
             <svg className="olymp-close-icon"><use href="#olymp-close-icon"></use></svg>

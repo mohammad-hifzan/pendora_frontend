@@ -17,7 +17,7 @@ function MangaTable({ mangas }) {
           </tr>
         </thead>
         <tbody>
-          {mangas.length > 0 ? (
+          {mangas?.length > 0 ? (
             mangas.map((manga) => (
               <tr key={manga.id}>
                 <td>{manga.title}</td>

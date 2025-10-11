@@ -13,6 +13,7 @@ function BaseLayout() {
         <LeftSidebar />
         {/* <RightSidebar /> */}
         <AdminHeader />
+        <div className="header-spacer"></div>
         <Outlet />
         <ChatPopup />
       </>

@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 import CreateCategoryModal from './createCategoryModal';
 import { Modal as BootstrapModal } from "bootstrap";
-function SuperAdminCategories() {
+function AdminCategories() {
   const [categories, setCategories] = useState([])
   const [selectedCategory, setSelectedCategory] = useState(null);
   const modalRef = useRef();
@@ -30,6 +30,7 @@ function SuperAdminCategories() {
   const getCategories = async () => {
     try {
       const response = await get('/v2/categories')
+
       return response.data;
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -166,4 +167,4 @@ function SuperAdminCategories() {
     )
 }
 
-export default SuperAdminCategories
+export default AdminCategories

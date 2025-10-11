@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useSelector } from 'react-redux';
 import {
 	faSwatchbook,
 	faUsersRectangle,
 	faUserCheck,
-	faArrowRightFromBracket
+	faArrowRightFromBracket,
+	faListAlt
 } from '@fortawesome/free-solid-svg-icons';
 
 const adminLinks = [
@@ -60,13 +62,15 @@ const superAdminLinks = [
 		label: "Roles"
 	},
 	{
-		to: "/admin/companies",
-		icon: <FontAwesomeIcon icon={faArrowRightFromBracket} size="3x" className="olymp-newsfeed-icon left-menu-icon" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="COMPANIES" />,
-		label: "Exit"
+		to: "/admin/categories",
+		icon: <FontAwesomeIcon icon={faListAlt} size="3x" className="olymp-newsfeed-icon left-menu-icon" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="CATEGORIES" />,
+		label: "Categories"
 	}
 ];
 
 function SidebarMenu({ large }) {
+	const { user, isAuthenticated, loading } = useSelector((state) => state.auth);
+	const links = user?.role === "super_admin" ? superAdminLinks : adminLinks;
 	return (
 		<ul className="left-menu">
 			<li>
@@ -77,7 +81,7 @@ function SidebarMenu({ large }) {
 					{large && <span className="left-menu-title">Collapse Menu</span>}
 				</a>
 			</li>
-			{adminLinks.map(({ to, icon, label }) => (
+			{links.map(({ to, icon, label }) => (
 				<li key={to}>
 					<Link to={to}>
 						{icon}
@@ -130,7 +134,7 @@ function LeftSidebar() {
 							<img loading="lazy" src="img/logo.webp" alt="Olympus" width="34" height="34" />
 						</div>
 						<div className="title-block">
-							<h6 className="logo-title">olympus</h6>
+							<h6 className="logo-title">bookworm</h6>
 						</div>
 					</a>
 					<div className="mCustomScrollbar" data-mcs-theme="dark">

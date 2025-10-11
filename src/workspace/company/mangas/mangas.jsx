@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { get } from '../../../common/utility/toolbox';
 import MangaTable from '../../../common/mangas/mangaTable';
 
-function WorkSpaceMangas() {
+function AdminMangas() {
   const [mangas, setMangas] = useState([]);
 
   const getMangas = async () => {
     try {
       const response = await get('/v2/mangas/company_mangas');
-      return response.data;
+      return response?.data;
     } catch (error) {
       console.error("Error fetching mangas:", error);
       throw error;
@@ -17,7 +17,7 @@ function WorkSpaceMangas() {
 
   useEffect(() => {
     getMangas().then((result) => {
-      setMangas(result.mangas);
+      setMangas(result?.mangas  || []);
     });
   }, []);
 
@@ -45,7 +45,9 @@ function WorkSpaceMangas() {
                       </button>
                     </div>
                   </form>
+
                   <a href="mangas/add" className="btn btn-blue btn-md">Add New Manga</a>
+                  
                 </div>
               </div>
             </div>
@@ -64,4 +66,4 @@ function WorkSpaceMangas() {
   );
 }
 
-export default WorkSpaceMangas;
+export default AdminMangas;
