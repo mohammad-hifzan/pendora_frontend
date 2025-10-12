@@ -29,7 +29,8 @@ import AddChapter from './admin/company/chapters/addChapter'
 import EditChapter from './admin/company/chapters/editChapter'
 import EditManga from './admin/company/mangas/editManga'
 import AdminUsers from './admin/company/users/users'
-import Role from './admin/company/role'
+import EditUser from './admin/company/users/editUser'
+import AdminRoles from './admin/company/roles/roles'
 import BaseLayout from './admin/layouts/baseLayout'
 import NoSidebarLayout from './admin/layouts/noSidebarLayout'
 import AuthLayout from './admin/layouts/authLayout'
@@ -70,8 +71,11 @@ function RootApp() {
                 <Route path=":chapter_id/edit" element={<PrivateRoute><EditChapter /></PrivateRoute>} />
               </Route>
             </Route>
-            <Route path="users" element={<PrivateRoute><AdminUsers /></PrivateRoute>} />
-            <Route path="role" element={<PrivateRoute><Role /></PrivateRoute>} />
+            <Route path="users">
+              <Route index element={<PrivateRoute><AdminUsers /></PrivateRoute>} />
+              <Route path=":id/edit" element={<PrivateRoute><EditUser /></PrivateRoute>} />
+            </Route>
+            <Route path="roles" element={<PrivateRoute><AdminRoles /></PrivateRoute>} />
           </Route>
 
           <Route path="new" element={<PrivateRoute><CreateCompany /></PrivateRoute>}/>

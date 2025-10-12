@@ -34,13 +34,11 @@ function AdminUsers() {
 						{user.email}
 					</td>
 					<td className="">
-						{user.role}
-					</td>
-					<td className="">
 						{user.updated_at}
 					</td>
 					<td>
 						{/* <Link to={`edit/${user.id}`} style={{ position: "relative", zIndex: 9999, pointerEvents: "auto" }}><FontAwesomeIcon icon={faPen} /></Link> */}
+						 <Link to={`${user.id}/edit`} style={{ position: "relative", zIndex: 9999, pointerEvents: "auto" }}><FontAwesomeIcon icon={faPen} /></Link>
 					</td>
 				</tr>
   		))
@@ -95,10 +93,6 @@ function AdminUsers() {
 										
 												<th>
 													Email
-												</th>
-										
-												<th>
-													Role
 												</th>
 										
 												<th>
