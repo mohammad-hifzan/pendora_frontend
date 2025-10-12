@@ -4,7 +4,7 @@ function Error404() {
 	return (
 			<>
 			{
-				window.location.pathname.includes("admin") ?
+				window.location.pathname.includes("workspace") ?
 				<div className="admin">
 				
 

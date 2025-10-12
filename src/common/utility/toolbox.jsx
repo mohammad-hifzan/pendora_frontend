@@ -22,6 +22,23 @@ export const post = async (path, data) => {
 	return response
 }
 
+export const destroy = async (path, data) => {
+	const csrfToken = await getCsrf(); // Get CSRF token
+	const response = await axios.delete(
+		`${API_URL}/${path}`,
+		data,
+		{
+		  headers: {
+		    'Content-Type': 'multipart/form-data',
+		    'X-CSRF-Token': csrfToken,
+		  },
+		  withCredentials: true, // Include cookies
+		}
+	);
+	return response
+}
+
+
 export const get = async (path, data={}) => {
 	console.log('backend: ' + API_URL)
 	const response = await axios.get(
@@ -54,14 +71,14 @@ export const getUser = () => {
   return store.getState().auth.user || {};
 }
 
-const handleAuthResponse = (response, dispatch, navigate, successMsg, adminRedirect, userRedirect, adminPath, userPath) => {
-	if (window.location.pathname.includes("admin")) {
+const handleAuthResponse = (response, dispatch, navigate, successMsg, workSpaceRedirect, userRedirect, workSpacePath, userPath) => {
+	if (window.location.pathname.includes("workspace")) {
 		if (response !== 'error' && response.status === 201) {
 			dispatch(login(response.data.user));
-			navigate(adminRedirect);
+			navigate(workSpaceRedirect);
 			customToast(successMsg, "success", "light");
 		} else {
-			navigate(adminPath);
+			navigate(workSpacePath);
 		}
 	} else {
 		if (response !== 'error' && response.status === 201) {
@@ -82,9 +99,9 @@ export const SubmitLogin = async (formData, dispatch, navigate) => {
 			dispatch,
 			navigate,
 			"Login Successful!",
-			"/admin/companies",
+			"/workspace/companies",
 			"/",
-			"/admin/login",
+			"/workspace/login",
 			"/login"
 		);
 	} catch (error) {
@@ -102,9 +119,9 @@ export const SubmitSignUp = async (formData, dispatch, navigate) => {
 			dispatch,
 			navigate,
 			"Registration Successful!",
-			"/admin/companies",
+			"/workspace/companies",
 			"/",
-			"/admin/login",
+			"/workspace/login",
 			"/login"
 		);
 	} catch (error) {

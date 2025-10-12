@@ -5,11 +5,8 @@ import './index.css';
 import $ from 'jquery';
 import 'bootstrap';
 import MangaList from './components/mangaList'
-import WizardLayout from './layouts/wizardLayout'
 import SignUp from './components/signUp'
 import Login from './components/login'
-import AdminRegister from './admin/auth/adminRegister'
-import AdminLogin from './admin/auth/adminLogin'
 import MangaShow from './components/mangaShow'
 import Chapter from './components/chapters'
 import Bookmark from './components/bookmark'
@@ -18,23 +15,44 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import store from './user_auths/store';
+// route imports
 import PrivateRoute from './components/privateRoute';
-import CreateCompany from './admin/createCompany'
-import CompanySelection from './admin/companySelection'
-import Dashboard from './admin/company/dashboard'
-import AdminMangas from './admin/company/mangas/mangas'
-import AdminChapters from './admin/company/chapters/chapters'
-import AddManga from './admin/company/mangas/addManga'
-import AddChapter from './admin/company/chapters/addChapter'
-import EditChapter from './admin/company/chapters/editChapter'
-import EditManga from './admin/company/mangas/editManga'
-import AdminUsers from './admin/company/users/users'
-import EditUser from './admin/company/users/editUser'
-import AdminRoles from './admin/company/roles/roles'
-import BaseLayout from './admin/layouts/baseLayout'
-import NoSidebarLayout from './admin/layouts/noSidebarLayout'
-import AuthLayout from './admin/layouts/authLayout'
-import RootLayout from './admin/layouts/rootLayout'
+// workspace imports
+// auth imports
+import WorkSpaceRegister from './workspace/auth/register'
+import WorkSpaceLogin from './workspace/auth/login'
+// company imports
+import CreateCompany from './workspace/createCompany'
+import CompanySelection from './workspace/companySelection'
+// dashboard imports
+import Dashboard from './workspace/company/dashboard'
+// chapter imports
+import WorkSpaceChapters from './workspace/company/chapters/chapters'
+import AddChapter from './workspace/company/chapters/addChapter'
+import EditChapter from './workspace/company/chapters/editChapter'
+// manga imports
+import WorkSpaceMangas from './workspace/company/mangas/mangas'
+import AddManga from './workspace/company/mangas/addManga'
+import EditManga from './workspace/company/mangas/editManga'
+// user imports
+import WorkSpaceUsers from './workspace/company/users/users'
+import EditUser from './workspace/company/users/editUser'
+// layout imports
+import BaseLayout from './workspace/layouts/baseLayout'
+import NoSidebarLayout from './workspace/layouts/noSidebarLayout'
+import AuthLayout from './workspace/layouts/authLayout'
+import RootLayout from './workspace/layouts/rootLayout'
+// super admin imports
+import AdminRoles from './admin/roles/index'
+import AdminChapters from './admin/chapters';
+import AdminEditChapter from './admin/chapters/edit';
+import AdminMangas from './admin/mangas';
+import AdminEditManga from './admin/mangas/edit';
+import AdminUsers from './admin/users';
+import AdminEditUser from './admin/users/edit';
+import AdminCategories from './admin/categories'; 
+
+// admin imports --- IGNORE ---
 import Error404 from './errors/error404'
 
 
@@ -54,28 +72,28 @@ function RootApp() {
           <Route path= '/signup' element={<SignUp />}/>
           <Route path= '/login' element={<Login />}/>
         </Route>
-        <Route path='/admin' element={<RootLayout />}>
+        <Route path='/workspace' element={<RootLayout />}>
           <Route element={<AuthLayout />}>
-            <Route path= 'signup' element={<AdminRegister />} />
-            <Route path= 'login'  element={<AdminLogin />} />
+            <Route path= 'signup' element={<WorkSpaceRegister />} />
+            <Route path= 'login'  element={<WorkSpaceLogin />} />
           </Route>
           <Route element={<BaseLayout />}>
             <Route path="dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>}/>
             <Route path="mangas" >
-              <Route index element={<PrivateRoute><AdminMangas /></PrivateRoute>} />
+              <Route index element={<PrivateRoute><WorkSpaceMangas /></PrivateRoute>} />
               <Route path="add" element={<PrivateRoute><AddManga /></PrivateRoute>} />
               <Route path="edit/:id" element={<PrivateRoute><EditManga /></PrivateRoute>} />
               <Route path=":id/chapters">
-                <Route index element={<PrivateRoute><AdminChapters /></PrivateRoute>} />
+                <Route index element={<PrivateRoute><WorkSpaceChapters /></PrivateRoute>} />
                 <Route path="add" element={<PrivateRoute><AddChapter /></PrivateRoute>} />
                 <Route path=":chapter_id/edit" element={<PrivateRoute><EditChapter /></PrivateRoute>} />
               </Route>
             </Route>
             <Route path="users">
-              <Route index element={<PrivateRoute><AdminUsers /></PrivateRoute>} />
+              <Route index element={<PrivateRoute><WorkSpaceUsers /></PrivateRoute>} />
               <Route path=":id/edit" element={<PrivateRoute><EditUser /></PrivateRoute>} />
             </Route>
-            <Route path="roles" element={<PrivateRoute><AdminRoles /></PrivateRoute>} />
+            {/* <Route path="roles" element={<PrivateRoute><AdminRoles /></PrivateRoute>} /> */}
           </Route>
 
           <Route path="new" element={<PrivateRoute><CreateCompany /></PrivateRoute>}/>
@@ -84,7 +102,28 @@ function RootApp() {
             <Route path="companies" element={<PrivateRoute><CompanySelection /></PrivateRoute>}/>
           </Route>
         </Route>
-        <Route path= "/admin/error" element={<Error404 />} />
+        <Route path="/admin" element={<RootLayout />}>
+          <Route element={<BaseLayout />}>
+            <Route path="dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>}/>
+            <Route path="mangas" >
+              <Route index element={<AdminMangas />} />
+              {/* <Route path="add" element={<AddManga />} /> */}
+              <Route path="edit/:id" element={<AdminEditManga />} />
+              <Route path=":id/chapters">
+                <Route index element={<AdminChapters />} />
+                {/* <Route path="add" element={<AddChapter />} /> */}
+                <Route path=":chapter_id/edit" element={<AdminEditChapter />} />
+              </Route>
+            </Route>
+            <Route path="users">
+              <Route index element={<AdminUsers />} />
+              <Route path=":id/edit" element={<AdminEditUser />} />
+            </Route>
+            <Route path="roles" element={<AdminRoles />} />
+            <Route path="categories" element={<AdminCategories />} />
+          </Route>
+        </Route>
+        <Route path= "/workspace/error" element={<Error404 />} />
         <Route path= "/error" element={<Error404 />} />
       </Routes>
     </BrowserRouter>
