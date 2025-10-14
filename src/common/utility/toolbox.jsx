@@ -145,3 +145,13 @@ export const customToast = (message, type = 'success', theme = 'light') => {
         style: { opacity: 0.8 }
     });
 }
+
+export const searchBar = async(obj) => {
+		const { query, endpoint, allData, setData } = obj;
+    if (query.length >= 3) {
+      const response = await get(endpoint, { query });
+			setData(response?.data);
+    } else {
+			setData(allData);
+		}
+  }

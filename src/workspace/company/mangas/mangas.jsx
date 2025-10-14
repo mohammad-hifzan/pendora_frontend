@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { get } from '../../../common/utility/toolbox';
+import { useState, useEffect } from 'react';
+import { get, searchBar } from '../../../common/utility/toolbox';
 import MangaTable from '../../../common/mangas/mangaTable';
 
 function AdminMangas() {
   const [mangas, setMangas] = useState([]);
+  const [allMangas, setAllMangas] = useState([]);
+  const [query, setQuery] = useState("");
 
   const getMangas = async () => {
     try {
@@ -18,8 +20,21 @@ function AdminMangas() {
   useEffect(() => {
     getMangas().then((result) => {
       setMangas(result?.mangas  || []);
+      setAllMangas(result?.mangas  || []);
     });
   }, []);
+
+  const handleInput = (e) => {  
+    const value = e.target.value;
+    setQuery(value);
+    const obj = {
+      query: value,
+      endpoint: '/v2/mangas/search',
+      allData: allMangas,
+      setData: setMangas
+    }
+    searchBar(obj);
+  }
 
   return (
     <>
@@ -36,6 +51,8 @@ function AdminMangas() {
                       <input
                         className="form-control"
                         type="text"
+                        value={query}
+                        onInput={handleInput}
                         placeholder="Search the forums..."
                       />
                       <button>

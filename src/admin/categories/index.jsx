@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import {get, destroy, customToast} from '../../common/utility/toolbox' 
+import {get, destroy, customToast, searchBar} from '../../common/utility/toolbox' 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 import CreateCategoryModal from './createCategoryModal';
@@ -7,6 +7,8 @@ import { Modal as BootstrapModal } from "bootstrap";
 function AdminCategories() {
   const [categories, setCategories] = useState([])
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [query, setQuery] = useState("");
+  const [allCategories, setAllCategories] = useState([]); 
   const modalRef = useRef();
 
   const openModal = (category = null) => {
@@ -20,6 +22,7 @@ function AdminCategories() {
     if (response != 'error' && response.status == 200) {
       const updatedCategories = categories.filter(r => r.id !== category.id);
       setCategories(updatedCategories);
+      setAllCategories(updatedCategories);
       customToast("Category Deleted Successfully!", "success", "light");
     } else {
       customToast("Failed to Delete Category!", "error", "light");
@@ -41,8 +44,21 @@ function AdminCategories() {
   useEffect(() => {
     getCategories().then(result => {
       setCategories(result.categories)
+      setAllCategories(result.categories)
     }) 
   }, []);
+
+  const handleInput = (e) => {  
+    const value = e.target.value;
+    setQuery(value);
+    const obj = {
+      query: value,
+      endpoint: '/v2/admin/categories/search',
+      allData: allCategories,
+      setData: setCategories
+    }
+    searchBar(obj);
+  }
 
   let categoriesRow;
   if (categories.length > 0) {
@@ -83,7 +99,11 @@ function AdminCategories() {
                 <div className="align-right">
                   <form className="w-search">
                     <div className="form-group with-button">
-                      <input className="form-control" type="text" placeholder="Search the forums..." />
+                      <input className="form-control"
+                        type="text"
+                        value={query}
+                        onInput={handleInput}
+                        placeholder="Search the forums..." />
                       <button>
                         <svg className="olymp-magnifying-glass-icon"><use href="#olymp-magnifying-glass-icon"></use></svg>
                       </button>
