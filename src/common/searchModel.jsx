@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from "react-router-dom"
-import {post} from './utility/toolbox';
+import {get} from './utility/toolbox';
 import $ from 'jquery';
 function SearchModel() {
 	const [data, setData] = useState([])
@@ -22,7 +22,7 @@ function SearchModel() {
 	}
 	const fetchData = async(data) => {
 		try {
-			const response = await post('v2/mangas/search', data)
+			const response = await get('v2/mangas/search', data)
 			if (response.statusText === 'OK' && response.status == 200) {
 				setData(response.data);
 			}

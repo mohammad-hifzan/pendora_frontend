@@ -1,11 +1,13 @@
 import { useParams, Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import { get } from "../../common/utility/toolbox";
+import { get, searchBar } from "../../common/utility/toolbox";
 import ChapterTable from "../../common/chapters/chapterTable";
 
 function AdminChapters() {
   const [chapters, setChapters] = useState([]);
   const { id } = useParams();
+  const [query, setQuery] = useState("");
+  const [allChapters, setAllChapters] = useState([]); 
 
   const getChapters = async () => {
     try {
@@ -17,9 +19,23 @@ function AdminChapters() {
     }
   };
 
+
+  const handleInput = (e) => {  
+    const value = e.target.value;
+    setQuery(value);
+    const obj = {
+      query: value,
+      endpoint: `v2/mangas/${id}/chapters/search`,
+      allData: allChapters,
+      setData: setChapters
+    }
+    searchBar(obj);
+  }
+
   useEffect(() => {
     getChapters().then((result) => {
       setChapters(result.chapters);
+      setAllChapters(result.chapters);
     });
   }, [id]);
 
@@ -35,11 +51,11 @@ function AdminChapters() {
                 <div className="align-right">
                   <form className="w-search">
                     <div className="form-group with-button">
-                      <input
-                        className="form-control"
+                      <input className="form-control"
                         type="text"
-                        placeholder="Search chapters..."
-                      />
+                        value={query}
+                        onInput={handleInput}
+                        placeholder="Search the forums..." />
                       <button>
                         <svg className="olymp-magnifying-glass-icon">
                           <use href="#olymp-magnifying-glass-icon"></use>

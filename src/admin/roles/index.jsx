@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import {get, destroy, customToast} from '../../common/utility/toolbox' 
+import {get, destroy, searchBar, customToast} from '../../common/utility/toolbox' 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 import CreateRoleModal from './createRoleModal';
@@ -7,6 +7,8 @@ import { Modal as BootstrapModal } from "bootstrap";
 function AdminRoles() {
   const [roles, setRoles] = useState([])
   const [selectedRole, setSelectedRole] = useState(null);
+  const [query, setQuery] = useState("");
+  const [allRoles, setAllRoles] = useState([]); 
   const modalRef = useRef();
 
   const openModal = (role = null) => {
@@ -24,7 +26,18 @@ function AdminRoles() {
     } else {
       customToast("Failed to Delete Role!", "error", "light");
     }
+  }
 
+  const handleInput = (e) => {  
+    const value = e.target.value;
+    setQuery(value);
+    const obj = {
+      query: value,
+      endpoint: '/v2/admin/roles/search',
+      allData: allRoles,
+      setData: setRoles
+    }
+    searchBar(obj);
   }
 
   const getRoles = async () => {
@@ -40,6 +53,7 @@ function AdminRoles() {
   useEffect(() => {
     getRoles().then(result => {
       setRoles(result.roles)
+      setAllRoles(result.roles);
     }) 
   }, []);
 
@@ -82,7 +96,12 @@ function AdminRoles() {
                 <div className="align-right">
                   <form className="w-search">
                     <div className="form-group with-button">
-                      <input className="form-control" type="text" placeholder="Search the forums..." />
+                      <input className="form-control"
+                        name="search"
+                        type="text"
+                        value={query}
+                        onInput={handleInput}
+                        placeholder="Search the forums..." />
                       <button>
                         <svg className="olymp-magnifying-glass-icon"><use href="#olymp-magnifying-glass-icon"></use></svg>
                       </button>

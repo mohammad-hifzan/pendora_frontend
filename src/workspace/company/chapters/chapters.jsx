@@ -1,10 +1,13 @@
 import { useParams, Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import { get } from "../../../common/utility/toolbox";
+import { get, searchBar } from "../../../common/utility/toolbox";
 import ChapterTable from "../../../common/chapters/chapterTable";
+import { all } from "axios";
 
 function WorkSpaceChapters() {
   const [chapters, setChapters] = useState([]);
+  const [query, setQuery] = useState("");
+  const [allChapters, setAllChapters] = useState([]);
   const { id } = useParams();
 
   const getChapters = async () => {
@@ -20,8 +23,21 @@ function WorkSpaceChapters() {
   useEffect(() => {
     getChapters().then((result) => {
       setChapters(result.chapters);
+      setAllChapters(result.chapters);
     });
   }, [id]);
+
+  const handleInput = (e) => {  
+    const value = e.target.value;
+    setQuery(value);
+    const obj = {
+      query: value,
+      endpoint: `v2/mangas/${id}/chapters/search`,
+      allData: allChapters,
+      setData: setChapters
+    }
+    searchBar(obj);
+  }
 
   return (
     <>
@@ -38,7 +54,9 @@ function WorkSpaceChapters() {
                       <input
                         className="form-control"
                         type="text"
-                        placeholder="Search chapters..."
+                        value={query}
+                        onInput={handleInput}
+                        placeholder="Search the forums..."
                       />
                       <button>
                         <svg className="olymp-magnifying-glass-icon">
