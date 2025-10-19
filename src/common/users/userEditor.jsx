@@ -45,7 +45,7 @@ export default function UserEditor({ fetchUrlBase = "/v2/users", redirectPath = 
   const fetchRoles = async () => {
     try {
       const result = await get("v2/roles");
-      setRoles(result.data.roles);
+      setRoles(result.data.data);
     } catch (error) {
       console.error("Error fetching roles:", error);
     }

@@ -1,14 +1,14 @@
-import { useState, useEffect, useRef } from 'react';
-import {get, destroy, customToast, searchBar} from '../../common/utility/toolbox' 
+import { useState, useRef } from 'react';
+import {destroy, customToast} from '../../common/utility/toolbox' 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 import CreateCategoryModal from './createCategoryModal';
 import { Modal as BootstrapModal } from "bootstrap";
+import {GlobalPagination} from '../../common/globalPagination'
 function AdminCategories() {
   const [categories, setCategories] = useState([])
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [query, setQuery] = useState("");
-  const [allCategories, setAllCategories] = useState([]); 
   const modalRef = useRef();
 
   const openModal = (category = null) => {
@@ -22,7 +22,6 @@ function AdminCategories() {
     if (response != 'error' && response.status == 200) {
       const updatedCategories = categories.filter(r => r.id !== category.id);
       setCategories(updatedCategories);
-      setAllCategories(updatedCategories);
       customToast("Category Deleted Successfully!", "success", "light");
     } else {
       customToast("Failed to Delete Category!", "error", "light");
@@ -30,34 +29,9 @@ function AdminCategories() {
 
   }
 
-  const getCategories = async () => {
-    try {
-      const response = await get('/v2/categories')
-
-      return response.data;
-    } catch (error) {
-      console.error("Error fetching categories:", error);
-      throw error;
-    }
-  };
-
-  useEffect(() => {
-    getCategories().then(result => {
-      setCategories(result.categories)
-      setAllCategories(result.categories)
-    }) 
-  }, []);
-
   const handleInput = (e) => {  
     const value = e.target.value;
     setQuery(value);
-    const obj = {
-      query: value,
-      endpoint: '/v2/admin/categories/search',
-      allData: allCategories,
-      setData: setCategories
-    }
-    searchBar(obj);
   }
 
   let categoriesRow;
@@ -160,21 +134,7 @@ function AdminCategories() {
             
             {/* <!-- Pagination --> */}
             
-            <nav aria-label="Page navigation">
-              <ul className="pagination justify-content-center">
-                <li className="page-item disabled">
-                  <a className="page-link" href="#" tabindex="-1">Previous</a>
-                </li>
-                <li className="page-item"><a className="page-link" href="#">1<div className="ripple-container"><div className="ripple ripple-on ripple-out" style={{left: "-10.3833px", top: "-16.8333px", backgroundColor: "rgb(255, 255, 255)", transform: "scale(16.7857)"}}></div></div></a></li>
-                <li className="page-item"><a className="page-link" href="#">2</a></li>
-                <li className="page-item"><a className="page-link" href="#">3</a></li>
-                <li className="page-item"><a className="page-link" href="#">...</a></li>
-                <li className="page-item"><a className="page-link" href="#">12</a></li>
-                <li className="page-item">
-                  <a className="page-link" href="#">Next</a>
-                </li>
-              </ul>
-            </nav>
+            <GlobalPagination url={'/v2/admin/categories'} setObject={setCategories} filterQuery={{query: query}} />
             
             {/* <!-- ... end Pagination --> */}
 

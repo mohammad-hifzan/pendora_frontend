@@ -13,12 +13,12 @@ const PaginatedList = (props) => {
   const { data, currentPage, totalPages, loading, error, goToPage } =
     usePagination(props?.url, props?.filterQuery);
     if (data.length > 0) {
-      dispatch(setUpdatedManga(data[0]['updated_chapters']));
-      dispatch(setNewManga(data[0]['recent_mangas']));
-      dispatch(setPopularManga(data[0]['popular_mangas']));
-      dispatch(setBookmark(data[0]['bookmarked_mangas']));
-      dispatch(setOngoing(data[0]['ongoing_mangas']));
-      dispatch(setCompleted(data[0]['completed_mangas']));
+      dispatch(setUpdatedManga(data['updated_chapters']));
+      dispatch(setNewManga(data['recent_mangas']));
+      dispatch(setPopularManga(data['popular_mangas']));
+      dispatch(setBookmark(data['bookmarked_mangas']));
+      dispatch(setOngoing(data['ongoing_mangas']));
+      dispatch(setCompleted(data['completed_mangas']));
     }
 
   return (
