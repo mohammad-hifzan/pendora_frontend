@@ -1,42 +1,16 @@
 import { useParams, Link } from "react-router-dom";
-import React, { useState, useEffect } from "react";
-import { get, searchBar } from "../../../common/utility/toolbox";
+import { useState } from "react";
 import ChapterTable from "../../../common/chapters/chapterTable";
-import { all } from "axios";
+import { GlobalPagination } from "../../../common/globalPagination";
 
 function WorkSpaceChapters() {
   const [chapters, setChapters] = useState([]);
   const [query, setQuery] = useState("");
-  const [allChapters, setAllChapters] = useState([]);
   const { id } = useParams();
-
-  const getChapters = async () => {
-    try {
-      const response = await get(`/v2/mangas/${id}/chapters`);
-      return response.data;
-    } catch (error) {
-      console.error("Error fetching chapters:", error);
-      throw error;
-    }
-  };
-
-  useEffect(() => {
-    getChapters().then((result) => {
-      setChapters(result.chapters);
-      setAllChapters(result.chapters);
-    });
-  }, [id]);
 
   const handleInput = (e) => {  
     const value = e.target.value;
     setQuery(value);
-    const obj = {
-      query: value,
-      endpoint: `v2/mangas/${id}/chapters/search`,
-      allData: allChapters,
-      setData: setChapters
-    }
-    searchBar(obj);
   }
 
   return (
@@ -79,6 +53,7 @@ function WorkSpaceChapters() {
         <div className="row">
           <div className="col col-xl-12 col-lg-9 col-md-12 col-sm-12 col-12">
             <ChapterTable chapters={chapters} />
+            <GlobalPagination url={`/v2/mangas/${id}/chapters`} setObject={setChapters} filterQuery={{query: query}} />
           </div>
         </div>
       </div>

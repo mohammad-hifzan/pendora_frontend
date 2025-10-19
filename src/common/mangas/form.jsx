@@ -22,7 +22,7 @@ export default function MangaFormPartial({
     const fetchCategories = async () => {
       try {
         const result = await getCategories();
-        setCategories(result.categories);
+        setCategories(result.data);
       } catch (error) {
         console.error("Error fetching categories:", error);
       }

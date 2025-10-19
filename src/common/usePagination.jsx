@@ -14,7 +14,7 @@ const usePagination = (url, filterQuery={}, options = {}) => {
   useEffect(() => {
     const type = new URLSearchParams(location.search).get('type')
     fetchData(url, currentPage, type);
-  }, [currentPage, filterQuery]);
+  }, [currentPage, JSON.stringify(filterQuery)]);
 
   const fetchData = async (url, page, type) => {
     setLoading(true);
@@ -23,8 +23,7 @@ const usePagination = (url, filterQuery={}, options = {}) => {
       const response = await get(url,
         { page: page, per_page: perPage, ...params, type: type, filter_query: filterQuery},
       );
-      
-      setData([response.data.data]);
+      setData(response.data.data || []);
 
       setCurrentPage(response.data.current_page);
       setTotalPages(response.data.total_pages);
@@ -40,7 +39,6 @@ const usePagination = (url, filterQuery={}, options = {}) => {
       setCurrentPage(page);
     }
   };
-
   return { data, currentPage, totalPages, loading, error, goToPage };
 };
 

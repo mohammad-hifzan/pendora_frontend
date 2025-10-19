@@ -1,44 +1,18 @@
 import { Link } from "react-router-dom"
-import React, { useState, useEffect } from 'react';
-import { get, searchBar } from '../../common/utility/toolbox' 
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { useSelector } from 'react-redux';
-import { current } from "@reduxjs/toolkit";
-import { all } from "axios";
+import {GlobalPagination} from '../../common/globalPagination'
 
 function UsersTable({ fetchUrl, basePath }) {
   const [users, setUsers] = useState([])
   const currentUser = useSelector((state) => state.auth.user);
   const [query, setQuery] = useState("");
-  const [allUsers, setAllUsers] = useState([]);
-  const getUsers = async () => {
-    try {
-      const response = await get(fetchUrl)
-      return response.data;
-    } catch (error) {
-      console.error("Error fetching users:", error);
-      throw error;
-    }
-  };
-
-  useEffect(() => {
-    getUsers().then(result => {
-      setUsers(result.users)
-      setAllUsers(result.users)
-    }) 
-  }, [fetchUrl]);
 
   const handleInput = (e) => {  
     const value = e.target.value;
     setQuery(value);
-    const obj = {
-      query: value,
-      endpoint: '/v2/users/search',
-      allData: allUsers,
-      setData: setUsers
-    }
-    searchBar(obj);
   }
 
   return (
@@ -107,9 +81,11 @@ function UsersTable({ fetchUrl, basePath }) {
                 </tbody>
               </table>
             </div>
+            <GlobalPagination url={fetchUrl} setObject={setUsers} filterQuery={{query: query}} />
           </div>
         </div>
       </div>
+
     </>
   )
 }

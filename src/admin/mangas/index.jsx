@@ -1,39 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { get, searchBar } from '../../common/utility/toolbox';
+import { useState } from 'react';
 import MangaTable from '../../common/mangas/mangaTable';
+import {GlobalPagination} from '../../common/globalPagination'
 
 function AdminMangas() {
   const [mangas, setMangas] = useState([]);
   const [query, setQuery] = useState("");
-  const [allMangas, setAllMangas] = useState([]);
-
-  const getMangas = async () => {
-    try {
-      const response = await get('/v2/mangas');
-      return response?.data?.data;
-    } catch (error) {
-      console.error("Error fetching mangas:", error);
-      throw error;
-    }
-  };
-
-  useEffect(() => {
-    getMangas().then((result) => {
-      setMangas(result?.all_mangas);
-      setAllMangas(result?.all_mangas);
-    });
-  }, []);
 
   const handleInput = (e) => {  
     const value = e.target.value;
     setQuery(value);
-    const obj = {
-      query: value,
-      endpoint: '/v2/mangas/search',
-      allData: allMangas,
-      setData: setMangas
-    }
-    searchBar(obj);
+    
   }
 
   return (
@@ -74,9 +50,11 @@ function AdminMangas() {
         <div className="row">
           <div className="col col-xl-12 col-lg-9 col-md-12 col-sm-12 col-12">
             <MangaTable mangas={mangas} />
+            <GlobalPagination url={'/v2/admin/mangas'} setObject={setMangas} filterQuery={{query: query}} />
           </div>
         </div>
       </div>
+
     </>
   );
 }
