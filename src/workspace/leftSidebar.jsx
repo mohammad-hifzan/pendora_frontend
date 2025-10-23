@@ -21,7 +21,7 @@ const adminLinks = [
 ];
 
 const superAdminLinks = [
-  { to: "/admin/dashboard", icon: faSwatchbook, label: "Dashboard" },
+  { to: "/admin/dashboard", icon: faChartLine, label: "Dashboard" },
   { to: "/admin/mangas", icon: faSwatchbook, label: "Mangas" },
   { to: "/admin/users", icon: faUsersRectangle, label: "Users" },
   { to: "/admin/roles", icon: faUserCheck, label: "Roles" },
