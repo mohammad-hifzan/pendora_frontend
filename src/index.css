@@ -1,3 +1,69 @@
+/* WORKSHOP HEADER */
+/* Fix body pseudo-element causing horizontal scroll */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(43, 45, 59, 0.9);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -999;
+}
+
+/* Fix profile icon on mobile */
+@media (max-width: 768px) {
+  .header-profile {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 9999;
+  }
+}
+
+/* Optional: prevent horizontal overflow globally */
+html, body {
+  overflow-x: hidden;
+}
+
+
+/* Mobile only */
+@media (max-width: 1024px) {
+  .author-thumb {
+    position: fixed;   /* Fixes it relative to viewport */
+    top: 10px;         /* Distance from top */
+    right: 10px;       /* Distance from right */
+    z-index: 9999;     /* Stay above other elements */
+  }
+
+  /* Optional: make profile image circular and size it */
+  .author-thumb img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+}
+
+/* Hide desktop header on mobile/tablet */
+@media (max-width: 1080px) {
+  .header-responsive, .tab-content-responsive {
+    display: block; /* or flex if needed */
+  }
+}
+
+/* Hide on large screens */
+@media (min-width: 1081px) {
+  .header-responsive, .tab-content-responsive {
+    display: none;
+  }
+}
+
+
+
+/* WORKSHOP HEADER CSS */
+
 .comment-container {
     display: flex;
     align-items: center;
