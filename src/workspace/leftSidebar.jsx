@@ -63,7 +63,6 @@ function SidebarMenu({ large, onToggle }) {
         <li key={to}>
           <Link
             to={to}
-            data-bs-toggle="tooltip"
             data-bs-placement="right"
             title={label}
             className="sidebar-link"
