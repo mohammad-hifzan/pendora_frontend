@@ -12,7 +12,7 @@ const PaginatedList = (props) => {
     
   const { data, currentPage, totalPages, loading, error, goToPage } =
     usePagination(props?.url, props?.filterQuery);
-    if (data.length > 0) {
+    if (data) {
       dispatch(setUpdatedManga(data['updated_chapters']));
       dispatch(setNewManga(data['recent_mangas']));
       dispatch(setPopularManga(data['popular_mangas']));
