@@ -179,7 +179,7 @@ const getManga = async (id) => {
 const getChapters = async (id) => {
   try {
     const response = await get(`v2/mangas/${id}/chapters`);
-    return response.data.chapters;
+    return response.data.data;
   } catch (error) {
     console.error("Error fetching chapters:", error);
     throw error;
