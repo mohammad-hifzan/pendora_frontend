@@ -3,9 +3,7 @@ export function GlobalPagination(props) {
   const { data, currentPage, totalPages, loading, error, goToPage } =
   usePagination(props?.url, props?.filterQuery);
   if (data.length > 0) {
-    console.log("DATA IN GLOBAL PAGINATION:", data)
       props.setObject(data)
-      // dispatch(props.setObject(data[0]) || []);
     }
   return (
       <>
