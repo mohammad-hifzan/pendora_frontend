@@ -7,8 +7,8 @@ return array(
             'inputs_allowed'   => array( 'email' ),
             'inputs_required' => array( 'email' ),
             'message_success' => 'You was successfully subscribed!',
-            'api_key' => 'ab84710546fc82519d48baa5b94a9d2a-us18',
-            'list_id' => 'c5c23a0e79'
+            'api_key' => '######',
+            'list_id' => '######'
         ),
         'standard'  => array(
             'email'           => 'your@email.net',
