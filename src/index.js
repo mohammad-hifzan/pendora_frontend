@@ -54,6 +54,7 @@ import AdminCategories from './admin/categories';
 
 // admin imports --- IGNORE ---
 import Error404 from './errors/error404'
+import ErrorBoundary from './components/errorBoundary';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -132,9 +133,11 @@ function RootApp() {
 
 root.render(
   // <React.StrictMode>
-    <Provider store={store}>
-      <RootApp />
-    </Provider>
+    <ErrorBoundary>
+      <Provider store={store}>
+        <RootApp />
+      </Provider>
+    </ErrorBoundary>
   // </React.StrictMode>
 );
 
