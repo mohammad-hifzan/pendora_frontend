@@ -9,6 +9,7 @@ import {
   faArrowRightFromBracket,
   faListAlt,
   faChartLine,
+  faBuilding,
 } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
@@ -22,6 +23,7 @@ const adminLinks = [
 
 const superAdminLinks = [
   { to: "/admin/dashboard", icon: faChartLine, label: "Dashboard" },
+  { to: "/admin/companies", icon: faBuilding, label: "Companies" },
   { to: "/admin/mangas", icon: faSwatchbook, label: "Mangas" },
   { to: "/admin/users", icon: faUsersRectangle, label: "Users" },
   { to: "/admin/roles", icon: faUserCheck, label: "Roles" },

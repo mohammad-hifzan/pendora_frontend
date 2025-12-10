@@ -51,6 +51,7 @@ import AdminEditManga from './admin/mangas/edit';
 import AdminUsers from './admin/users';
 import AdminEditUser from './admin/users/edit';
 import AdminCategories from './admin/categories'; 
+import AdminCompanies from './admin/companies/index';
 
 // admin imports --- IGNORE ---
 import Error404 from './errors/error404'
@@ -106,6 +107,7 @@ function RootApp() {
         <Route path="/admin" element={<RootLayout />}>
           <Route element={<BaseLayout />}>
             <Route path="dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>}/>
+            <Route path="companies" element={<PrivateRoute><AdminCompanies /></PrivateRoute>} />
             <Route path="mangas" >
               <Route index element={<AdminMangas />} />
               {/* <Route path="add" element={<AddManga />} /> */}
