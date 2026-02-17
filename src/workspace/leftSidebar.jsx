@@ -10,6 +10,7 @@ import {
   faListAlt,
   faChartLine,
   faBuilding,
+  faBook
 } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
@@ -17,6 +18,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 const adminLinks = [
   { to: "/workspace/dashboard", icon: faChartLine, label: "Dashboard" },
   { to: "/workspace/mangas", icon: faSwatchbook, label: "Mangas" },
+  { to: "/workspace/novels", icon: faBook, label: "Novels" },
   { to: "/workspace/users", icon: faUsersRectangle, label: "Users" },
   { to: "/workspace/companies", icon: faArrowRightFromBracket, label: "Exit" },
 ];

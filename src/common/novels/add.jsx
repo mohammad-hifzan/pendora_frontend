@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { post, customToast } from "../utility/toolbox";
-import MangaFormPartial from "./form";
+import NovelFormPartial from "./form";
 
-function MangaAdd({ fetchUrlBase = "/v2/mangas", redirectPath = "/workspace/mangas" }) {
+function NovelAdd({ fetchUrlBase = "/v2/novels", redirectPath = "/workspace/novels" }) {
   const [formParams, setFormParams] = useState({
     title: "",
     author: "",
     description: "",
-    manga_type: "",
+    novel_type: "",
     status: "",
     thumbnail: null,
     categories: [],
@@ -28,35 +28,34 @@ function MangaAdd({ fetchUrlBase = "/v2/mangas", redirectPath = "/workspace/mang
   };
 
   const handleSubmit = async (e) => {
-    debugger
     e.preventDefault();
     try {
       const formData = buildFormData(formParams);
       const response = await post(fetchUrlBase, formData);
       if (response !== "error" && response.status === 201) {
         navigate(redirectPath);
-        customToast("Manga Created Successfully!", "success", "light");
+        customToast("Novel Created Successfully!", "success", "light");
       } else {
-        customToast("Failed to Create Manga!", "error", "light");
+        customToast("Failed to Create Novel!", "error", "light");
       }
     } catch (error) {
       console.error("Submission error:", error);
-      customToast("Failed to Create Manga!", "error", "light");
+      customToast("Failed to Create Novel!", "error", "light");
     }
   };
 
   const buildFormData = (data) => {
     const formData = new FormData();
-    formData.append("manga[title]", data.title);
-    formData.append("manga[author]", data.author);
-    formData.append("manga[description]", data.description);
-    formData.append("manga[manga_type]", data.manga_type);
+    formData.append("novel[title]", data.title);
+    formData.append("novel[author]", data.author);
+    formData.append("novel[description]", data.description);
+    formData.append("novel[novel_type]", data.novel_type);
 
     data.categories.forEach((cat) =>
-      formData.append("manga[categories][]", Number(cat.value))
+      formData.append("novel[categories][]", Number(cat.value))
     );
 
-    if (data.thumbnail) formData.append("manga[thumbnail]", data.thumbnail);
+    if (data.thumbnail) formData.append("novel[thumbnail]", data.thumbnail);
     return formData;
   };
 
@@ -64,20 +63,22 @@ function MangaAdd({ fetchUrlBase = "/v2/mangas", redirectPath = "/workspace/mang
     <div className="container">
       <div className="ui-block">
         <div className="ui-block-title">
-          <h6 className="title">Add Manga</h6>
+          <h6 className="title">Add Novel</h6>
         </div>
         <div className="ui-block-content">
-          <MangaFormPartial
-            formParams={formParams}
-            handleChange={handleChange}
-            handleSelectChange={handleSelectChange}
-            handleSubmit={handleSubmit}
-            isEdit={false}
-          />
+          <form onSubmit={handleSubmit}>
+            <NovelFormPartial
+              formParams={formParams}
+              handleChange={handleChange}
+              handleSelectChange={handleSelectChange}
+              handleSubmit={handleSubmit}
+              isEdit={false}
+            />
+          </form>
         </div>
       </div>
     </div>
   );
 }
 
-export default MangaAdd;
+export default NovelAdd;

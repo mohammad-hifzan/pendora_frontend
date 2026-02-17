@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom"
 
 export default function ChapterFormPartial({ initialValues = {}, onSubmit, loading }) {
   const [formData, setFormData] = useState({
@@ -66,9 +67,12 @@ export default function ChapterFormPartial({ initialValues = {}, onSubmit, loadi
             <input className="form-control" placeholder="" type="file" name="chapter_images" multiple={true} accept="image/*" onChange={handleChange} />
           </div>
         </div>
-    
 
-        <div className="col col-lg-12 col-md-12 col-sm-12 col-12">
+        <div className="col col-lg-6 col-md-6 col-sm-12 col-12">
+          <Link className="btn btn-secondary btn-lg full-width" to="..">Back to Chapters</Link>
+        </div>
+
+        <div className="col col-lg-6 col-md-6 col-sm-6 col-12">
           <button className="btn btn-primary btn-lg full-width" type="submit">Save all Changes</button>
         </div>
     

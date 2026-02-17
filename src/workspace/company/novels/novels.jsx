@@ -1,22 +1,15 @@
-import { useParams, Link, useLocation } from "react-router-dom";
-import { useState } from "react";
-import ChapterTable from "../../../common/chapters/chapterTable";
-import { GlobalPagination } from "../../../common/globalPagination";
+import { useState } from 'react';
+import MangaTable from '../../../common/mangas/mangaTable';
+import {GlobalPagination} from '../../../common/globalPagination'
 
-function WorkSpaceChapters() {
-  const [chapters, setChapters] = useState([]);
+function AdminNovels() {
+  const [novels, setNovels] = useState([]);
   const [query, setQuery] = useState("");
-  const { id } = useParams();
-  const location = useLocation();
-  const isNovel = location.pathname.includes('/novels/');
 
   const handleInput = (e) => {  
     const value = e.target.value;
     setQuery(value);
   }
-
-  const apiUrl = isNovel ? `/v2/novels/${id}/chapters` : `/v2/mangas/${id}/chapters`;
-  const typeLabel = isNovel ? "Novel Chapters" : "Chapters";
 
   return (
     <>
@@ -26,7 +19,7 @@ function WorkSpaceChapters() {
           <div className="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div className="ui-block responsive-flex">
               <div className="ui-block-title">
-                <div className="h6 title">{typeLabel}</div>
+                <div className="h6 title">Novels</div>
                 <div className="align-right">
                   <form className="w-search">
                     <div className="form-group with-button">
@@ -44,9 +37,9 @@ function WorkSpaceChapters() {
                       </button>
                     </div>
                   </form>
-                  <Link to="add" className="btn btn-blue btn-md">
-                    Add New Chapter
-                  </Link>
+
+                  <a href="novels/add" className="btn btn-blue btn-md">Add New Novels</a>
+                  
                 </div>
               </div>
             </div>
@@ -57,8 +50,8 @@ function WorkSpaceChapters() {
       <div className="container">
         <div className="row">
           <div className="col col-xl-12 col-lg-9 col-md-12 col-sm-12 col-12">
-            <ChapterTable chapters={chapters} />
-            <GlobalPagination url={apiUrl} setObject={setChapters} filterQuery={{query: query}} />
+            <MangaTable mangas={novels} />
+            <GlobalPagination url={'/v2/novels/company_novels'} setObject={setNovels} filterQuery={{query: query}} />
           </div>
         </div>
       </div>
@@ -66,4 +59,4 @@ function WorkSpaceChapters() {
   );
 }
 
-export default WorkSpaceChapters;
+export default AdminNovels;

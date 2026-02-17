@@ -1,23 +1,36 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import ChapterFormPartial from "./form";
-import { post, customToast } from "../utility/toolbox";
+import NovelEditor from "./novelEditor";
+import { post } from "../utility/toolbox";
 
-export default function ChapterAdd() {
+export default function ChapterAdd({ isNovel = false }) {
   const navigate = useNavigate();
   const { id } = useParams();
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (data) => {
+  const handleChapterSubmit = async (data) => {
     setLoading(true);
     try {
       await post(`/v2/mangas/${id}/chapters`, data);
-      customToast("Chapter created successfully!", "success");
       navigate("/workspace/chapters");
     } catch (error) {
-      customToast("Failed to create chapter", "error");
+      console.error("Failed to create chapter", "error");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleNovelSave = async (data) => {
+    debugger
+    try {
+      await post(`/v2/novels/${id}/chapters`, {
+        chapter: {
+          content: data.content
+        },
+      });
+    } catch (error) {
+      console.error("Failed to save chapter", "error");
     }
   };
 
@@ -28,7 +41,11 @@ export default function ChapterAdd() {
           <h6 className="title">Add Chapter</h6>
         </div>
         <div className="ui-block-content">
-          <ChapterFormPartial onSubmit={handleSubmit} loading={loading} />
+          {isNovel ? (
+            <NovelEditor onSave={handleNovelSave} />
+          ) : (
+            <ChapterFormPartial onSubmit={handleChapterSubmit} loading={loading} />
+          )}
         </div>
       </div>
     </div>

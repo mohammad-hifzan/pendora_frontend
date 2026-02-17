@@ -34,6 +34,10 @@ import EditChapter from './workspace/company/chapters/editChapter'
 import WorkSpaceMangas from './workspace/company/mangas/mangas'
 import AddManga from './workspace/company/mangas/addManga'
 import EditManga from './workspace/company/mangas/editManga'
+// novel imports
+import AdminNovels from './workspace/company/novels/novels'
+import AddNovel from './workspace/company/novels/addNovel'
+import EditNovel from './workspace/company/novels/editNovel'
 // user imports
 import WorkSpaceUsers from './workspace/company/users/users'
 import EditUser from './workspace/company/users/editUser'
@@ -85,6 +89,16 @@ function RootApp() {
               <Route index element={<PrivateRoute><WorkSpaceMangas /></PrivateRoute>} />
               <Route path="add" element={<PrivateRoute><AddManga /></PrivateRoute>} />
               <Route path="edit/:id" element={<PrivateRoute><EditManga /></PrivateRoute>} />
+              <Route path=":id/chapters">
+                <Route index element={<PrivateRoute><WorkSpaceChapters /></PrivateRoute>} />
+                <Route path="add" element={<PrivateRoute><AddChapter /></PrivateRoute>} />
+                <Route path=":chapter_id/edit" element={<PrivateRoute><EditChapter /></PrivateRoute>} />
+              </Route>
+            </Route>
+            <Route path="novels" >
+              <Route index element={<PrivateRoute><AdminNovels /></PrivateRoute>} />
+              <Route path="add" element={<PrivateRoute><AddNovel /></PrivateRoute>} />
+              <Route path="edit/:id" element={<PrivateRoute><EditNovel /></PrivateRoute>} />
               <Route path=":id/chapters">
                 <Route index element={<PrivateRoute><WorkSpaceChapters /></PrivateRoute>} />
                 <Route path="add" element={<PrivateRoute><AddChapter /></PrivateRoute>} />
